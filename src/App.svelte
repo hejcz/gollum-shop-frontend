@@ -2,6 +2,7 @@
 	import { Router, Route, Link } from "svelte-navigator";
 	import ActiveCampaigns from "./ActiveCampaigns.svelte";
 	import EditCampaign from "./admin/EditCampaign.svelte";
+import ManageOrders from "./ManageOrders.svelte";
 	import Order from "./Order.svelte";
 	import { role, switchToAdmin, switchToLoggedUser, user } from "./stores";
 </script>
@@ -26,6 +27,9 @@
 		{#if $role.might_modify_campaign()}
 			<Route path="/edit/:uuid" let:params>
 				<EditCampaign uuid={params.uuid} />
+			</Route>
+			<Route path="/orders/:uuid" let:params>
+				<ManageOrders uuid={params.uuid} />
 			</Route>
 		{/if}
 		{:else}

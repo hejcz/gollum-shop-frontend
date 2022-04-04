@@ -16,6 +16,7 @@
     let items = [];
     let orderInProgress = false;
     let last_successful_order: Date | null = null;
+    let paid = 0
     $: totalPrice = items
         .map((i) => i.item.price * i.amount)
         .reduce((acc, x) => acc + x, 0);
@@ -26,6 +27,7 @@
         if (fetchedCampaign == null) {
             items = [];
             campaign = null;
+            paid = 0;
         } else {
             // set ordered amounts
             const orderItems = new Map<string, OrderedItem>();
@@ -35,6 +37,7 @@
                     amount: orderItems.get(i.uuid)?.amount ?? null,
                     item: { ...i },
                 }));
+            paid = fetchedOrder.paid_amount
             campaign = fetchedCampaign;
         }
     });
@@ -61,7 +64,7 @@
         {#if items.length === 0}
             <span>There is nothing to order in this campaign yet.</span>
         {:else}
-            <span>Total price: {totalPrice}</span>
+            <span>Paid {paid} out of {totalPrice}</span>
         {/if}
     </div>
     {#if last_successful_order != null}

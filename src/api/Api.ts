@@ -13,7 +13,6 @@ export interface Campaign {
     title: string,
     img_url?: string,
     url?: string,
-    likes: string[],
     items: CampaignItem[],
     locked: boolean
 }
@@ -27,6 +26,10 @@ export interface Order {
     campaign_uuid: string,
     items: OrderedItem[],
     paid_amount: number,
+}
+
+export interface AssignedToUser {
+    username: string
 }
 
 let userInfo: string = null
@@ -46,6 +49,25 @@ export async function fetchCampaign(uuid: string): Promise<Campaign> {
     } else {
         return Promise.resolve(JSON.parse(JSON.stringify(campaign)) );
     }
+}
+
+export async function fetchOrders(uuid: string): Promise<(Order & AssignedToUser)[]> {
+    const orders = []
+    for (const user in data.orders) {
+        const order: Order = data.orders[user]
+            ?.find(o => o.campaign_uuid === uuid)
+        if (order == null) {
+            continue
+        }
+        orders.push({username: user, ...order})
+    }
+    return Promise.resolve(JSON.parse(JSON.stringify(orders)));
+}
+
+export async function updatePaidAmount(order: Order & AssignedToUser): Promise<Order> {
+    const index = data.orders[order.username].findIndex(o => o.campaign_uuid === order.campaign_uuid)
+    data.orders[order.username][index] = {...order}
+    return Promise.resolve(JSON.parse(JSON.stringify(data.orders[order.username][index])));
 }
 
 export async function fetchOrder(uuid: string): Promise<Order> {
@@ -83,28 +105,6 @@ export async function fetchActiveCampaigns(titleLike: string | null = null): Pro
     return Promise.resolve(JSON.parse(JSON.stringify(data.campaigns
         .filter(c => !c.locked
             && (titleLike == null || titleLike.length === 0 || c.title.toLowerCase().includes(titleLike.toLowerCase()))))));
-}
-
-export async function likeCampaign(uuid: string): Promise<Campaign> {
-    mutateCampaign(uuid, c => {
-        user.subscribe(u => {
-            const index = c.likes.indexOf(u);
-            if (index === -1) {
-                c.likes.push(u);
-            }
-        })();
-    });
-    return fetchCampaign(uuid);
-}
-
-export async function unlikeCampaign(uuid: string): Promise<Campaign> {
-    mutateCampaign(uuid, c => {
-        const index = c.likes.indexOf(userInfo);
-        if (index !== -1) {
-            c.likes.splice(index, 1);
-        }
-    });
-    return fetchCampaign(uuid);
 }
 
 export async function lockCampaign(uuid: string): Promise<Campaign> {

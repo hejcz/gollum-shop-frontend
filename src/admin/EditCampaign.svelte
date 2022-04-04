@@ -7,7 +7,6 @@
     const newCampaign: () => Campaign = () => ({
         uuid: uuid,
         items: [],
-        likes: [],
         locked: false,
         title: "",
     })

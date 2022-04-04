@@ -6,7 +6,6 @@ const campaigns: Campaign[] = [
       "title": "Kingdoms Forlorn",
       "img_url": "/images/forlorn.avif",
       "url": "https://www.kickstarter.com/projects/kingdomsforlorn/kingdoms-forlorn-dragons-devils-and-kings",
-      "likes": [],
       "items": [
         {
           "name": "Core Game Pledge",
@@ -27,11 +26,6 @@ const campaigns: Campaign[] = [
       "title": "Scarface 1920",
       "img_url": "/images/scarface1920.avif",
       "url": null,
-      "likes": [
-        "userA",
-        "userB",
-        "userE"
-      ],
       "items": [],
       "locked": false
     },
@@ -40,12 +34,6 @@ const campaigns: Campaign[] = [
       "title": "Too Many Bones / Cloudspire",
       "img_url": "/images/tmb.avif",
       "url": null,
-      "likes": [
-        "userA",
-        "userB",
-        "userC",
-        "userD"
-      ],
       "items": [
         {
           "name": "Cloudspire Skymat",
@@ -220,17 +208,26 @@ const campaigns: Campaign[] = [
       "title": "Resurgence",
       "img_url": "/images/resurgence.avif",
       "url": null,
-      "likes": [
-        "userA",
-        "userB",
-        "userX"
-      ],
       "items": [],
       "locked": false
     }
   ];
 
-const orders: {[key: string]: Order[]} = {}
+  const orders: {[key: string]: Order[]} = {
+    "userX": [
+      {campaign_uuid: "97c921aa-d1c3-4e34-8c72-bc620f566970", paid_amount: 100, items: [
+        {amount: 1, order_uuid: "1dfb1dae-7b1f-475f-84a9-a562d68d1c22"},
+        {amount: 2, order_uuid: "234d4d93-4b36-41f3-b9ef-cc158b10932a"},
+        {amount: 3, order_uuid: "4fd6fd19-39d2-46a4-8206-6c76aba1d734"},
+      ]}
+    ],
+    "userA": [
+      {campaign_uuid: "97c921aa-d1c3-4e34-8c72-bc620f566970", paid_amount: 200, items: [
+        {amount: 1, order_uuid: "1dfb1dae-7b1f-475f-84a9-a562d68d1c22"},
+        {amount: 1, order_uuid: "4fd6fd19-39d2-46a4-8206-6c76aba1d734"},
+      ]}
+    ]
+  }
 
 export interface ShopData {
   campaigns: Campaign[],
