@@ -14,7 +14,6 @@ const campaigns: Campaign[] = [
         },
         {
           "name": "Elite Core Game Pledge",
-          "min_amount": 5,
           "price": 750,
           "uuid": "a1ebd6d4-566d-4c13-9453-9f488b7c8bb4"
         }
@@ -216,15 +215,15 @@ const campaigns: Campaign[] = [
   const orders: {[key: string]: Order[]} = {
     "userX": [
       {campaign_uuid: "97c921aa-d1c3-4e34-8c72-bc620f566970", paid_amount: 100, items: [
-        {amount: 1, order_uuid: "1dfb1dae-7b1f-475f-84a9-a562d68d1c22"},
-        {amount: 2, order_uuid: "234d4d93-4b36-41f3-b9ef-cc158b10932a"},
-        {amount: 3, order_uuid: "4fd6fd19-39d2-46a4-8206-6c76aba1d734"},
+        {amount: 1, item_uuid: "1dfb1dae-7b1f-475f-84a9-a562d68d1c22"},
+        {amount: 2, item_uuid: "234d4d93-4b36-41f3-b9ef-cc158b10932a"},
+        {amount: 3, item_uuid: "4fd6fd19-39d2-46a4-8206-6c76aba1d734"},
       ]}
     ],
     "userA": [
       {campaign_uuid: "97c921aa-d1c3-4e34-8c72-bc620f566970", paid_amount: 200, items: [
-        {amount: 1, order_uuid: "1dfb1dae-7b1f-475f-84a9-a562d68d1c22"},
-        {amount: 1, order_uuid: "4fd6fd19-39d2-46a4-8206-6c76aba1d734"},
+        {amount: 1, item_uuid: "1dfb1dae-7b1f-475f-84a9-a562d68d1c22"},
+        {amount: 1, item_uuid: "4fd6fd19-39d2-46a4-8206-6c76aba1d734"},
       ]}
     ]
   }

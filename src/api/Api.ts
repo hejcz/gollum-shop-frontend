@@ -4,7 +4,6 @@ import data from "./data";
 export interface CampaignItem {
     name: string,
     price: number,
-    min_amount?: number,
     uuid: string
 }
 
@@ -18,7 +17,7 @@ export interface Campaign {
 }
 
 export interface OrderedItem {
-    order_uuid: string,
+    item_uuid: string,
     amount: number
 }
 

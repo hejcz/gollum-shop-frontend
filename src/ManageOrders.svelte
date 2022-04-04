@@ -16,8 +16,8 @@ import { onMount } from "svelte";
         if (campaign != null && orders != null) {
             let itemOccurrences = new Map<string, number>()
             orders.forEach(order => order.items.forEach(item => {
-                const previous = itemOccurrences.get(item.order_uuid) ?? 0
-                itemOccurrences.set(item.order_uuid, previous + item.amount)
+                const previous = itemOccurrences.get(item.item_uuid) ?? 0
+                itemOccurrences.set(item.item_uuid, previous + item.amount)
             }))
             totalItems = campaign.items.map(item => ({...item, total_amount: itemOccurrences.get(item.uuid) ?? 0}))
                 .filter(item => item.total_amount > 0)
@@ -59,12 +59,12 @@ import { onMount } from "svelte";
         <div>
             <span>Paid </span>
             <input type="text" bind:value={order.paid_amount} />
-            <span> out of {order.items.reduce((acc, item) => acc + itemByUuid.get(item.order_uuid).price * item.amount, 0)}</span>
+            <span> out of {order.items.reduce((acc, item) => acc + itemByUuid.get(item.item_uuid).price * item.amount, 0)}</span>
             <button type="button" on:click={() => confirm(order)}>Confirm</button>
         </div>
         <ul>
         {#each order.items as item}
-            <li>{itemByUuid.get(item.order_uuid).name}: {item.amount}</li>
+            <li>{itemByUuid.get(item.item_uuid).name}: {item.amount}</li>
         {/each}
         </ul>
     {/each}

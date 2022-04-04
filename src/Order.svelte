@@ -31,7 +31,7 @@
         } else {
             // set ordered amounts
             const orderItems = new Map<string, OrderedItem>();
-            fetchedOrder.items.forEach((i) => orderItems.set(i.order_uuid, i));
+            fetchedOrder.items.forEach((i) => orderItems.set(i.item_uuid, i));
             items =
                 fetchedCampaign.items.map((i) => ({
                     amount: orderItems.get(i.uuid)?.amount ?? null,
@@ -47,7 +47,7 @@
         await orderCampaign(
             uuid,
             items.filter(i => i.amount > 0)
-                .map((i) => ({ order_uuid: i.item.uuid, amount: i.amount }))
+                .map((i) => ({ item_uuid: i.item.uuid, amount: i.amount }))
         );
         orderInProgress = false;
         last_successful_order = new Date();
