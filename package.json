@@ -28,6 +28,7 @@
     "uuid": "^8.3.2"
   },
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.21.0",
     "sirv-cli": "^2.0.0",
     "svelte-language-server": "^0.14.23"
   }

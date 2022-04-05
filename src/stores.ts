@@ -1,3 +1,4 @@
+import type { Auth0Client } from '@auth0/auth0-spa-js';
 import { Readable, readable, writable, Writable } from 'svelte/store';
 
 export interface Role {
@@ -31,6 +32,8 @@ export function switchToAdmin() {
     role.update(last => new Admin())
 }
 
-export const user: Readable<string> = readable("userX");
+export const user: Writable<string> = writable(null);
 
 export const role: Writable<Role> = writable(new Admin() as Role);
+
+export const auth0_client: Writable<Auth0Client> = writable(null);
