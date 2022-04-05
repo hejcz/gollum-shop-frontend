@@ -1,35 +1,28 @@
-import type { Auth0Client } from '@auth0/auth0-spa-js';
-import { Readable, readable, writable, Writable } from 'svelte/store';
+import type { Auth0Client } from "@auth0/auth0-spa-js";
+import { writable, Writable } from "svelte/store";
 
 export interface Role {
-    might_modify_campaign(): boolean
-}
-
-class Anonymous implements Role {
-    might_modify_campaign(): boolean {
-        return false
-    }
+  might_modify_campaign(): boolean;
 }
 
 class LoggedUser implements Role {
-    might_modify_campaign(): boolean {
-        return false
-    }
+  might_modify_campaign(): boolean {
+    return false;
+  }
 }
 
 class Admin implements Role {
-    might_modify_campaign(): boolean {
-        return true
-    }
+  might_modify_campaign(): boolean {
+    return true;
+  }
 }
 
 export function switchToLoggedUser() {
-    console.log("logged user")
-    role.update(last => new LoggedUser())
+  role.update(() => new LoggedUser());
 }
 
 export function switchToAdmin() {
-    role.update(last => new Admin())
+  role.update(() => new Admin());
 }
 
 export const user: Writable<string> = writable(null);

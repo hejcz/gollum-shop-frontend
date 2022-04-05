@@ -1,46 +1,60 @@
 <script lang="ts">
-    import { useNavigate } from "svelte-navigator";
-	import { v4 as uuidv4 } from "uuid";
-    import { fetchActiveCampaigns, lockCampaign } from "./api/Api";
-    import { debounce } from "./utils/debounce";
-    import ActiveCampaign from "./ActiveCampaign.svelte";
-import { role } from "./stores";
+  import { useNavigate } from "svelte-navigator";
+  import { v4 as uuidv4 } from "uuid";
+  import { fetchActiveCampaigns, lockCampaign } from "./api/Api";
+  import { debounce } from "./utils/debounce";
+  import ActiveCampaign from "./ActiveCampaign.svelte";
+  import { role } from "./stores";
 
-    let search: string = ""
-    let active_campaigns = fetchActiveCampaigns();
-    const navigate = useNavigate()
+  let search: string = "";
+  let active_campaigns = fetchActiveCampaigns();
+  const navigate = useNavigate();
 
-    function add_new_campaign() {
-        navigate(`/edit/${uuidv4()}`)
-    }
+  function add_new_campaign() {
+    navigate(`/edit/${uuidv4()}`);
+  }
 
-    async function lock(uuid: string) {
-        await lockCampaign(uuid);
-        active_campaigns = fetchActiveCampaigns(search)
-    }
+  async function lock(uuid: string) {
+    await lockCampaign(uuid);
+    active_campaigns = fetchActiveCampaigns(search);
+  }
 
-    const filter = debounce(() => { active_campaigns = fetchActiveCampaigns(search) }, 500)
+  const filter = debounce(() => {
+    active_campaigns = fetchActiveCampaigns(search);
+  }, 500);
 </script>
 
 <h1>Active campaigns</h1>
 
 {#if $role.might_modify_campaign()}
-    <div class="mb-2">
-        <button type="button" class="btn btn-primary" on:click={add_new_campaign}>+ Add campaign</button>
-    </div>
+  <div class="mb-2">
+    <button type="button" class="btn btn-primary" on:click={add_new_campaign}>
+      + Add campaign
+    </button>
+  </div>
 {/if}
 
-<input type="text" bind:value={search} on:keyup={filter} placeholder="Filter campaigns by title" />
+<input
+  type="text"
+  bind:value={search}
+  on:keyup={filter}
+  placeholder="Filter campaigns by title" />
 
 <div class="row">
-    {#await active_campaigns then campaigns}
+  {#await active_campaigns then campaigns}
     {#each campaigns as c}
-        <div class="col-12 col-xl-3">
-            <!-- Locking removes campaign from actives so it must be passed to children -->
-            <ActiveCampaign campaign={c}>
-                <slot if="lock"><li><span class="fake-link" on:click={lock.bind(this, c.uuid)}>Lock campaign</span></li></slot>
-            </ActiveCampaign>
-        </div>
+      <div class="col-12 col-xl-3">
+        <!-- Locking removes campaign from actives so it must be passed to children -->
+        <ActiveCampaign campaign={c}>
+          <slot if="lock">
+            <li>
+              <span class="fake-link" on:click={lock.bind(this, c.uuid)}>
+                Lock campaign
+              </span>
+            </li>
+          </slot>
+        </ActiveCampaign>
+      </div>
     {/each}
-    {/await}
+  {/await}
 </div>
