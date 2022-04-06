@@ -1,11 +1,11 @@
 <script lang="ts">
   import { auth0_client } from "../stores";
-  import { store_credentials } from "./util";
+  import { auth0_audience, store_credentials } from "./util";
 
   async function login() {
     await $auth0_client.loginWithPopup({
-      audience: "http://localhost:8090",
       connection: "Username-Password-Authentication",
+      ...auth0_audience,
     });
     await store_credentials();
   }

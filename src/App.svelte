@@ -5,7 +5,7 @@
   import ActiveCampaigns from "./ActiveCampaigns.svelte";
   import EditCampaign from "./admin/EditCampaign.svelte";
   import Login from "./auth0/Login.svelte";
-  import { store_credentials } from "./auth0/util";
+  import { auth0_audience, store_credentials } from "./auth0/util";
   import ManageOrders from "./ManageOrders.svelte";
   import Navigation from "./Navigation.svelte";
   import Order from "./Order.svelte";
@@ -18,6 +18,7 @@
     $auth0_client = await createAuth0Client({
       domain: config.domain,
       client_id: config.clientId,
+      ...auth0_audience,
     });
 
     await store_credentials();
