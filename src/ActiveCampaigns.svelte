@@ -42,19 +42,13 @@
 
 <div class="row">
   {#await active_campaigns then campaigns}
-    {#each campaigns as c}
-      <div class="col-12 col-xl-3">
-        <!-- Locking removes campaign from actives so it must be passed to children -->
-        <ActiveCampaign campaign={c}>
-          <slot if="lock">
-            <li>
-              <span class="fake-link" on:click={lock.bind(this, c.uuid)}>
-                Lock campaign
-              </span>
-            </li>
-          </slot>
-        </ActiveCampaign>
+    <div class="mb-2 mt-2">
+      <div class="accordion" id="accordionExample">
+        {#each campaigns as c}
+          <!-- Locking removes campaign from actives so it must be passed to children -->
+          <ActiveCampaign campaign={c} lock_function={() => lock(c.uuid)} />
+        {/each}
       </div>
-    {/each}
+    </div>
   {/await}
 </div>
