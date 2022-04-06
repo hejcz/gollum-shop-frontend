@@ -64,4 +64,8 @@
   :global(a:visited) {
     color: #0d6efd;
   }
+
+  :global(h1) {
+    text-align: center;
+  }
 </style>

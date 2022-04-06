@@ -15,7 +15,6 @@
   let campaign: Campaign = null;
   let items = [];
   let orderInProgress = false;
-  let last_successful_order: Date | null = null;
   let paid = 0;
   $: totalPrice = items
     .map((i) => i.item.price * i.amount)
@@ -50,7 +49,6 @@
         .map((i) => ({ item_uuid: i.item.uuid, amount: i.amount }))
     );
     orderInProgress = false;
-    last_successful_order = new Date();
   }
 </script>
 
@@ -65,6 +63,12 @@
       class="btn btn-primary"
       on:click={() => order()}
       disabled={totalPrice <= 0 || orderInProgress}>
+      {#if orderInProgress}
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true" />
+      {/if}
       Order
     </button>
     {#if items.length === 0}
@@ -73,12 +77,6 @@
       <span>Paid {paid} out of {totalPrice}</span>
     {/if}
   </div>
-  {#if last_successful_order != null}
-    <div class="my-2" style="color: green">
-      Last successful order: {last_successful_order.toLocaleTimeString("pl-PL")}
-    </div>
-  {/if}
-
   <div class="row align-items-end">
     {#each items as { amount, item }}
       <div class="col-12 col-lg-3">

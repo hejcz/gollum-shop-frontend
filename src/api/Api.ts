@@ -1,4 +1,5 @@
 import { user } from "../stores";
+import { delay } from "../utils/delay";
 import data from "./data";
 
 export interface CampaignItem {
@@ -89,6 +90,7 @@ export async function orderCampaign(
   uuid: string,
   items: OrderedItem[]
 ): Promise<Order> {
+  await delay(3000);
   if (data.orders[userInfo] == null) {
     data.orders[userInfo] = [];
   }
