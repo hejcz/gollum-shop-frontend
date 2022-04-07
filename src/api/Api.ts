@@ -70,7 +70,6 @@ export async function fetchOrders(
 export async function updatePaidAmount(
   order: Order & AssignedToUser
 ): Promise<Order> {
-  await delay(2000);
   const index = data.orders[order.username].findIndex(
     (o) => o.campaign_uuid === order.campaign_uuid
   );
@@ -91,7 +90,6 @@ export async function orderCampaign(
   uuid: string,
   items: OrderedItem[]
 ): Promise<Order> {
-  await delay(2000);
   if (data.orders[userInfo] == null) {
     data.orders[userInfo] = [];
   }
@@ -106,7 +104,6 @@ export async function orderCampaign(
 }
 
 export async function updateCampaign(campaign: Campaign): Promise<Campaign> {
-  await delay(2000);
   const index = data.campaigns.findIndex((c) => c.uuid === campaign.uuid);
   if (index === -1) {
     data.campaigns.push(campaign);
@@ -116,7 +113,8 @@ export async function updateCampaign(campaign: Campaign): Promise<Campaign> {
   return Promise.resolve({ ...campaign });
 }
 
-export async function fetchActiveCampaigns(
+export async function fetchCampaigns(
+  active: boolean,
   titleLike: string | null = null
 ): Promise<Campaign[]> {
   return Promise.resolve(
@@ -124,7 +122,7 @@ export async function fetchActiveCampaigns(
       JSON.stringify(
         data.campaigns.filter(
           (c) =>
-            !c.locked &&
+            (active ? !c.locked : c.locked) &&
             (titleLike == null ||
               titleLike.length === 0 ||
               c.title.toLowerCase().includes(titleLike.toLowerCase()))

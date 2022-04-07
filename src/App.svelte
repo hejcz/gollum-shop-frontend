@@ -7,6 +7,7 @@
   import Anonymous from "./Anonymous.svelte";
   import Login from "./auth0/Login.svelte";
   import { auth0_audience, store_credentials } from "./auth0/util";
+  import InactiveCampaigns from "./InactiveCampaigns.svelte";
   import ManageOrders from "./ManageOrders.svelte";
   import Navigation from "./Navigation.svelte";
   import Order from "./Order.svelte";
@@ -32,6 +33,7 @@
 <Router>
   <div class="container">
     {#if $user == null}
+      <Navigation hide_actions={true} />
       <Route path="/">
         <Login />
       </Route>
@@ -44,6 +46,9 @@
       <Navigation />
       <Route path="/">
         <ActiveCampaigns />
+      </Route>
+      <Route path="/campaigns-archive">
+        <InactiveCampaigns />
       </Route>
       <Route path="/order/:uuid" let:params>
         <Order uuid={params.uuid} />

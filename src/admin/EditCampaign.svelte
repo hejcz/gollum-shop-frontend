@@ -1,7 +1,7 @@
 <script lang="ts">
   import { v4 } from "uuid";
   import { fetchCampaign, updateCampaign, Campaign } from "../api/Api";
-import InProgressButton from "../InProgressButton.svelte";
+  import InProgressButton from "../InProgressButton.svelte";
 
   export let uuid: string;
 
@@ -51,7 +51,10 @@ import InProgressButton from "../InProgressButton.svelte";
       disabled={save_in_progress}>
       + Add item
     </button>
-    <InProgressButton on_click_function={save} label="Save" bind:in_progress={save_in_progress}></InProgressButton>
+    <InProgressButton
+      on_click_function={save}
+      label="Save"
+      bind:in_progress={save_in_progress} />
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" for="title">Title</span>

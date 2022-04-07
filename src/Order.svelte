@@ -9,7 +9,7 @@
     Campaign,
     OrderedItem,
   } from "./api/Api";
-import InProgressButton from "./InProgressButton.svelte";
+  import InProgressButton from "./InProgressButton.svelte";
 
   export let uuid: string;
 
@@ -56,7 +56,10 @@ import InProgressButton from "./InProgressButton.svelte";
   <h1>Order {campaign.title}</h1>
 
   <div class="mb-2">
-    <InProgressButton on_click_function={async () => order()} label="Order" disabled_predicate={() => totalPrice <= 0}></InProgressButton>
+    <InProgressButton
+      on_click_function={async () => order()}
+      label="Order"
+      disabled_predicate={() => totalPrice <= 0} />
     {#if items.length === 0}
       <span>There is nothing to order in this campaign yet.</span>
     {:else}

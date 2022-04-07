@@ -28,6 +28,11 @@
     </div>
   </div>
 {:else}
-  <h1>Login</h1>
-  <button id="btn-login" on:click={login}>Log in</button>
+  <h1 on:click={login}>Click to login</h1>
 {/if}
+
+<style>
+  h1 {
+    cursor: pointer;
+  }
+</style>

@@ -1,12 +1,7 @@
 <script lang="ts">
-  import { Link } from "svelte-navigator";
-  import { role } from "./stores";
   import type { Campaign } from "./api/Api";
 
-  export let lock_function: () => void;
-
   export let campaign: Campaign;
-  const uuid = campaign.uuid;
 </script>
 
 <div class="accordion-item">
@@ -31,31 +26,7 @@
     aria-labelledby="headingOne"
     data-bs-parent="#accordionExample">
     <div class="accordion-body">
-      <ul>
-        <li>
-          <Link to="/order/{uuid}">Order / Modify order</Link>
-        </li>
-        {#if $role.might_modify_campaign()}
-          <li>
-            <Link to="/edit/{uuid}">Edit campaign</Link>
-          </li>
-          <li>
-            <Link to="/orders/{uuid}">Manage orders</Link>
-          </li>
-          <li>
-            <span class="fake-link" on:click={lock_function}>
-              Lock campaign
-            </span>
-          </li>
-        {/if}
-      </ul>
+      <slot id="actions" />
     </div>
   </div>
 </div>
-
-<style>
-  ul {
-    padding-left: 0rem;
-    list-style-type: none;
-  }
-</style>

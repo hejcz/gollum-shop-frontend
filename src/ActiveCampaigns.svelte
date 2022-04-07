@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { useNavigate } from "svelte-navigator";
+  import { Link, useNavigate } from "svelte-navigator";
   import { v4 as uuidv4 } from "uuid";
-  import { fetchActiveCampaigns, lockCampaign } from "./api/Api";
+  import { fetchCampaigns, lockCampaign } from "./api/Api";
   import { debounce } from "./utils/debounce";
-  import ActiveCampaign from "./ActiveCampaign.svelte";
+  import ActiveCampaign from "./CampaignTab.svelte";
   import { role } from "./stores";
 
   let search: string = "";
-  let active_campaigns = fetchActiveCampaigns();
+  let active_campaigns = fetchCampaigns(true);
   const navigate = useNavigate();
 
   function add_new_campaign() {
@@ -16,11 +16,11 @@
 
   async function lock(uuid: string) {
     await lockCampaign(uuid);
-    active_campaigns = fetchActiveCampaigns(search);
+    active_campaigns = fetchCampaigns(true, search);
   }
 
   const filter = debounce(() => {
-    active_campaigns = fetchActiveCampaigns(search);
+    active_campaigns = fetchCampaigns(true, search);
   }, 500);
 </script>
 
@@ -45,10 +45,37 @@
     <div class="mb-2 mt-2">
       <div class="accordion" id="accordionExample">
         {#each campaigns as c}
-          <!-- Locking removes campaign from actives so it must be passed to children -->
-          <ActiveCampaign campaign={c} lock_function={() => lock(c.uuid)} />
+          <ActiveCampaign campaign={c}>
+            <slot id="actions">
+              <ul>
+                <li>
+                  <Link to="/order/{c.uuid}">Order / Modify order</Link>
+                </li>
+                {#if $role.might_modify_campaign()}
+                  <li>
+                    <Link to="/edit/{c.uuid}">Edit campaign</Link>
+                  </li>
+                  <li>
+                    <Link to="/orders/{c.uuid}">Manage orders</Link>
+                  </li>
+                  <li>
+                    <span class="fake-link" on:click={() => lock(c.uuid)}>
+                      Lock campaign
+                    </span>
+                  </li>
+                {/if}
+              </ul>
+            </slot>
+          </ActiveCampaign>
         {/each}
       </div>
     </div>
   {/await}
 </div>
+
+<style>
+  ul {
+    padding-left: 0rem;
+    list-style-type: none;
+  }
+</style>
