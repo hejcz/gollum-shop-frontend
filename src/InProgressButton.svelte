@@ -2,7 +2,7 @@
   export let on_click_function = async () => {};
   export let disabled_predicate = () => false;
   export let label;
-  let in_progress = false;
+  export let in_progress = false;
 
   async function click() {
     in_progress = true;

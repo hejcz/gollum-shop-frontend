@@ -9,12 +9,12 @@
     Campaign,
     OrderedItem,
   } from "./api/Api";
+import InProgressButton from "./InProgressButton.svelte";
 
   export let uuid: string;
 
   let campaign: Campaign = null;
   let items = [];
-  let orderInProgress = false;
   let paid = 0;
   $: totalPrice = items
     .map((i) => i.item.price * i.amount)
@@ -41,14 +41,12 @@
   });
 
   async function order() {
-    orderInProgress = true;
     await orderCampaign(
       uuid,
       items
         .filter((i) => i.amount > 0)
         .map((i) => ({ item_uuid: i.item.uuid, amount: i.amount }))
     );
-    orderInProgress = false;
   }
 </script>
 
@@ -58,19 +56,7 @@
   <h1>Order {campaign.title}</h1>
 
   <div class="mb-2">
-    <button
-      type="button"
-      class="btn btn-primary"
-      on:click={() => order()}
-      disabled={totalPrice <= 0 || orderInProgress}>
-      {#if orderInProgress}
-        <span
-          class="spinner-border spinner-border-sm"
-          role="status"
-          aria-hidden="true" />
-      {/if}
-      Order
-    </button>
+    <InProgressButton on_click_function={async () => order()} label="Order" disabled_predicate={() => totalPrice <= 0}></InProgressButton>
     {#if items.length === 0}
       <span>There is nothing to order in this campaign yet.</span>
     {:else}

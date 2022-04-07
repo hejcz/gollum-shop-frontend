@@ -1,6 +1,7 @@
 <script lang="ts">
   import { v4 } from "uuid";
   import { fetchCampaign, updateCampaign, Campaign } from "../api/Api";
+import InProgressButton from "../InProgressButton.svelte";
 
   export let uuid: string;
 
@@ -33,9 +34,7 @@
   }
 
   async function save() {
-    save_in_progress = true;
     edited_campaign = await updateCampaign(edited_campaign);
-    save_in_progress = false;
   }
 </script>
 
@@ -52,19 +51,7 @@
       disabled={save_in_progress}>
       + Add item
     </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      on:click={save}
-      disabled={save_in_progress}>
-      {#if save_in_progress}
-        <span
-          class="spinner-border spinner-border-sm"
-          role="status"
-          aria-hidden="true" />
-      {/if}
-      Save
-    </button>
+    <InProgressButton on_click_function={save} label="Save" bind:in_progress={save_in_progress}></InProgressButton>
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" for="title">Title</span>
