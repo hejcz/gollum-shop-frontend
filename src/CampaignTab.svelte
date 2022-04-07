@@ -7,13 +7,15 @@
 <div class="accordion-item">
   <h2 class="accordion-header" id="headingOne">
     <div style="display: flex;">
-      {#if campaign.url == null}
-        <img src={campaign.img_url} alt="campaign minature" />
-      {:else}
-        <a href={campaign.url} target="_blank">
+      <div class="d-none d-md-inline">
+        {#if campaign.url == null}
           <img src={campaign.img_url} alt="campaign minature" />
-        </a>
-      {/if}
+        {:else}
+          <a href={campaign.url} target="_blank">
+            <img src={campaign.img_url} alt="campaign minature" />
+          </a>
+        {/if}
+      </div>
 
       <button
         class="accordion-button collapsed"

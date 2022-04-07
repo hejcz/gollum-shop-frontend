@@ -62,7 +62,8 @@ const campaigns: Campaign[] = [
   {
     uuid: "97c921aa-d1c3-4e34-8c72-bc620f566970",
     title: "Too Many Bones / Cloudspire",
-    img_url: "/images/tmb.avif",
+    img_url:
+      "https://a.allegroimg.com/s1024/0c71a5/fffddddf46f6b0412b0c35e6fd21",
     url: null,
     items: [
       {
