@@ -4,6 +4,7 @@
   import { Router, Route } from "svelte-navigator";
   import ActiveCampaigns from "./ActiveCampaigns.svelte";
   import EditCampaign from "./admin/EditCampaign.svelte";
+  import Anonymous from "./Anonymous.svelte";
   import Login from "./auth0/Login.svelte";
   import { auth0_audience, store_credentials } from "./auth0/util";
   import ManageOrders from "./ManageOrders.svelte";
@@ -33,6 +34,11 @@
     {#if $user == null}
       <Route path="/">
         <Login />
+      </Route>
+    {:else if $role.is_anonymous()}
+      <Navigation logout_only={true} />
+      <Route path="/">
+        <Anonymous />
       </Route>
     {:else}
       <Navigation />
