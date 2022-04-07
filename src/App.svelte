@@ -34,14 +34,10 @@
   <div class="container">
     {#if $user == null}
       <Navigation hide_actions={true} />
-      <Route path="/">
-        <Login />
-      </Route>
+      <Login />
     {:else if $role.is_anonymous()}
       <Navigation logout_only={true} />
-      <Route path="/">
-        <Anonymous />
-      </Route>
+      <Anonymous />
     {:else}
       <Navigation />
       <Route path="/">

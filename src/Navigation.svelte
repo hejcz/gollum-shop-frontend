@@ -1,7 +1,10 @@
 <script lang="ts">
   import { Link } from "svelte-navigator";
-  import { auth0_client, role, user } from "./stores";
-  import { Anonymous, switchToAdmin, switchToLoggedUser } from "./auth0/util";
+  import {
+    auth0_client,
+    switchToLoggedUser,
+    switchToAdmin,
+  } from "./stores";
 
   export let hide_actions = false;
   export let logout_only = false;
