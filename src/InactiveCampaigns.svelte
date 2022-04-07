@@ -18,7 +18,7 @@
   }, 500);
 </script>
 
-<h1>Active campaigns</h1>
+<h1>Campaigns archive</h1>
 
 <input
   type="text"
