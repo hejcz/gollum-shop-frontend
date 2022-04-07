@@ -77,13 +77,26 @@
       <span>Paid {paid} out of {totalPrice}</span>
     {/if}
   </div>
-  <div class="row align-items-end">
-    {#each items as { amount, item }}
-      <div class="col-12 col-lg-3">
-        <p>{item.name}</p>
-        <div class="input-group mb-3">
-          <span class="input-group-text">{item.price} PLN</span>
-          <span class="input-group-text">Amount</span>
+  {#each items as { amount, item }}
+    <div class="card mb-2" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title" class:fade-text={amount == null || amount === 0}>
+          {item.name}
+        </h5>
+        <div class="input-group card-text">
+          <span class="input-group-text price">{item.price} PLN</span>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            on:click={() => amount++}>
+            +1
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            on:click={() => amount--}>
+            -1
+          </button>
           <input
             type="number"
             id="amount"
@@ -92,6 +105,20 @@
             min="0" />
         </div>
       </div>
-    {/each}
-  </div>
+    </div>
+  {/each}
 {/if}
+
+<style>
+  .fade-text {
+    color: grey;
+  }
+
+  #amount {
+    text-align: left;
+  }
+
+  .price {
+    width: 90px;
+  }
+</style>

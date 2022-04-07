@@ -4,6 +4,8 @@
 
   export let uuid: string;
 
+  let save_in_progress = false;
+
   const newCampaign: () => Campaign = () => ({
     uuid: uuid,
     items: [],
@@ -31,7 +33,9 @@
   }
 
   async function save() {
+    save_in_progress = true;
     edited_campaign = await updateCampaign(edited_campaign);
+    save_in_progress = false;
   }
 </script>
 
@@ -41,10 +45,26 @@
   <h1>Edit campaign {fetched_campaign.title}</h1>
 
   <div class="mb-2">
-    <button type="button" class="btn btn-primary" on:click={add_item}>
+    <button
+      type="button"
+      class="btn btn-primary"
+      on:click={add_item}
+      disabled={save_in_progress}>
       + Add item
     </button>
-    <button type="button" class="btn btn-primary" on:click={save}>Save</button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      on:click={save}
+      disabled={save_in_progress}>
+      {#if save_in_progress}
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true" />
+      {/if}
+      Save
+    </button>
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" for="title">Title</span>
@@ -52,7 +72,8 @@
       class="form-control"
       type="text"
       id="title"
-      bind:value={edited_campaign.title} />
+      bind:value={edited_campaign.title}
+      disabled={save_in_progress} />
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" for="campaign_url">Campaign url</span>
@@ -60,10 +81,47 @@
       class="form-control"
       type="text"
       id="campaign_url"
-      bind:value={edited_campaign.url} />
+      bind:value={edited_campaign.url}
+      disabled={save_in_progress} />
   </div>
-  <div class="row align-items-end">
-    {#each edited_campaign.items as item}
+  <div class="input-group mb-3">
+    <span class="input-group-text" for="campaign_url">Image url</span>
+    <input
+      class="form-control"
+      type="text"
+      id="campaign_img_url"
+      bind:value={edited_campaign.img_url}
+      disabled={save_in_progress} />
+  </div>
+  {#each edited_campaign.items as item}
+    <div class="card mb-2" style="width: 100%;">
+      <div class="card-body">
+        <div class="input-group mb-3">
+          <span class="input-group-text" for="item_name_{item.uuid}">Name</span>
+          <input
+            class="form-control"
+            type="text"
+            id="item_name_{item.uuid}"
+            bind:value={item.name}
+            disabled={save_in_progress} />
+        </div>
+        <div class="input-group card-text">
+          <span class="input-group-text" for="item_price_{item.uuid}">
+            Price
+          </span>
+          <input
+            class="form-control"
+            type="number"
+            min="0"
+            id="item_price_{item.uuid}"
+            bind:value={item.price}
+            disabled={save_in_progress} />
+        </div>
+      </div>
+    </div>
+  {/each}
+
+  <!-- {#each edited_campaign.items as item}
       <div class="col-12 col-lg-3">
         <span class="fake-link" on:click={() => delete_item(item.uuid)}>
           Delete
@@ -88,6 +146,5 @@
             bind:value={item.price} />
         </div>
       </div>
-    {/each}
-  </div>
+    {/each} -->
 {/await}

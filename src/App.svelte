@@ -26,7 +26,7 @@
 </script>
 
 <svelte:head>
-  <title>Zakupy u Golluma</title>
+  <title>Gollum Shop</title>
 </svelte:head>
 <Router>
   <div class="container">

@@ -10,6 +10,7 @@
     Order,
     updatePaidAmount,
   } from "./api/Api";
+  import InProgressButton from "./InProgressButton.svelte";
 
   export let uuid: string;
 
@@ -52,7 +53,7 @@
   });
 
   async function confirm(order: Order & AssignedToUser) {
-    updatePaidAmount(order);
+    await updatePaidAmount(order);
   }
 </script>
 
@@ -63,28 +64,30 @@
 {#if campaign != null && orders != null}
   <h1>Manage orders for {campaign.title}</h1>
 
-  <h2>Items to order</h2>
-  <p>Gathered {totalGathered} out of {totalPrice}</p>
+  <h2>Orders summary</h2>
+  <p>Paid {totalGathered} out of {totalPrice}</p>
   <ul>
     {#each totalItems as totalItem}
       <li>{totalItem.name}: {totalItem.total_amount}</li>
     {/each}
   </ul>
 
-  <h2>Orders</h2>
+  <h2>Orders per user</h2>
   {#each orders as order}
     <h3>{order.username}</h3>
     <div>
       <span>Paid</span>
-      <input type="text" bind:value={order.paid_amount} />
-      <span>
+      <input type="number" bind:value={order.paid_amount} class="money" />
+      <span class="me-1">
         out of {order.items.reduce(
           (acc, item) =>
             acc + itemByUuid.get(item.item_uuid).price * item.amount,
           0
         )}
       </span>
-      <button type="button" on:click={() => confirm(order)}>Confirm</button>
+      <InProgressButton
+        on_click_function={async () => confirm(order)}
+        label="Confirm" />
     </div>
     <ul>
       {#each order.items as item}
@@ -94,5 +97,8 @@
   {/each}
 {/if}
 
-<!-- total per item -->
-<!-- rozbicie per user + możliwość oznaczenia że wpłacił kaskę -->
+<style>
+  .money {
+    max-width: 120px;
+  }
+</style>

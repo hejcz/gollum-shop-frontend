@@ -9,13 +9,18 @@ const campaigns: Campaign[] = [
     items: [
       {
         name: "Core Game Pledge",
-        price: 540,
-        uuid: "66a89ed0-8fdd-4c6e-a14f-ee0ab4045255",
+        price: 139,
+        uuid: "b71582b6-3b9e-4096-be21-1155d5d61de1",
       },
       {
         name: "Elite Core Game Pledge",
-        price: 750,
-        uuid: "a1ebd6d4-566d-4c13-9453-9f488b7c8bb4",
+        price: 221,
+        uuid: "9ed31265-54cb-4e6d-af3d-ca8ba8942b37",
+      },
+      {
+        name: "Gameplay All-in Pledge",
+        price: 429,
+        uuid: "1b93d558-4181-472d-a9d8-800cf10f82ac",
       },
     ],
     locked: false,
@@ -25,7 +30,33 @@ const campaigns: Campaign[] = [
     title: "Scarface 1920",
     img_url: "/images/scarface1920.avif",
     url: null,
-    items: [],
+    items: [
+      {
+        name: "BOSS TRIBUTE",
+        price: 5,
+        uuid: "794fb81b-5254-4ff0-91a4-b3851c8fcf50",
+      },
+      {
+        name: "SCARFACE 1920 - MOBSTER PLEDGE",
+        price: 99,
+        uuid: "fb33765a-fd43-4298-9593-1491d83801f0",
+      },
+      {
+        name: "SCARFACE 1920 - BIG BOSS PLEDGE",
+        price: 139,
+        uuid: "b0020ac7-e6f7-438c-a39a-4ce8b24b4655",
+      },
+      {
+        name: "SCARFACE 1920 - KING OF CHICAGO PLEDGE",
+        price: 174,
+        uuid: "aa295fc2-4491-49f6-842e-16d7c4b5873f",
+      },
+      {
+        name: "SCARFACE 1920 - ALL IN PLEDGE",
+        price: 210,
+        uuid: "ebe3775d-c022-4823-88b4-c9de33630b54",
+      },
+    ],
     locked: false,
   },
   {
@@ -60,7 +91,7 @@ const campaigns: Campaign[] = [
         uuid: "509d3e04-9dda-47db-b95f-ec56a9da5d7c",
       },
       {
-        name: "Cloudspire Vol 1:The Joining War - Hardcover Lore & Scenario Book",
+        name: "Cloudspire Vol 1: The Joining War - Hardcover Lore & Scenario Book",
         price: 127,
         uuid: "94c97849-5605-495b-99a5-4b3469ae6957",
       },
@@ -207,7 +238,23 @@ const campaigns: Campaign[] = [
     title: "Resurgence",
     img_url: "/images/resurgence.avif",
     url: null,
-    items: [],
+    items: [
+      {
+        name: "Survivor Pledge",
+        price: 1,
+        uuid: "639bdb64-af7c-4f20-9cf0-62335c97a58b",
+      },
+      {
+        name: "Hero Pledge",
+        price: 55,
+        uuid: "36a2f64c-870e-477b-ada0-0348f9a6c26e",
+      },
+      {
+        name: "Retailer Pledge",
+        price: 100,
+        uuid: "ec042da7-ee08-41d1-81d1-27daff102308",
+      },
+    ],
     locked: false,
   },
   {
@@ -216,7 +263,58 @@ const campaigns: Campaign[] = [
     url: "https://www.kickstarter.com/projects/sawant3d/hidden-places-amazing-3d-printable-scenery",
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/830/782/25575d37a9d0509d5938cf4ed73bb898_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648674665&auto=format&frame=1&q=92&s=92144e0ef27e62becdf9c13b109d9c0f",
-    items: [],
+    items: [
+      {
+        name: "The Isthmus of a Fallen Angel",
+        price: 7,
+        uuid: "a06bae3b-8a88-48b1-a6b0-e012928956b9",
+      },
+      {
+        name: "Lost portal in the Temples of Azoroth",
+        price: 7,
+        uuid: "4d22ebce-134f-4a38-b962-65027fbb7abe",
+      },
+      {
+        name: "Abandoned Base of Space Elves",
+        price: 7,
+        uuid: "b69951ac-15ea-4efa-9f3a-afbc7a3b1fa8",
+      },
+      {
+        name: "Frosty Land",
+        price: 7,
+        uuid: "ec8a6364-8250-46b0-ab5c-a7dd5f3e0958",
+      },
+      {
+        name: "Sunken Ruins",
+        price: 7,
+        uuid: "87d7d197-cb54-4b8e-8c4a-6cc2ef7635fc",
+      },
+      {
+        name: "Early All In Wave II",
+        price: 30,
+        uuid: "c91afb25-64e0-4cfe-9422-fb2ff6c36900",
+      },
+      {
+        name: "All In",
+        price: 39,
+        uuid: "3c9e9eb5-0180-42f0-9ac9-bb4ba427d36e",
+      },
+      {
+        name: "Life Time Merchant",
+        price: 99,
+        uuid: "5523e464-7c54-49c4-8863-a010979b6ca6",
+      },
+      {
+        name: "Early All In",
+        price: 29,
+        uuid: "f94b8ab8-175e-43c9-9ddc-cadad09182b6",
+      },
+      {
+        name: "Early Life Time Merchant",
+        price: 69,
+        uuid: "113abfac-f57e-4229-a9c8-3af569977695",
+      },
+    ],
     locked: false,
   },
   {

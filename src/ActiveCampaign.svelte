@@ -52,3 +52,10 @@
     </div>
   </div>
 </div>
+
+<style>
+  ul {
+    padding-left: 0rem;
+    list-style-type: none;
+  }
+</style>

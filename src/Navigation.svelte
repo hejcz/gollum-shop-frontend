@@ -43,8 +43,7 @@
     </div>
   </div>
 </nav>
-<div class="mt-3">
-</div>
+<div class="mt-3" />
 
 <style>
   :global(.nav-link > a) {
