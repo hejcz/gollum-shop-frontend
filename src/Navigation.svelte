@@ -1,10 +1,6 @@
 <script lang="ts">
   import { Link } from "svelte-navigator";
-  import {
-    auth0_client,
-    switchToLoggedUser,
-    switchToAdmin,
-  } from "./stores";
+  import { auth0_client, switchToLoggedUser, switchToAdmin } from "./stores";
 
   export let hide_actions = false;
   export let logout_only = false;
@@ -12,7 +8,7 @@
   async function logout() {
     // localOnly option fools auth0 client but when we try to login then
     // there is no option to specify login/password
-    await $auth0_client.logout({returnTo: "AUTH0_LOGOUT_URL"});
+    await $auth0_client.logout({ returnTo: "AUTH0_LOGOUT_URL" });
   }
 </script>
 

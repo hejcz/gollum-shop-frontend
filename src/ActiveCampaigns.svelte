@@ -77,5 +77,6 @@
   ul {
     padding-left: 0rem;
     list-style-type: none;
+    margin-bottom: 0px;
   }
 </style>
