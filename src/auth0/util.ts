@@ -2,7 +2,9 @@ import { auth0_client, user, role } from "../stores";
 import { get } from "svelte/store";
 import { Admin, Anonymous, LoggedUser } from "./roles";
 
-export const auth0_audience = { audience: "http://localhost:8090" };
+const audience = "AUTH0_AUDIENCE"
+
+export const auth0_audience = { audience: audience };
 export const roles_key = "https://localhost:8090/roles";
 
 export async function store_credentials() {

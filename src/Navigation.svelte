@@ -12,7 +12,7 @@
   async function logout() {
     // localOnly option fools auth0 client but when we try to login then
     // there is no option to specify login/password
-    await $auth0_client.logout();
+    await $auth0_client.logout({returnTo: "AUTH0_LOGOUT_URL"});
   }
 </script>
 

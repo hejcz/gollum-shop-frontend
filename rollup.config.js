@@ -6,8 +6,17 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
+
+let auth0_audience = 'http://localhost:8090'
+let auth0_logout_url = 'http://localhost:8090'
+switch (process.env.environment) {
+	case 'github':
+		auth0_logout_url = 'https://hejcz.github.io'
+}
+
 
 function serve() {
 	let server;
@@ -75,7 +84,13 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),
+
+		replace({
+			preventAssignment: true,
+			AUTH0_AUDIENCE: auth0_audience,
+			AUTH0_LOGOUT_URL: auth0_logout_url,
+		}),
 	],
 	watch: {
 		clearScreen: false
