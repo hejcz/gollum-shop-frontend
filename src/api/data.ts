@@ -4,7 +4,8 @@ const campaigns: Campaign[] = [
   {
     uuid: "a170039a-9917-4168-aee1-aedb77afe34e",
     title: "Kingdoms Forlorn",
-    img_url: "/images/forlorn.avif",
+    img_url:
+      "https://ksr-ugc.imgix.net/assets/036/443/513/e4c8e316acfbb719aeeec5fbca000354_original.jpg?ixlib=rb-4.0.2&crop=faces&w=1552&h=873&fit=crop&v=1645568642&auto=format&frame=1&q=92&s=8277cceace3f583a783dcf3496dd6f94",
     url: "https://www.kickstarter.com/projects/kingdomsforlorn/kingdoms-forlorn-dragons-devils-and-kings",
     items: [
       {
@@ -28,7 +29,8 @@ const campaigns: Campaign[] = [
   {
     uuid: "ee2d0863-bd0d-4fb4-8ed3-f0ec58a0b223",
     title: "Scarface 1920",
-    img_url: "/images/scarface1920.avif",
+    img_url:
+      "https://ksr-ugc.imgix.net/assets/034/190/782/ad9b521d0ddfc9ae67f591012de14432_original.jpg?ixlib=rb-4.0.2&crop=faces&w=1552&h=873&fit=crop&v=1626170973&auto=format&frame=1&q=92&s=8cb5b5e167967b15444bbbb38609ba99",
     url: null,
     items: [
       {
@@ -237,7 +239,8 @@ const campaigns: Campaign[] = [
   {
     uuid: "779e7493-840a-45d8-8cbb-0685e0b5c910",
     title: "Resurgence",
-    img_url: "/images/resurgence.avif",
+    img_url:
+      "https://ksr-ugc.imgix.net/assets/035/432/817/2e255a3f0c3549f0c5f0c71da41e3bcc_original.png?ixlib=rb-4.0.2&crop=faces&w=1552&h=873&fit=crop&v=1635780981&auto=format&frame=1&q=92&s=f58e4a746a0e1170abb36476df1031a0",
     url: null,
     items: [
       {
@@ -328,24 +331,6 @@ const campaigns: Campaign[] = [
     locked: false,
   },
   {
-    uuid: "a1cc92e4-9361-48d9-a782-1ddee95d5103",
-    title: "An Empty Throne",
-    url: "https://www.kickstarter.com/projects/smallboxgames/an-empty-throne",
-    img_url:
-      "https://ksr-ugc.imgix.net/assets/036/900/339/254fd356871e2ba190502892807316ce_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649242272&auto=format&frame=1&q=92&s=fdf60e871cbdc0f2bb82cacbba4c59db",
-    items: [],
-    locked: false,
-  },
-  {
-    uuid: "8b5944e2-23fe-4414-ba0c-7ea6d892cee4",
-    title: "The Quest Kids: Big Bads of Tolk's Cave (Reprint+Expansion)",
-    url: "https://www.kickstarter.com/projects/treasurefallsgames/the-quest-kids-big-bads-of-tolks-cave",
-    img_url:
-      "https://ksr-ugc.imgix.net/assets/036/903/603/d577e63fc46b26c1e8d74be641893e77_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649261841&auto=format&frame=1&q=92&s=b5da884b8d8bfb5aedad027c4b42e4e5",
-    items: [],
-    locked: false,
-  },
-  {
     uuid: "9bef6d90-4000-4b8a-899c-6e4980395149",
     title: "🛡️Remarkable Guilds & Their Heroes - GM guide for Any RPG",
     url: "https://www.kickstarter.com/projects/loresmyth/remarkable-guilds-and-their-heroes-gm-sourcebook-for-any-rpg",
@@ -360,15 +345,6 @@ const campaigns: Campaign[] = [
     url: "https://www.kickstarter.com/projects/blackspirefantasy/swords-and-chaos",
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/896/177/aa00ca635cec930507c84fe672396cee_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649202967&auto=format&frame=1&q=92&s=6c0293944d176b1f860ffb19ce01daeb",
-    items: [],
-    locked: false,
-  },
-  {
-    uuid: "abef1259-9238-4fa1-a850-ffcddefcb330",
-    title: "CBR+PNK: Augmented",
-    url: "https://www.kickstarter.com/projects/mythopoeia/cbr-pnk",
-    img_url:
-      "https://ksr-ugc.imgix.net/assets/036/895/265/38af0263f485cd90ee142f1707131b52_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649196437&auto=format&frame=1&q=92&s=131208cbd1a16fd57bcd6db509e9d6d3",
     items: [],
     locked: false,
   },
@@ -740,6 +716,14 @@ const campaigns: Campaign[] = [
       "https://ksr-ugc.imgix.net/assets/036/640/630/6add053b0976c83561e538c8ea4f7792_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1647163454&auto=format&frame=1&q=92&s=bb2814e46f0628f369de421104ace8b0",
     items: [],
     locked: true,
+  },
+  {
+    uuid: "4e4a3dbd-85c4-4dcb-be2a-572ebc96e24f",
+    title: "Campaign with failing image",
+    url: "https://google.com",
+    img_url: "https://google.com",
+    items: [],
+    locked: false,
   },
 ];
 

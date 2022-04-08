@@ -1,37 +1,28 @@
 <script lang="ts">
   import { Link } from "svelte-navigator";
-  import { fetchCampaigns, unlockCampaign } from "./api/Api";
-  import ActiveCampaign from "./CampaignTab.svelte";
-  import { role } from "./stores";
-  import { debounce } from "./utils/debounce";
+  import { fetchCampaigns, unlockCampaign } from "../api/Api";
+  import { role } from "../stores";
+  import CampaignsNav from "./CampaignsNav.svelte";
+  import Campaign from "./Campaign.svelte";
 
-  let search: string = "";
   let inactive_campaigns = fetchCampaigns(false);
 
   async function unlock(uuid: string) {
     await unlockCampaign(uuid);
-    inactive_campaigns = fetchCampaigns(false, search);
+    inactive_campaigns = fetchCampaigns(false);
   }
-
-  const filter = debounce(() => {
-    inactive_campaigns = fetchCampaigns(false, search);
-  }, 500);
 </script>
 
 <h1>Campaigns archive</h1>
 
-<input
-  type="text"
-  bind:value={search}
-  on:keyup={filter}
-  placeholder="Filter campaigns by title" />
+<CampaignsNav bind:campaigns={inactive_campaigns} />
 
-<div class="row">
+<div class="row campaigns-row">
   {#await inactive_campaigns then campaigns}
     <div class="mb-2 mt-2">
       <div class="accordion" id="accordionExample">
         {#each campaigns as c}
-          <ActiveCampaign campaign={c}>
+          <Campaign campaign={c}>
             <slot id="actions">
               {#if $role.might_modify_campaign()}
                 <ul>
@@ -51,16 +42,9 @@
                 Nothing to do here
               {/if}
             </slot>
-          </ActiveCampaign>
+          </Campaign>
         {/each}
       </div>
     </div>
   {/await}
 </div>
-
-<style>
-  ul {
-    padding-left: 0rem;
-    list-style-type: none;
-  }
-</style>

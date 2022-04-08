@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.21.0",
+    "bootstrap": "^5.1.3",
     "sirv-cli": "^2.0.0",
     "svelte-language-server": "^0.14.23"
   }

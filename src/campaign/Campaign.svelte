@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Campaign } from "./api/Api";
+  import type { Campaign } from "../api/Api";
 
   export let campaign: Campaign;
 </script>
@@ -9,10 +9,10 @@
     <div style="display: flex;">
       <div class="d-none d-md-inline">
         {#if campaign.url == null}
-          <img src={campaign.img_url} alt="campaign minature" />
+          <img src={campaign.img_url} alt="campaign miniature" />
         {:else}
           <a href={campaign.url} target="_blank">
-            <img src={campaign.img_url} alt="campaign minature" />
+            <img src={campaign.img_url} alt="campaign miniature" />
           </a>
         {/if}
       </div>
@@ -48,6 +48,11 @@
     width: 90px;
     height: 52px;
     object-fit: cover;
+    overflow: hidden;
+    float: left;
+    font-size: 1rem;
+    line-height: 26px;
+    text-align: center;
   }
 
   .accordion-button {

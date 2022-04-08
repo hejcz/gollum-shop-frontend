@@ -2,12 +2,12 @@
   import createAuth0Client from "@auth0/auth0-spa-js";
   import { onMount } from "svelte";
   import { Router, Route } from "svelte-navigator";
-  import ActiveCampaigns from "./ActiveCampaigns.svelte";
+  import ActiveCampaigns from "./campaign/ActiveCampaigns.svelte";
   import EditCampaign from "./admin/EditCampaign.svelte";
   import Anonymous from "./Anonymous.svelte";
   import Login from "./auth0/Login.svelte";
   import { auth0_audience, store_credentials } from "./auth0/util";
-  import InactiveCampaigns from "./InactiveCampaigns.svelte";
+  import InactiveCampaigns from "./campaign/InactiveCampaigns.svelte";
   import ManageOrders from "./ManageOrders.svelte";
   import Navigation from "./Navigation.svelte";
   import Order from "./Order.svelte";
@@ -74,5 +74,11 @@
 
   :global(h1) {
     text-align: center;
+  }
+
+  :global(.campaigns-row ul) {
+    padding-left: 0rem;
+    list-style-type: none;
+    margin-bottom: 0px;
   }
 </style>
