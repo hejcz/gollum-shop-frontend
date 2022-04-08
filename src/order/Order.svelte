@@ -76,7 +76,7 @@
           <button
             type="button"
             class="btn btn-outline-secondary"
-            on:click={() => amount--}>
+            on:click={() => (amount = Math.max(0, amount - 1))}>
             -1
           </button>
           <input
