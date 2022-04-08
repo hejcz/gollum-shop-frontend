@@ -1,6 +1,6 @@
 <script lang="ts">
   import { v4 } from "uuid";
-  import { fetchCampaign, updateCampaign, Campaign } from "../api/Api";
+  import { api, Campaign } from "../api/Api";
   import InProgressButton from "../InProgressButton.svelte";
 
   export let uuid: string;
@@ -15,7 +15,8 @@
   });
 
   let edited_campaign: Campaign;
-  const campaign = fetchCampaign(uuid)
+  const campaign = api
+    .fetchCampaign(uuid)
     .then(
       (campaign) => ({ ...campaign }),
       () => newCampaign()
@@ -34,7 +35,7 @@
   }
 
   async function save() {
-    edited_campaign = await updateCampaign(edited_campaign);
+    edited_campaign = await api.updateCampaign(edited_campaign);
   }
 </script>
 

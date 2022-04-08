@@ -1,14 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import {
-    fetchCampaign,
-    fetchOrder,
-    orderCampaign,
-    Order,
-    Campaign,
-    OrderedItem,
-  } from "../api/Api";
+  import { api, Order, Campaign, OrderedItem } from "../api/Api";
   import InProgressButton from "../InProgressButton.svelte";
 
   export let uuid: string;
@@ -21,8 +14,8 @@
     .reduce((acc, x) => acc + x, 0);
 
   onMount(async () => {
-    const fetchedOrder: Order = await fetchOrder(uuid);
-    const fetchedCampaign: Campaign = await fetchCampaign(uuid);
+    const fetchedOrder: Order = await api.fetchOrder(uuid);
+    const fetchedCampaign: Campaign = await api.fetchCampaign(uuid);
     if (fetchedCampaign == null) {
       items = [];
       campaign = null;
@@ -41,7 +34,7 @@
   });
 
   async function order() {
-    await orderCampaign(
+    await api.orderCampaign(
       uuid,
       items
         .filter((i) => i.amount > 0)

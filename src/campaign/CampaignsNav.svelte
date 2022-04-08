@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { Campaign, fetchCampaigns } from "../api/Api";
+  import { Campaign, api } from "../api/Api";
   import { debounce } from "../utils/debounce";
 
   export let campaigns: Promise<Campaign[]>;
   let search: string = "";
 
-  const filter = debounce(() => {
-    campaigns = fetchCampaigns(true, search);
+  const filter = debounce(async () => {
+    campaigns = api.fetchCampaigns(true, search);
   }, 500);
 </script>
 

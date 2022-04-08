@@ -1,5 +1,6 @@
 import createAuth0Client, { PopupCancelledError } from "@auth0/auth0-spa-js";
 import { get } from "svelte/store";
+import { environment } from "../environment";
 import { auth0_client, role, user } from "../stores";
 import { Admin, Anonymous, LoggedUser } from "./roles";
 
@@ -106,7 +107,5 @@ class Auth0Manager implements AuthenticationManager {
   }
 }
 
-let environment = "ENVIRONMENT";
-
 export const authentication_manager: AuthenticationManager =
-  environment === "local" ? new LocalDevManager() : new Auth0Manager();
+  environment() === "local" ? new LocalDevManager() : new Auth0Manager();

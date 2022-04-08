@@ -1,5 +1,5 @@
-import { user } from "../stores";
-import data from "./data";
+import { environment } from "../environment";
+import { MockApi } from "./MockApi";
 
 export interface CampaignItem {
   name: string;
@@ -33,110 +33,21 @@ export interface AssignedToUser {
 
 export interface OrderedCampaign {}
 
-let userInfo: string = null;
-user.subscribe((u) => (userInfo = u));
-
-function mutateCampaign(uuid: string, mutator: (c: Campaign) => void): void {
-  const campaign = data.campaigns.find((c) => c.uuid === uuid);
-  if (campaign != null) {
-    mutator(campaign);
-  }
+export interface Api {
+  fetchCampaign(uuid: string): Promise<Campaign>;
+  fetchOrders(uuid: string): Promise<(Order & AssignedToUser)[]>;
+  updatePaidAmount(order: Order & AssignedToUser): Promise<Order>;
+  fetchOrder(uuid: string): Promise<Order>;
+  orderCampaign(uuid: string, items: OrderedItem[]): Promise<Order>;
+  updateCampaign(campaign: Campaign): Promise<Campaign>;
+  fetchCampaigns(
+    active: boolean,
+    titleLike: string | null
+  ): Promise<Campaign[]>;
+  lockCampaign(uuid: string): Promise<Campaign>;
+  unlockCampaign(uuid: string): Promise<Campaign>;
 }
 
-export async function fetchCampaign(uuid: string): Promise<Campaign> {
-  const campaign = data.campaigns.find((c) => c.uuid === uuid);
-  if (campaign == null) {
-    return Promise.reject("no such campaign");
-  } else {
-    return Promise.resolve(JSON.parse(JSON.stringify(campaign)));
-  }
-}
-
-export async function fetchOrders(
-  uuid: string
-): Promise<(Order & AssignedToUser)[]> {
-  const orders = [];
-  for (const user in data.orders) {
-    const order: Order = data.orders[user]?.find(
-      (o) => o.campaign_uuid === uuid
-    );
-    if (order == null) {
-      continue;
-    }
-    orders.push({ username: user, ...order });
-  }
-  return Promise.resolve(JSON.parse(JSON.stringify(orders)));
-}
-
-export async function updatePaidAmount(
-  order: Order & AssignedToUser
-): Promise<Order> {
-  const index = data.orders[order.username].findIndex(
-    (o) => o.campaign_uuid === order.campaign_uuid
-  );
-  data.orders[order.username][index] = { ...order };
-  return Promise.resolve(
-    JSON.parse(JSON.stringify(data.orders[order.username][index]))
-  );
-}
-
-export async function fetchOrder(uuid: string): Promise<Order> {
-  const order: Order = data.orders[userInfo]?.find(
-    (o) => o.campaign_uuid === uuid
-  ) ?? { campaign_uuid: uuid, items: [], paid_amount: 0 };
-  return Promise.resolve(JSON.parse(JSON.stringify(order)));
-}
-
-export async function orderCampaign(
-  uuid: string,
-  items: OrderedItem[]
-): Promise<Order> {
-  if (data.orders[userInfo] == null) {
-    data.orders[userInfo] = [];
-  }
-  const orders: Order[] = data.orders[userInfo];
-  let order: Order | undefined = orders?.find((o) => o.campaign_uuid === uuid);
-  if (order == null) {
-    order = { campaign_uuid: uuid, items: items, paid_amount: 0 };
-    orders.push(order);
-  }
-  order.items = items;
-  return Promise.resolve({ ...order });
-}
-
-export async function updateCampaign(campaign: Campaign): Promise<Campaign> {
-  const index = data.campaigns.findIndex((c) => c.uuid === campaign.uuid);
-  if (index === -1) {
-    data.campaigns.push(campaign);
-  } else {
-    data.campaigns[index] = campaign;
-  }
-  return Promise.resolve({ ...campaign });
-}
-
-export async function fetchCampaigns(
-  active: boolean,
-  titleLike: string | null = null
-): Promise<Campaign[]> {
-  const campaigns = data.campaigns.filter(
-    (c) =>
-      (active ? !c.locked : c.locked) &&
-      (titleLike == null ||
-        titleLike.length === 0 ||
-        c.title.toLowerCase().includes(titleLike.toLowerCase()))
-  );
-  campaigns.sort((a, b) =>
-    a.title < b.title ? -1 : a.title === b.title ? 0 : 1
-  );
-  return Promise.resolve(JSON.parse(JSON.stringify(campaigns)));
-}
-
-export async function lockCampaign(uuid: string): Promise<Campaign> {
-  mutateCampaign(uuid, (c) => (c.locked = true));
-  return fetchCampaign(uuid);
-}
-
-export async function unlockCampaign(uuid: string): Promise<Campaign> {
-  mutateCampaign(uuid, (c) => (c.locked = false));
-  return fetchCampaign(uuid);
-}
+export const api: Api = ["local", "github"].includes(environment())
+  ? new MockApi()
+  : null;

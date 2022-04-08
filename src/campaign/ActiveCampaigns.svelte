@@ -1,12 +1,12 @@
 <script lang="ts">
   import { Link, useNavigate } from "svelte-navigator";
   import { v4 as uuidv4 } from "uuid";
-  import { fetchCampaigns, lockCampaign } from "../api/Api";
+  import { api } from "../api/Api";
   import { role } from "../stores";
   import CampaignsNav from "./CampaignsNav.svelte";
   import Campaign from "./Campaign.svelte";
 
-  let active_campaigns = fetchCampaigns(true);
+  let active_campaigns = api.fetchCampaigns(true, null);
   const navigate = useNavigate();
 
   function add_new_campaign() {
@@ -14,8 +14,8 @@
   }
 
   async function lock(uuid: string) {
-    await lockCampaign(uuid);
-    active_campaigns = fetchCampaigns(true);
+    await api.lockCampaign(uuid);
+    active_campaigns = api.fetchCampaigns(true, null);
   }
 </script>
 

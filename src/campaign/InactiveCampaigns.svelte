@@ -1,15 +1,15 @@
 <script lang="ts">
   import { Link } from "svelte-navigator";
-  import { fetchCampaigns, unlockCampaign } from "../api/Api";
+  import { api } from "../api/Api";
   import { role } from "../stores";
   import CampaignsNav from "./CampaignsNav.svelte";
   import Campaign from "./Campaign.svelte";
 
-  let inactive_campaigns = fetchCampaigns(false);
+  let inactive_campaigns = api.fetchCampaigns(false, null);
 
   async function unlock(uuid: string) {
-    await unlockCampaign(uuid);
-    inactive_campaigns = fetchCampaigns(false);
+    await api.unlockCampaign(uuid);
+    inactive_campaigns = api.fetchCampaigns(false, null);
   }
 </script>
 

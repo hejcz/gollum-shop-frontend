@@ -5,10 +5,8 @@
     AssignedToUser,
     Campaign,
     CampaignItem,
-    fetchCampaign,
-    fetchOrders,
     Order,
-    updatePaidAmount,
+    api,
   } from "../api/Api";
   import InProgressButton from "../InProgressButton.svelte";
 
@@ -47,13 +45,16 @@
   }
 
   onMount(async () => {
-    const [o, c] = await Promise.all([fetchOrders(uuid), fetchCampaign(uuid)]);
+    const [o, c] = await Promise.all([
+      api.fetchOrders(uuid),
+      api.fetchCampaign(uuid),
+    ]);
     orders = o;
     campaign = c;
   });
 
   async function confirm(order: Order & AssignedToUser) {
-    await updatePaidAmount(order);
+    await api.updatePaidAmount(order);
   }
 </script>
 
