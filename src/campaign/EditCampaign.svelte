@@ -110,31 +110,4 @@
       </div>
     </div>
   {/each}
-
-  <!-- {#each edited_campaign.items as item}
-      <div class="col-12 col-lg-3">
-        <span class="fake-link" on:click={() => delete_item(item.uuid)}>
-          Delete
-        </span>
-        <div class="input-group mb-3">
-          <span class="input-group-text" for="item_name_{item.uuid}">Name</span>
-          <input
-            class="form-control"
-            type="text"
-            id="item_name_{item.uuid}"
-            bind:value={item.name} />
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" for="item_price_{item.uuid}">
-            Price
-          </span>
-          <input
-            class="form-control"
-            type="number"
-            min="0"
-            id="item_price_{item.uuid}"
-            bind:value={item.price} />
-        </div>
-      </div>
-    {/each} -->
 {/await}

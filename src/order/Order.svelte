@@ -8,8 +8,8 @@
     Order,
     Campaign,
     OrderedItem,
-  } from "./api/Api";
-  import InProgressButton from "./InProgressButton.svelte";
+  } from "../api/Api";
+  import InProgressButton from "../InProgressButton.svelte";
 
   export let uuid: string;
 

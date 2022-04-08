@@ -1,5 +1,4 @@
 import { user } from "../stores";
-import { delay } from "../utils/delay";
 import data from "./data";
 
 export interface CampaignItem {
@@ -31,6 +30,8 @@ export interface Order {
 export interface AssignedToUser {
   username: string;
 }
+
+export interface OrderedCampaign {}
 
 let userInfo: string = null;
 user.subscribe((u) => (userInfo = u));
@@ -117,19 +118,17 @@ export async function fetchCampaigns(
   active: boolean,
   titleLike: string | null = null
 ): Promise<Campaign[]> {
-  return Promise.resolve(
-    JSON.parse(
-      JSON.stringify(
-        data.campaigns.filter(
-          (c) =>
-            (active ? !c.locked : c.locked) &&
-            (titleLike == null ||
-              titleLike.length === 0 ||
-              c.title.toLowerCase().includes(titleLike.toLowerCase()))
-        )
-      )
-    )
+  const campaigns = data.campaigns.filter(
+    (c) =>
+      (active ? !c.locked : c.locked) &&
+      (titleLike == null ||
+        titleLike.length === 0 ||
+        c.title.toLowerCase().includes(titleLike.toLowerCase()))
   );
+  campaigns.sort((a, b) =>
+    a.title < b.title ? -1 : a.title === b.title ? 0 : 1
+  );
+  return Promise.resolve(JSON.parse(JSON.stringify(campaigns)));
 }
 
 export async function lockCampaign(uuid: string): Promise<Campaign> {

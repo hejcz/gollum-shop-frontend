@@ -3,14 +3,14 @@
   import { onMount } from "svelte";
   import { Router, Route } from "svelte-navigator";
   import ActiveCampaigns from "./campaign/ActiveCampaigns.svelte";
-  import EditCampaign from "./admin/EditCampaign.svelte";
+  import EditCampaign from "./campaign/EditCampaign.svelte";
   import Anonymous from "./Anonymous.svelte";
   import Login from "./auth0/Login.svelte";
   import { auth0_audience, store_credentials } from "./auth0/util";
   import InactiveCampaigns from "./campaign/InactiveCampaigns.svelte";
-  import ManageOrders from "./ManageOrders.svelte";
+  import ManageOrders from "./order/ManageOrders.svelte";
   import Navigation from "./Navigation.svelte";
-  import Order from "./Order.svelte";
+  import Order from "./order/Order.svelte";
   import { auth0_client, role, user } from "./stores";
 
   onMount(async () => {

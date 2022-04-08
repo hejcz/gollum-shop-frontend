@@ -9,8 +9,8 @@
     fetchOrders,
     Order,
     updatePaidAmount,
-  } from "./api/Api";
-  import InProgressButton from "./InProgressButton.svelte";
+  } from "../api/Api";
+  import InProgressButton from "../InProgressButton.svelte";
 
   export let uuid: string;
 
