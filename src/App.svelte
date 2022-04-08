@@ -1,29 +1,20 @@
 <script lang="ts">
-  import createAuth0Client from "@auth0/auth0-spa-js";
   import { onMount } from "svelte";
-  import { Router, Route } from "svelte-navigator";
+  import { Route, Router } from "svelte-navigator";
+  import Anonymous from "./Anonymous.svelte";
+  import { authentication_manager } from "./authentication/authentication_manager";
+  import Login from "./authentication/Login.svelte";
   import ActiveCampaigns from "./campaign/ActiveCampaigns.svelte";
   import EditCampaign from "./campaign/EditCampaign.svelte";
-  import Anonymous from "./Anonymous.svelte";
-  import Login from "./auth0/Login.svelte";
-  import { auth0_audience, store_credentials } from "./auth0/util";
   import InactiveCampaigns from "./campaign/InactiveCampaigns.svelte";
-  import ManageOrders from "./order/ManageOrders.svelte";
   import Navigation from "./Navigation.svelte";
+  import ManageOrders from "./order/ManageOrders.svelte";
   import Order from "./order/Order.svelte";
-  import { auth0_client, role, user } from "./stores";
+  import { role, user } from "./stores";
 
   onMount(async () => {
-    const response = await fetch("/auth_config.json");
-    const config = await response.json();
-
-    $auth0_client = await createAuth0Client({
-      domain: config.domain,
-      client_id: config.clientId,
-      ...auth0_audience,
-    });
-
-    await store_credentials();
+    await authentication_manager.initiate_client();
+    await authentication_manager.store_credentials();
   });
 </script>
 

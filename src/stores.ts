@@ -1,6 +1,6 @@
 import type { Auth0Client } from "@auth0/auth0-spa-js";
 import { writable, Writable } from "svelte/store";
-import { Anonymous, Role, LoggedUser, Admin } from "./auth0/roles";
+import { Anonymous, Role, LoggedUser, Admin } from "./authentication/roles";
 
 export const user: Writable<string> = writable(null);
 
