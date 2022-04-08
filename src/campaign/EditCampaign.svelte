@@ -86,7 +86,7 @@
   {#each edited_campaign.items as item}
     <div class="card mb-2" style="width: 100%;">
       <div class="card-body">
-        <div class="input-group mb-3">
+        <div class="input-group">
           <span class="input-group-text" for="item_name_{item.uuid}">Name</span>
           <input
             class="form-control"
@@ -95,7 +95,7 @@
             bind:value={item.name}
             disabled={save_in_progress} />
         </div>
-        <div class="input-group card-text">
+        <div class="input-group">
           <span class="input-group-text" for="item_price_{item.uuid}">
             Price
           </span>
@@ -107,7 +107,34 @@
             bind:value={item.price}
             disabled={save_in_progress} />
         </div>
+        <button
+          type="button"
+          class="btn btn-danger"
+          on:click={() => delete_item(item.uuid)}>
+          Delete
+        </button>
       </div>
     </div>
   {/each}
 {/await}
+
+<style>
+  .card-body {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  @media (min-width: 992px) {
+    .input-group {
+      width: auto;
+      flex-grow: 1;
+    }
+  }
+</style>
