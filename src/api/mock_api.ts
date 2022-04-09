@@ -6,10 +6,11 @@ import type {
   Campaign,
   CampaignCandidate,
   CampaignsSearchParams,
+  CampaignUpdate,
   Order,
   OrderedItem,
 } from "./Api";
-import { campaigns, orders } from "./mock_data";
+import { campaigns, candidates, orders } from "./mock_data";
 
 function mutateCampaign(uuid: string, mutator: (c: Campaign) => void): void {
   const campaign = campaigns.find((c) => c.uuid === uuid);
@@ -18,7 +19,21 @@ function mutateCampaign(uuid: string, mutator: (c: Campaign) => void): void {
   }
 }
 
+function test_title_like(title: string, titleLike: string | null) {
+  return (
+    titleLike == null ||
+    titleLike.length === 0 ||
+    title.toLowerCase().includes(titleLike.toLowerCase())
+  );
+}
+
 export class MockApi implements Api {
+  fetchCampaignCandidate(uuid: string): Promise<CampaignCandidate> {
+    return (async () => {
+      return candidates.find((c) => c.uuid === uuid);
+    })();
+  }
+  
   fetchUserOrders(): Promise<Order[]> {
     return (async () => {
       return orders[get(user)] ?? [];
@@ -27,7 +42,7 @@ export class MockApi implements Api {
 
   fetchCampaignCandidates(titleLike: string): Promise<CampaignCandidate[]> {
     return (async () => {
-      return [];
+      return candidates.filter((c) => test_title_like(c.title, titleLike));
     })();
   }
 
@@ -98,13 +113,20 @@ export class MockApi implements Api {
     })();
   }
 
-  updateCampaign(campaign: Campaign): Promise<Campaign> {
+  updateCampaign(update: CampaignUpdate): Promise<Campaign> {
     return (async () => {
+      const campaign = update.campaign
       const index = campaigns.findIndex((c) => c.uuid === campaign.uuid);
       if (index === -1) {
         campaigns.push(campaign);
       } else {
         campaigns[index] = campaign;
+      }
+      if (update.candidate_uuid != null) {
+        const index = candidates.findIndex(c => c.uuid === update.candidate_uuid)
+        if (index !== -1) {
+          candidates.splice(index, 1);
+        }
       }
       return { ...campaign };
     })();
@@ -115,9 +137,7 @@ export class MockApi implements Api {
       const filtered_campaigns = campaigns.filter(
         (c) =>
           (params.active == null || params.active ? !c.locked : c.locked) &&
-          (params.titleLike == null ||
-            params.titleLike.length === 0 ||
-            c.title.toLowerCase().includes(params.titleLike.toLowerCase())) &&
+          test_title_like(c.title, params.titleLike) &&
           (params.uuids == null || params.uuids.includes(c.uuid))
       );
       filtered_campaigns.sort((a, b) =>

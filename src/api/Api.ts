@@ -10,8 +10,8 @@ export interface CampaignItem {
 export interface Campaign {
   uuid: string;
   title: string;
-  img_url?: string;
-  url?: string;
+  img_url: string;
+  url: string;
   items: CampaignItem[];
   locked: boolean;
 }
@@ -32,11 +32,10 @@ export interface AssignedToUser {
 }
 
 export interface CampaignCandidate {
-  // game title
+  uuid: string;
   title: string;
-  // url to the campaign
-  url?: string;
-  // nicknames of users who liked this candidate
+  url: string;
+  img_url: string;
   liking_users: string[];
 }
 
@@ -44,6 +43,11 @@ export interface CampaignsSearchParams {
   active?: boolean;
   titleLike?: string;
   uuids?: string[];
+}
+
+export interface CampaignUpdate {
+  campaign: Campaign;
+  candidate_uuid?: string;
 }
 
 export interface Api {
@@ -55,10 +59,11 @@ export interface Api {
   updatePaidAmount(order: Order & AssignedToUser): Promise<Order>;
   fetchCampaign(uuid: string): Promise<Campaign>;
   orderCampaign(uuid: string, items: OrderedItem[]): Promise<Order>;
-  updateCampaign(campaign: Campaign): Promise<Campaign>;
+  updateCampaign(update: CampaignUpdate): Promise<Campaign>;
   fetchCampaigns(params: CampaignsSearchParams): Promise<Campaign[]>;
   lockCampaign(uuid: string): Promise<Campaign>;
   unlockCampaign(uuid: string): Promise<Campaign>;
+  fetchCampaignCandidate(uuid: string):  Promise<CampaignCandidate>;
   fetchCampaignCandidates(
     titleLike: string | null
   ): Promise<CampaignCandidate[]>;

@@ -35,7 +35,7 @@
     {#if $role.might_modify_campaign()}
       <ul>
         <li>
-          <Link to="/edit/{item.id}">Edit campaign</Link>
+          <Link to="/campaigns/edit/{item.id}">Edit campaign</Link>
         </li>
         <li>
           <Link to="/orders/{item.id}">Manage orders</Link>

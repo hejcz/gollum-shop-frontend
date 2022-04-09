@@ -349,42 +349,6 @@ export const campaigns: Campaign[] = [
     locked: false,
   },
   {
-    uuid: "f2e25bb7-da30-4680-b611-e4eff6bcf2b4",
-    title: "Tidal Blades 2: Rise of the Unfolders + Cypher System RPG",
-    url: "https://www.kickstarter.com/projects/druidcitygames/tidal-blades-rise-of-the-unfolders-cypher-system-rpg-book",
-    img_url:
-      "https://ksr-ugc.imgix.net/assets/035/690/451/a8710dd8b6dc406f904cc2618d7e7620_original.jpeg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1637868434&auto=format&frame=1&q=92&s=0fbbbcc9a6a89ea722939d31ede8617f",
-    items: [],
-    locked: false,
-  },
-  {
-    uuid: "72dd3516-4c30-4f9d-b798-00ead0990c4f",
-    title: "Maul Peak: An Asymmetric, 2-Player Game with Epic Meeples",
-    url: "https://www.kickstarter.com/projects/ebaraf/maul-peak",
-    img_url:
-      "https://ksr-ugc.imgix.net/assets/036/780/992/b055a766d1c72d0ae56ca0d782a35d2f_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648255606&auto=format&frame=1&q=92&s=1befd8ababfe0c4b755e95a181f54835",
-    items: [],
-    locked: false,
-  },
-  {
-    uuid: "be584182-66fd-4f12-81d6-c03caf8abeb1",
-    title: "Lairs & Legends",
-    url: "https://www.kickstarter.com/projects/thedmlair/lairs-and-legends",
-    img_url:
-      "https://ksr-ugc.imgix.net/assets/036/890/045/6ea01713079a872af180b5c1956f8bad_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649166507&auto=format&frame=1&q=92&s=43a09c2e0ac045f9984c9838e078356c",
-    items: [],
-    locked: true,
-  },
-  {
-    uuid: "ef3e0261-9f4b-45ba-94e6-b37a84e0af78",
-    title: "Tome of Adventure Design",
-    url: "https://www.kickstarter.com/projects/adventuredesigntome/tome-of-adventure-design",
-    img_url:
-      "https://ksr-ugc.imgix.net/assets/036/814/904/2fd9fd125f710dcb4c9c7de71143b1c6_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648571785&auto=format&frame=1&q=92&s=e09592e5db33ce25fb4626efd423d29f",
-    items: [],
-    locked: true,
-  },
-  {
     uuid: "3d6b8968-fa57-4b3f-adb9-46bb6404f5dc",
     title: "ROVE: Expansion Collection",
     url: "https://www.kickstarter.com/projects/239309591/rove-expansion-collection",

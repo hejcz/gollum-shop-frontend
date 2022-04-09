@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Link, useNavigate } from "svelte-navigator";
-  import { v4 as uuidv4 } from "uuid";
   import { api, Campaign } from "../api/Api";
   import { role } from "../stores";
   import AccordionList from "../utils/AccordionList.svelte";
@@ -12,7 +11,7 @@
   let active_campaigns = [];
 
   function add_new_campaign() {
-    navigate(`/edit/${uuidv4()}`);
+    navigate(`/campaigns/edit`);
   }
 
   async function lock(uuid: string) {
@@ -51,7 +50,7 @@
       </li>
       {#if $role.might_modify_campaign()}
         <li>
-          <Link to="/edit/{item.id}">Edit campaign</Link>
+          <Link to="/campaigns/edit/{item.id}">Edit campaign</Link>
         </li>
         <li>
           <Link to="/orders/{item.id}">Manage orders</Link>

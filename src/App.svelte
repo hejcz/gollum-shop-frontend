@@ -5,6 +5,7 @@
   import { authentication_manager } from "./authentication/authentication_manager";
   import Login from "./authentication/Login.svelte";
   import ActiveCampaigns from "./campaign/ActiveCampaigns.svelte";
+  import CampaignsCandidates from "./campaign/CampaignsCandidates.svelte";
   import EditCampaign from "./campaign/EditCampaign.svelte";
   import InactiveCampaigns from "./campaign/InactiveCampaigns.svelte";
   import Navigation from "./Navigation.svelte";
@@ -35,7 +36,7 @@
       <Route path="/">
         <ActiveCampaigns />
       </Route>
-      <Route path="/campaigns-archive">
+      <Route path="/campaigns/archive">
         <InactiveCampaigns />
       </Route>
       <Route path="/order/:uuid" let:params>
@@ -44,8 +45,14 @@
       <Route path="/orders-history" let:params>
         <OrdersHistory />
       </Route>
+      <Route path="/campaigns/proposals" let:params>
+        <CampaignsCandidates />
+      </Route>
       {#if $role.might_modify_campaign()}
-        <Route path="/edit/:uuid" let:params>
+        <Route path="/campaigns/edit" let:params let:location>
+          <EditCampaign uuid={null} location={location.search} />
+        </Route>
+        <Route path="/campaigns/edit/:uuid" let:params>
           <EditCampaign uuid={params.uuid} />
         </Route>
         <Route path="/orders/:uuid" let:params>

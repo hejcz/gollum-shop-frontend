@@ -36,7 +36,12 @@
             </li>
             <li class="nav-item">
               <span class="nav-link">
-                <Link to="/campaigns-archive">Campaigns archive</Link>
+                <Link to="/campaigns/archive">Campaigns archive</Link>
+              </span>
+            </li>
+            <li class="nav-item">
+              <span class="nav-link">
+                <Link to="/campaigns/proposals">Campaigns proposals</Link>
               </span>
             </li>
             <li class="nav-item">
