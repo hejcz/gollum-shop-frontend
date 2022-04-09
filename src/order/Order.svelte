@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   import { api, Order, Campaign, OrderedItem } from "../api/Api";
-  import InProgressButton from "../InProgressButton.svelte";
+  import InProgressButton from "../utils/InProgressButton.svelte";
 
   export let uuid: string;
 

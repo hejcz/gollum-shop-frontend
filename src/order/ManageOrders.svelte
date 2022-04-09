@@ -8,7 +8,7 @@
     Order,
     api,
   } from "../api/Api";
-  import InProgressButton from "../InProgressButton.svelte";
+  import InProgressButton from "../utils/InProgressButton.svelte";
 
   export let uuid: string;
 

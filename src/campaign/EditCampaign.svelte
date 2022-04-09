@@ -1,7 +1,7 @@
 <script lang="ts">
   import { v4 } from "uuid";
   import { api, Campaign } from "../api/Api";
-  import InProgressButton from "../InProgressButton.svelte";
+  import InProgressButton from "../utils/InProgressButton.svelte";
 
   export let uuid: string;
 
