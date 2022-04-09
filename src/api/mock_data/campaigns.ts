@@ -1,6 +1,6 @@
-import type { Campaign, Order } from "./Api";
+import type { Campaign } from "../Api";
 
-const campaigns: Campaign[] = [
+export const campaigns: Campaign[] = [
   {
     uuid: "a170039a-9917-4168-aee1-aedb77afe34e",
     title: "Kingdoms Forlorn",
@@ -726,37 +726,3 @@ const campaigns: Campaign[] = [
     locked: false,
   },
 ];
-
-const orders: { [key: string]: Order[] } = {
-  userX: [
-    {
-      campaign_uuid: "97c921aa-d1c3-4e34-8c72-bc620f566970",
-      paid_amount: 100,
-      items: [
-        { amount: 1, item_uuid: "1dfb1dae-7b1f-475f-84a9-a562d68d1c22" },
-        { amount: 2, item_uuid: "234d4d93-4b36-41f3-b9ef-cc158b10932a" },
-        { amount: 3, item_uuid: "4fd6fd19-39d2-46a4-8206-6c76aba1d734" },
-      ],
-    },
-  ],
-  userA: [
-    {
-      campaign_uuid: "97c921aa-d1c3-4e34-8c72-bc620f566970",
-      paid_amount: 200,
-      items: [
-        { amount: 1, item_uuid: "1dfb1dae-7b1f-475f-84a9-a562d68d1c22" },
-        { amount: 1, item_uuid: "4fd6fd19-39d2-46a4-8206-6c76aba1d734" },
-      ],
-    },
-  ],
-};
-
-export interface ShopData {
-  campaigns: Campaign[];
-  orders: { [key: string]: Order[] };
-}
-
-export default {
-  campaigns: campaigns,
-  orders: orders,
-} as ShopData;

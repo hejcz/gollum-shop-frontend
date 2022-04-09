@@ -40,6 +40,11 @@
               </span>
             </li>
             <li class="nav-item">
+              <span class="nav-link">
+                <Link to="/orders-history">Orders history</Link>
+              </span>
+            </li>
+            <li class="nav-item">
               <span class="nav-link" on:click={switchToAdmin}>
                 Switch to admin
               </span>

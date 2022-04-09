@@ -76,7 +76,8 @@
           <button
             type="button"
             class="btn btn-outline-secondary"
-            on:click={() => (amount = Math.max(0, amount - 1))}>
+            on:click={() =>
+              (amount = amount - 1 <= 0 ? null : Math.max(0, amount - 1))}>
             -1
           </button>
           <input
@@ -84,6 +85,7 @@
             id="amount"
             class="form-control"
             bind:value={amount}
+            placeholder="Number of copies to order"
             min="0" />
         </div>
       </div>

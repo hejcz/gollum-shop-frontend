@@ -10,6 +10,7 @@
   import Navigation from "./Navigation.svelte";
   import ManageOrders from "./order/ManageOrders.svelte";
   import Order from "./order/Order.svelte";
+  import OrdersHistory from "./order/OrdersHistory.svelte";
   import { role, user } from "./stores";
 
   onMount(async () => {
@@ -39,6 +40,9 @@
       </Route>
       <Route path="/order/:uuid" let:params>
         <Order uuid={params.uuid} />
+      </Route>
+      <Route path="/orders-history" let:params>
+        <OrdersHistory />
       </Route>
       {#if $role.might_modify_campaign()}
         <Route path="/edit/:uuid" let:params>

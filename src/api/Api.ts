@@ -1,5 +1,5 @@
 import { environment } from "../environment";
-import { MockApi } from "./MockApi";
+import { MockApi } from "./mock_api";
 
 export interface CampaignItem {
   name: string;
@@ -31,21 +31,37 @@ export interface AssignedToUser {
   username: string;
 }
 
-export interface OrderedCampaign {}
+export interface CampaignCandidate {
+  // game title
+  title: string;
+  // url to the campaign
+  url?: string;
+  // nicknames of users who liked this candidate
+  liking_users: string[];
+}
+
+export interface CampaignsSearchParams {
+  active?: boolean;
+  titleLike?: string;
+  uuids?: string[];
+}
 
 export interface Api {
-  fetchCampaign(uuid: string): Promise<Campaign>;
-  fetchOrders(uuid: string): Promise<(Order & AssignedToUser)[]>;
+  fetchCampaignOrders(
+    campaign_uuid: string
+  ): Promise<(Order & AssignedToUser)[]>;
+  fetchUserOrders(): Promise<Order[]>;
+  fetchOrder(order_uuid: string): Promise<Order>;
   updatePaidAmount(order: Order & AssignedToUser): Promise<Order>;
-  fetchOrder(uuid: string): Promise<Order>;
+  fetchCampaign(uuid: string): Promise<Campaign>;
   orderCampaign(uuid: string, items: OrderedItem[]): Promise<Order>;
   updateCampaign(campaign: Campaign): Promise<Campaign>;
-  fetchCampaigns(
-    active: boolean,
-    titleLike: string | null
-  ): Promise<Campaign[]>;
+  fetchCampaigns(params: CampaignsSearchParams): Promise<Campaign[]>;
   lockCampaign(uuid: string): Promise<Campaign>;
   unlockCampaign(uuid: string): Promise<Campaign>;
+  fetchCampaignCandidates(
+    titleLike: string | null
+  ): Promise<CampaignCandidate[]>;
 }
 
 export const api: Api = ["local", "github"].includes(environment())

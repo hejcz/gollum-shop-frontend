@@ -46,7 +46,7 @@
 
   onMount(async () => {
     const [o, c] = await Promise.all([
-      api.fetchOrders(uuid),
+      api.fetchCampaignOrders(uuid),
       api.fetchCampaign(uuid),
     ]);
     orders = o;

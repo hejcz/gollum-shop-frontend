@@ -5,17 +5,19 @@
   import CampaignsNav from "./CampaignsNav.svelte";
   import Campaign from "./Campaign.svelte";
 
-  let inactive_campaigns = api.fetchCampaigns(false, null);
+  const fetch_filter = { active: false };
+
+  let inactive_campaigns = api.fetchCampaigns(fetch_filter);
 
   async function unlock(uuid: string) {
     await api.unlockCampaign(uuid);
-    inactive_campaigns = api.fetchCampaigns(false, null);
+    inactive_campaigns = api.fetchCampaigns(fetch_filter);
   }
 </script>
 
 <h1>Campaigns archive</h1>
 
-<CampaignsNav bind:campaigns={inactive_campaigns} />
+<CampaignsNav bind:campaigns={inactive_campaigns} {fetch_filter} />
 
 <div class="row campaigns-row">
   {#await inactive_campaigns then campaigns}

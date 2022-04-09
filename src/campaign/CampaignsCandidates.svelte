@@ -6,8 +6,7 @@
   import CampaignsNav from "./CampaignsNav.svelte";
   import Campaign from "./Campaign.svelte";
 
-  const fetch_filter = { active: true };
-  let active_campaigns = api.fetchCampaigns(fetch_filter);
+  let active_campaigns = api.fetchCampaigns({});
   const navigate = useNavigate();
 
   function add_new_campaign() {
@@ -16,13 +15,13 @@
 
   async function lock(uuid: string) {
     await api.lockCampaign(uuid);
-    active_campaigns = api.fetchCampaigns(fetch_filter);
+    active_campaigns = api.fetchCampaigns({});
   }
 </script>
 
 <h1>Active campaigns</h1>
 
-<CampaignsNav bind:campaigns={active_campaigns} {fetch_filter}>
+<CampaignsNav bind:campaigns={active_campaigns}>
   <slot id="actions">
     {#if $role.might_modify_campaign()}
       <button type="button" class="btn btn-primary" on:click={add_new_campaign}>
