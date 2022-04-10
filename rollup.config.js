@@ -11,12 +11,15 @@ import replace from '@rollup/plugin-replace';
 const production = !process.env.ROLLUP_WATCH;
 
 let auth0_audience = 'http://localhost:8090'
+console.log()
 let auth0_logout_url
 switch (process.env.environment) {
 	case 'github':
 		auth0_logout_url = 'https://hejcz.github.io'
+        break;
 	default:
 		auth0_logout_url = 'http://localhost:8090'
+        break;
 }
 
 const environment = process.env.environment ?? 'local'
