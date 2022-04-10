@@ -27,9 +27,6 @@
     {#if !hide_actions}
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <span class="nav-link" on:click={logout}>Logout</span>
-          </li>
           {#if !logout_only}
             <li class="nav-item">
               <span class="nav-link"><Link to="/">Active campaigns</Link></span>
@@ -61,6 +58,9 @@
             </li>
           {/if}
         </ul>
+        <div class="logout navbar-nav">
+          <span class="nav-link" on:click={logout}>Logout</span>
+        </div>
       </div>
     {/if}
   </div>
@@ -75,5 +75,11 @@
 
   .nav-link {
     cursor: pointer;
+  }
+
+  .logout {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
   }
 </style>
