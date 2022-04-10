@@ -18,19 +18,13 @@
       </div>
 
       <button
-        class="accordion-button collapsed {item.title_class == null
-          ? ''
-          : item.title_class}"
+        class="accordion-button collapsed"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target={"#collapse" + item.id}
         aria-expanded="true"
         aria-controls={"collapse" + item.id}>
-        {#if item.url == null}
-          {item.title}
-        {:else}
-          <a href={item.url} target="_blank">{item.title}</a>
-        {/if}
+        <slot name="title" />
       </button>
     </div>
   </h2>

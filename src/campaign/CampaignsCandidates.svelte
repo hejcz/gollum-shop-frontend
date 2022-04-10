@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Link } from "svelte-navigator";
+  import { Link } from "svelte-navigator";
 
   import { api, CampaignCandidate } from "../api/Api";
   import { role, user } from "../stores";
@@ -13,7 +13,7 @@ import { Link } from "svelte-navigator";
   ): Promise<(CampaignCandidate & AccordionItem)[]> {
     const fetched_candidates: CampaignCandidate[] =
       await api.fetchCampaignCandidates(search);
-    return fetched_candidates.map(c => ({
+    return fetched_candidates.map((c) => ({
       ...c,
       id: c.uuid,
     }));
@@ -31,7 +31,10 @@ import { Link } from "svelte-navigator";
         <li>Like</li>
       {/if}
       {#if $role.might_modify_campaign()}
-        <li><Link to="/campaigns/edit?from={item.id}">Convert to active campaign</Link></li>
+        <li>
+          <Link to="/campaigns/edit?from={item.id}"
+            >Convert to active campaign</Link>
+        </li>
       {/if}
     </ul>
   </div>

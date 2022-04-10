@@ -48,7 +48,6 @@
         title: c.title,
         id: c.uuid,
         img_url: c.img_url,
-        title_class: to_pay > 0 ? "alert-danger" : "alert-success",
       });
     }
     return new_orders;
@@ -58,6 +57,21 @@
 <h1>Orders history</h1>
 
 <AccordionList items_provider={fetch}>
+  <svelte:fragment slot="title" let:item>
+    {#if item.paid_value < item.order_value}
+      <span class="badge bg-danger">Unpaid</span>
+    {:else}
+      <span class="badge bg-success">Paid</span>
+    {/if}
+    <div class="ms-3">
+      {#if item.url == null}
+        {item.title}
+      {:else}
+        <a href={item.url} target="_blank">{item.title}</a>
+      {/if}
+    </div>
+  </svelte:fragment>
+
   <div slot="item-actions" let:item>
     {#if item.order_value <= item.paid_value}
       <p>Zamówienie opłacone</p>

@@ -35,9 +35,11 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.21.0",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "bootstrap": "^5.1.3",
     "query-string": "^7.1.1",
     "sirv-cli": "^2.0.0",
+    "svelte-fa": "^2.4.0",
     "svelte-language-server": "^0.14.23"
   }
 }

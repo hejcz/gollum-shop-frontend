@@ -4,37 +4,38 @@
   import { api, Campaign } from "../api/Api";
   import InProgressButton from "../utils/InProgressButton.svelte";
   import { useNavigate } from "svelte-navigator";
-import { onMount } from "svelte";
+  import { onMount } from "svelte";
 
   export let uuid: string;
   export let location: string = null;
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const ADD = 0;
   const EDIT = 1;
   const ADD_FROM_CANDIDATE = 2;
-  const mode = uuid != null 
-    ? EDIT 
-    : location == null || location.length === 0
+  const mode =
+    uuid != null
+      ? EDIT
+      : location == null || location.length === 0
       ? ADD
       : ADD_FROM_CANDIDATE;
 
-  let candidate_uuid = null
+  let candidate_uuid = null;
   if (mode == ADD_FROM_CANDIDATE) {
-    const parsed = parse_query_string(location)
-    const from_value = parsed.from
+    const parsed = parse_query_string(location);
+    const from_value = parsed.from;
     if (from_value != null) {
       if (Array.isArray(from_value)) {
         if (from_value.length > 0) {
-          candidate_uuid = from_value[0]
+          candidate_uuid = from_value[0];
         }
       } else {
-        candidate_uuid = from_value
+        candidate_uuid = from_value;
       }
     }
     if (candidate_uuid == null) {
-      navigate("/")
+      navigate("/");
     }
   }
 
@@ -46,7 +47,7 @@ import { onMount } from "svelte";
     locked: false,
     title: "",
     img_url: "",
-    url: ""
+    url: "",
   });
 
   let campaign: Campaign;
@@ -54,24 +55,22 @@ import { onMount } from "svelte";
   onMount(async () => {
     switch (mode) {
       case ADD:
-        campaign = newCampaign()
+        campaign = newCampaign();
         break;
       case ADD_FROM_CANDIDATE:
-        const candidate = await api.fetchCampaignCandidate(candidate_uuid)
-        campaign = {...newCampaign(), ...candidate, uuid: v4()}
+        const candidate = await api.fetchCampaignCandidate(candidate_uuid);
+        campaign = { ...newCampaign(), ...candidate, uuid: v4() };
         break;
       case EDIT:
-        campaign = await api.fetchCampaign(uuid)
+        campaign = await api.fetchCampaign(uuid);
         break;
       default:
-        throw new Error("unknown campaign modification mode: " + mode)
+        throw new Error("unknown campaign modification mode: " + mode);
     }
-  })
+  });
 
   function delete_item(item_uuid: string) {
-    campaign.items = campaign.items.filter(
-      (it) => it.uuid !== item_uuid
-    );
+    campaign.items = campaign.items.filter((it) => it.uuid !== item_uuid);
   }
 
   function add_item() {
@@ -80,14 +79,14 @@ import { onMount } from "svelte";
   }
 
   async function save() {
-    campaign = await api.updateCampaign({campaign, candidate_uuid});
+    campaign = await api.updateCampaign({ campaign, candidate_uuid });
   }
 </script>
 
 {#if campaign == null}
   <h1>Loading campaign {uuid}</h1>
 {:else}
-  <h1>{mode == EDIT ? 'Edit' : 'Create'} campaign {campaign.title}</h1>
+  <h1>{mode == EDIT ? "Edit" : "Create"} campaign {campaign.title}</h1>
 
   <div class="mb-2">
     <button

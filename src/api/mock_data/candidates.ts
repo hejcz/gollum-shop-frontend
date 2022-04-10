@@ -2,7 +2,7 @@ import type { CampaignCandidate } from "../Api";
 
 export const candidates: CampaignCandidate[] = [
   {
-      uuid: "220a6151-d1eb-4c54-9988-18815d22bc78",
+    uuid: "220a6151-d1eb-4c54-9988-18815d22bc78",
     title: "Tidal Blades 2: Rise of the Unfolders + Cypher System RPG",
     url: "https://www.kickstarter.com/projects/druidcitygames/tidal-blades-rise-of-the-unfolders-cypher-system-rpg-book",
     img_url:
@@ -10,7 +10,7 @@ export const candidates: CampaignCandidate[] = [
     liking_users: ["userA", "userB", "userC", "test-user"],
   },
   {
-      uuid: "8ad759ab-70e1-4936-8ed5-e1ec84160b21",
+    uuid: "8ad759ab-70e1-4936-8ed5-e1ec84160b21",
     title: "Maul Peak: An Asymmetric, 2-Player Game with Epic Meeples",
     url: "https://www.kickstarter.com/projects/ebaraf/maul-peak",
     img_url:
@@ -18,7 +18,7 @@ export const candidates: CampaignCandidate[] = [
     liking_users: ["userA", "userC"],
   },
   {
-      uuid: "479d3a06-5726-46a1-98b2-eeb748010062",
+    uuid: "479d3a06-5726-46a1-98b2-eeb748010062",
     title: "Lairs & Legends",
     url: "https://www.kickstarter.com/projects/thedmlair/lairs-and-legends",
     img_url:

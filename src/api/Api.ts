@@ -63,7 +63,7 @@ export interface Api {
   fetchCampaigns(params: CampaignsSearchParams): Promise<Campaign[]>;
   lockCampaign(uuid: string): Promise<Campaign>;
   unlockCampaign(uuid: string): Promise<Campaign>;
-  fetchCampaignCandidate(uuid: string):  Promise<CampaignCandidate>;
+  fetchCampaignCandidate(uuid: string): Promise<CampaignCandidate>;
   fetchCampaignCandidates(
     titleLike: string | null
   ): Promise<CampaignCandidate[]>;

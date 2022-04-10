@@ -3,5 +3,4 @@ export interface AccordionItem {
   url?: string;
   img_url: string;
   id: string;
-  title_class?: string;
 }

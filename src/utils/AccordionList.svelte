@@ -25,6 +25,13 @@
       {#each items as item}
         <AccordionListItem {item}>
           <slot name="item-actions" slot="actions" {item} />
+          <slot name="title" slot="title" {item}>
+            {#if item.url == null}
+              {item.title}
+            {:else}
+              <a href={item.url} target="_blank">{item.title}</a>
+            {/if}
+          </slot>
         </AccordionListItem>
       {/each}
     </div>

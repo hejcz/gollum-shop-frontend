@@ -33,7 +33,7 @@ export class MockApi implements Api {
       return candidates.find((c) => c.uuid === uuid);
     })();
   }
-  
+
   fetchUserOrders(): Promise<Order[]> {
     return (async () => {
       return orders[get(user)] ?? [];
@@ -115,7 +115,7 @@ export class MockApi implements Api {
 
   updateCampaign(update: CampaignUpdate): Promise<Campaign> {
     return (async () => {
-      const campaign = update.campaign
+      const campaign = update.campaign;
       const index = campaigns.findIndex((c) => c.uuid === campaign.uuid);
       if (index === -1) {
         campaigns.push(campaign);
@@ -123,7 +123,9 @@ export class MockApi implements Api {
         campaigns[index] = campaign;
       }
       if (update.candidate_uuid != null) {
-        const index = candidates.findIndex(c => c.uuid === update.candidate_uuid)
+        const index = candidates.findIndex(
+          (c) => c.uuid === update.candidate_uuid
+        );
         if (index !== -1) {
           candidates.splice(index, 1);
         }
