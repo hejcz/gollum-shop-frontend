@@ -9,10 +9,16 @@
     <div style="display: flex;">
       <div class="d-none d-md-inline">
         {#if item.url == null}
-          <img src={item.img_url} alt="item miniature" />
+          <img
+            class="accordion-list-item"
+            src={item.img_url}
+            alt="item miniature" />
         {:else}
           <a href={item.url} target="_blank">
-            <img src={item.img_url} alt="item miniature" />
+            <img
+              class="accordion-list-item"
+              src={item.img_url}
+              alt="item miniature" />
           </a>
         {/if}
       </div>
