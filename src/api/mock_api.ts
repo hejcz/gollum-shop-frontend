@@ -28,6 +28,26 @@ function test_title_like(title: string, titleLike: string | null) {
 }
 
 export class MockApi implements Api {
+  likeCandidate(uuid: string): Promise<CampaignCandidate> {
+    return (async () => {
+      const candidate = candidates.find((c) => c.uuid === uuid);
+      const liking_users = new Set<string>(candidate.liking_users);
+      liking_users.add(get(user));
+      candidate.liking_users = Array.from(liking_users.values());
+      return { ...candidate };
+    })();
+  }
+
+  unlikeCandidate(uuid: string): Promise<CampaignCandidate> {
+    return (async () => {
+      const candidate = candidates.find((c) => c.uuid === uuid);
+      const liking_users = new Set<string>(candidate.liking_users);
+      liking_users.delete(get(user));
+      candidate.liking_users = Array.from(liking_users.values());
+      return { ...candidate };
+    })();
+  }
+
   fetchCampaignCandidate(uuid: string): Promise<CampaignCandidate> {
     return (async () => {
       return candidates.find((c) => c.uuid === uuid);

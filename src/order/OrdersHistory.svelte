@@ -74,10 +74,10 @@
 
   <div slot="item-actions" let:item>
     {#if item.order_value <= item.paid_value}
-      <p>Zamówienie opłacone</p>
+      <p>Order is paid</p>
     {:else}
       <p>
-        Do zapłaty pozostało: {item.order_value - item.paid_value}
+        You need to pay: {item.order_value - item.paid_value}. You already paid: {item.paid_value}.
       </p>
     {/if}
     <ul>

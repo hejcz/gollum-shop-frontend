@@ -67,6 +67,8 @@ export interface Api {
   fetchCampaignCandidates(
     titleLike: string | null
   ): Promise<CampaignCandidate[]>;
+  likeCandidate(uuid: string): Promise<CampaignCandidate>;
+  unlikeCandidate(uuid: string): Promise<CampaignCandidate>;
 }
 
 export const api: Api = ["local", "github"].includes(environment())
