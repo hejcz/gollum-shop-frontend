@@ -25,7 +25,7 @@
       const orderItems = new Map<string, OrderedItem>();
       fetchedOrder.items.forEach((i) => orderItems.set(i.item_uuid, i));
       items = fetchedCampaign.items.map((i) => ({
-        amount: orderItems.get(i.uuid)?.amount ?? null,
+        amount: orderItems.get(i.uuid)?.amount ?? 0,
         item: { ...i },
       }));
       paid = fetchedOrder.paid_amount;
@@ -85,7 +85,6 @@
             id="amount"
             class="form-control"
             bind:value={amount}
-            placeholder="Number of copies to order"
             min="0" />
         </div>
       </div>
