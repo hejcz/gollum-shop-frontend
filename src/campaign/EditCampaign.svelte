@@ -70,11 +70,12 @@
   });
 
   function delete_item(item_uuid: string) {
-    campaign.items = campaign.items.filter((it) => it.uuid !== item_uuid);
+    campaign.items = campaign.items.filter((it) => it.uuid !== item_uuid)
+      .map((it, index) => ({...it, ordinal: index + 1}));
   }
 
   function add_item() {
-    campaign.items.push({ name: "", price: 0, uuid: v4() });
+    campaign.items.push({ name: "", price: 0, uuid: v4(), ordinal: campaign.items.length + 1 });
     campaign.items = campaign.items;
   }
 
@@ -132,6 +133,7 @@
     <div class="card mb-2" style="width: 100%;">
       <div class="card-body">
         <div class="input-group">
+          <span class="input-group-text">{item.ordinal}.</span>
           <span class="input-group-text" for="item_name_{item.uuid}">Name</span>
           <input
             class="form-control"
@@ -155,7 +157,8 @@
         <button
           type="button"
           class="btn btn-danger"
-          on:click={() => delete_item(item.uuid)}>
+          on:click={() => delete_item(item.uuid)}
+          disabled={mode == EDIT}>
           Delete
         </button>
       </div>

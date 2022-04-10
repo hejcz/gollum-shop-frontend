@@ -66,6 +66,7 @@
           {item.name}
         </h5>
         <div class="input-group card-text">
+          <span class="input-group-text">{item.ordinal}.</span>
           <span class="input-group-text price">{item.price} PLN</span>
           <button
             type="button"

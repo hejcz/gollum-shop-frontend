@@ -2,6 +2,7 @@ import { environment } from "../environment";
 import { MockApi } from "./mock_api";
 
 export interface CampaignItem {
+  ordinal: number;
   name: string;
   price: number;
   uuid: string;

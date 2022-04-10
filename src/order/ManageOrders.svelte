@@ -69,7 +69,7 @@
   <p>Paid {totalGathered} out of {totalPrice}</p>
   <ul>
     {#each totalItems as totalItem}
-      <li>{totalItem.name}: {totalItem.total_amount}</li>
+      <li>{totalItem.ordinal}. {totalItem.name}: {totalItem.total_amount}</li>
     {/each}
   </ul>
 
