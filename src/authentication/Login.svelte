@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { auth0_client_initialized } from "../stores";
+
   import { authentication_manager } from "./authentication_manager";
 
   async function login() {
@@ -7,7 +9,7 @@
   }
 </script>
 
-{#if authentication_manager.is_client_initialized()}
+{#if $auth0_client_initialized}
   <h1 on:click={login}>Click to login</h1>
 {:else}
   <h1>Authorization in progress</h1>

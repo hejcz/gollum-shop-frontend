@@ -10,7 +10,6 @@ const auth0_audience = { audience: audience };
 const roles_key = "https://localhost:8090/roles";
 
 export interface AuthenticationManager {
-  is_client_initialized(): boolean;
   initiate_client(): Promise<void>;
   login(): Promise<void>;
   logout(): Promise<void>;
@@ -18,11 +17,9 @@ export interface AuthenticationManager {
 }
 
 class LocalDevManager implements AuthenticationManager {
-  is_client_initialized(): boolean {
-    return true;
-  }
-
   initiate_client(): Promise<void> {
+    // derived store checks strict null
+    user.set(undefined);
     return Promise.resolve();
   }
 
@@ -44,22 +41,16 @@ class LocalDevManager implements AuthenticationManager {
 }
 
 class Auth0Manager implements AuthenticationManager {
-  is_client_initialized(): boolean {
-    return get(auth0_client) !== null;
-  }
-
   initiate_client(): Promise<void> {
     return (async () => {
       const response = await fetch("/auth_config.json");
       const config = await response.json();
-
-      auth0_client.set(
-        await createAuth0Client({
-          domain: config.domain,
-          client_id: config.clientId,
-          ...auth0_audience,
-        })
-      );
+      const client = await createAuth0Client({
+        domain: config.domain,
+        client_id: config.clientId,
+        ...auth0_audience,
+      });
+      auth0_client.set(client);
     })();
   }
 
