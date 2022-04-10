@@ -64,11 +64,6 @@
   </svelte:fragment>
   <div slot="item-actions" let:item>
     <ul>
-      {#if item.liking_users.includes($user)}
-        <li>Unlike</li>
-      {:else}
-        <li>Like</li>
-      {/if}
       {#if $role.might_modify_campaign()}
         <li>
           <Link to="/campaigns/edit?from={item.id}"
