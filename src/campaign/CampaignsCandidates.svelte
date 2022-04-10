@@ -1,10 +1,10 @@
 <script lang="ts">
+  import { faHeart } from "@fortawesome/free-solid-svg-icons";
+  import { faHeart as faHeartOpen } from "@fortawesome/free-regular-svg-icons";
   import Fa from "svelte-fa";
-  import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
   import { Link } from "svelte-navigator";
-
-  import { api, CampaignCandidate } from "../api/Api";
-  import { role, user } from "../stores";
+  import { api,CampaignCandidate } from "../api/Api";
+  import { role,user } from "../stores";
   import AccordionList from "../utils/AccordionList.svelte";
   import type { AccordionItem } from "../utils/accordion_item";
 
@@ -49,7 +49,7 @@
         data-bs-toggle="collapse"
         data-bs-target
         on:click={() => unlike(item.id)}>
-        <Fa icon={faThumbsDown} /> Liked {item.liking_users.length} times
+        <Fa icon={faHeart} primaryColor="red" /> Liked {item.liking_users.length} times
       </button>
     {:else}
       <button
@@ -58,7 +58,7 @@
         data-bs-toggle="collapse"
         data-bs-target
         on:click={() => like(item.id)}>
-        <Fa icon={faThumbsUp} /> Liked {item.liking_users.length} times
+        <Fa icon={faHeartOpen} /> Liked {item.liking_users.length} times
       </button>
     {/if}
   </svelte:fragment>
