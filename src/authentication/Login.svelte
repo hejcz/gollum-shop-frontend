@@ -1,7 +1,7 @@
 <script lang="ts">
   import { auth0_client_initialized } from "../stores";
-
   import { authentication_manager } from "./authentication_manager";
+  import { _ } from "svelte-i18n";
 
   async function login() {
     await authentication_manager.login();
@@ -10,9 +10,9 @@
 </script>
 
 {#if $auth0_client_initialized}
-  <h1 on:click={login}>Click to login</h1>
+  <h1 on:click={login}>{$_("login.login")}</h1>
 {:else}
-  <h1>Authorization in progress</h1>
+  <h1>{$_("login.loading_client")}</h1>
   <div class="d-flex justify-content-center">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>

@@ -1,1 +1,5 @@
-<h1>Ask Przemek to enable your account</h1>
+<script>
+  import { _ } from "svelte-i18n";
+</script>
+
+<h1>{$_("anonymous.info")}</h1>

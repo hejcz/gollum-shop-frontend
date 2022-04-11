@@ -4,6 +4,7 @@
   import { role } from "../stores";
   import AccordionList from "../utils/AccordionList.svelte";
   import type { AccordionItem } from "../utils/accordion_item";
+  import { _ } from "svelte-i18n";
 
   const fetch_filter = { active: false };
 
@@ -28,26 +29,28 @@
   }
 </script>
 
-<h1>Campaigns archive</h1>
+<h1>{$_("archived_campaigns.title")}</h1>
 
 <AccordionList items_provider={fetch} items={inactive_campaigns}>
   <div slot="item-actions" let:item>
     {#if $role.might_modify_campaign()}
       <ul>
         <li>
-          <Link to="/campaigns/edit/{item.id}">Edit campaign</Link>
+          <Link to="/campaigns/edit/{item.id}"
+            >{$_("archived_campaigns.edit_campaign")}</Link>
         </li>
         <li>
-          <Link to="/orders/{item.id}">Manage orders</Link>
+          <Link to="/orders/{item.id}"
+            >{$_("archived_campaigns.manage_orders")}</Link>
         </li>
         <li>
           <span class="fake-link" on:click={() => unlock(item.id)}>
-            Unlock campaign
+            {$_("archived_campaigns.convert_to_active")}
           </span>
         </li>
       </ul>
     {:else}
-      Nothing to do here
+      {$_("archived_campaigns.no_actions")}
     {/if}
   </div>
 </AccordionList>

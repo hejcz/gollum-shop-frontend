@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import { api, Order, Campaign, OrderedItem } from "../api/Api";
   import InProgressButton from "../utils/InProgressButton.svelte";
@@ -44,9 +45,9 @@
 </script>
 
 {#if campaign == null}
-  <h1>Preparing order page</h1>
+  <h1>{$_("order.loading")}</h1>
 {:else}
-  <h1>Order {campaign.title}</h1>
+  <h1>{$_("order.title", { values: { campaign_title: campaign.title } })}</h1>
 
   <div class="mb-2">
     <InProgressButton
@@ -54,20 +55,22 @@
       label="Order"
       disabled_predicate={() => totalPrice <= 0} />
     {#if items.length === 0}
-      <span>There is nothing to order in this campaign yet.</span>
+      <span>{$_("order.no_items")}</span>
     {:else}
-      <span>Paid {paid} out of {totalPrice}</span>
+      <span>{$_("order.paid", { values: { paid, totalPrice } })}</span>
     {/if}
   </div>
   {#each items as { amount, item }}
     <div class="card mb-2" style="width: 100%;">
       <div class="card-body">
-        <h5 class="card-title" class:fade-text={amount == null || amount === 0}>
-          {item.name}
-        </h5>
+        <div class="card-title">
+          <h5 class:fade-text={amount == null || amount === 0}>
+            {item.ordinal}. {item.name}
+            <span class="ms-2 badge bg-secondary">{item.price} PLN</span>
+          </h5>
+        </div>
         <div class="input-group card-text">
-          <span class="input-group-text">{item.ordinal}.</span>
-          <span class="input-group-text price">{item.price} PLN</span>
+          <span class="input-group-text">{$_("order.quantity")}</span>
           <button
             type="button"
             class="btn btn-outline-secondary"
@@ -102,7 +105,7 @@
     text-align: left;
   }
 
-  .price {
-    width: 90px;
+  .badge {
+    vertical-align: top;
   }
 </style>

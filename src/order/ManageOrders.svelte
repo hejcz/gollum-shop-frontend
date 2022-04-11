@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { _ } from "svelte-i18n";
 
   import {
     AssignedToUser,
@@ -59,28 +60,35 @@
 </script>
 
 {#if orders === null}
-  <h1>Loading data...</h1>
+  <h1>{$_("manage_orders.loading")}</h1>
 {/if}
 
 {#if campaign != null && orders != null}
-  <h1>Manage orders for {campaign.title}</h1>
+  <h1>
+    {$_("manage_orders.title", { values: { campaign_title: campaign.title } })}
+  </h1>
 
-  <h2>Orders summary</h2>
-  <p>Paid {totalGathered} out of {totalPrice}</p>
+  <h2>{$_("manage_orders.orders_summary")}</h2>
+  <p>
+    {$_("manage_orders.orders_summary.paid", {
+      values: { totalGathered, totalPrice },
+    })}
+  </p>
   <ul>
     {#each totalItems as totalItem}
       <li>{totalItem.ordinal}. {totalItem.name}: {totalItem.total_amount}</li>
     {/each}
   </ul>
 
-  <h2>Orders per user</h2>
+  <h2>{$_("manage_orders.per_user_summary")}</h2>
   {#each orders as order}
     <h3>{order.username}</h3>
     <div>
-      <span>Paid</span>
+      <span>{$_("manage_orders.per_user_summary.paid")}</span>
       <input type="number" bind:value={order.paid_amount} class="money" />
       <span class="me-1">
-        out of {order.items.reduce(
+        {$_("manage_orders.per_user_summary.out_of")}
+        {order.items.reduce(
           (acc, item) =>
             acc + itemByUuid.get(item.item_uuid).price * item.amount,
           0

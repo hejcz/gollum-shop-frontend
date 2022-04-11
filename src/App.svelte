@@ -13,6 +13,7 @@
   import Order from "./order/Order.svelte";
   import OrdersHistory from "./order/OrdersHistory.svelte";
   import { role, user } from "./stores";
+  import { _ } from "svelte-i18n";
 
   onMount(async () => {
     await authentication_manager.initiate_client();
@@ -21,7 +22,7 @@
 </script>
 
 <svelte:head>
-  <title>Gollum Shop</title>
+  <title>{$_("nav.title")}</title>
 </svelte:head>
 <Router>
   <div class="container">

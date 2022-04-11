@@ -4,6 +4,7 @@
   import { role } from "../stores";
   import AccordionList from "../utils/AccordionList.svelte";
   import type { AccordionItem } from "../utils/accordion_item";
+  import { _ } from "svelte-i18n";
 
   const navigate = useNavigate();
   const fetch_filter = { active: true };
@@ -33,31 +34,33 @@
   }
 </script>
 
-<h1>Active campaigns</h1>
+<h1>{$_("active_campaigns.title")}</h1>
 
 <AccordionList items_provider={fetch} items={active_campaigns}>
   <svelte:fragment slot="nav-actions">
     {#if $role.might_modify_campaign()}
       <button type="button" class="btn btn-primary" on:click={add_new_campaign}>
-        + Add campaign
+        + {$_("active_campaigns.add_campaign")}
       </button>
     {/if}
   </svelte:fragment>
   <svelte:fragment slot="item-actions" let:item>
     <ul>
       <li>
-        <Link to="/order/{item.id}">Order / Modify order</Link>
+        <Link to="/order/{item.id}">{$_("active_campaigns.order")}</Link>
       </li>
       {#if $role.might_modify_campaign()}
         <li>
-          <Link to="/campaigns/edit/{item.id}">Edit campaign</Link>
+          <Link to="/campaigns/edit/{item.id}"
+            >{$_("active_campaigns.edit")}</Link>
         </li>
         <li>
-          <Link to="/orders/{item.id}">Manage orders</Link>
+          <Link to="/orders/{item.id}"
+            >{$_("active_campaigns.manage_orders")}</Link>
         </li>
         <li>
           <span class="fake-link" on:click={() => lock(item.id)}>
-            Lock campaign
+            {$_("active_campaigns.lock")}
           </span>
         </li>
       {/if}

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
+
   import { api, Campaign, CampaignItem } from "../api/Api";
   import AccordionList from "../utils/AccordionList.svelte";
   import type { AccordionItem } from "../utils/accordion_item";
@@ -59,9 +61,9 @@
 <AccordionList items_provider={fetch}>
   <svelte:fragment slot="title" let:item>
     {#if item.paid_value < item.order_value}
-      <span class="badge bg-danger">Unpaid</span>
+      <span class="badge bg-danger">{$_("orders_history.unpaid")}</span>
     {:else}
-      <span class="badge bg-success">Paid</span>
+      <span class="badge bg-success">{$_("orders_history.paid")}</span>
     {/if}
     <div class="ms-3">
       {#if item.url == null}
@@ -73,11 +75,14 @@
   </svelte:fragment>
 
   <div slot="item-actions" let:item>
-    {#if item.order_value <= item.paid_value}
-      <p>Order is paid</p>
-    {:else}
+    {#if item.order_value > item.paid_value}
       <p>
-        You need to pay: {item.order_value - item.paid_value}. You already paid: {item.paid_value}.
+        {$_("orders_history.to_pay", {
+          values: {
+            to_pay: item.order_value - item.paid_value,
+            paid: item.paid_value,
+          },
+        })}
       </p>
     {/if}
     <ul>

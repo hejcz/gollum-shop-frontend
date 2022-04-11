@@ -5,6 +5,7 @@
   import InProgressButton from "../utils/InProgressButton.svelte";
   import { useNavigate } from "svelte-navigator";
   import { onMount } from "svelte";
+  import { _ } from "svelte-i18n";
 
   export let uuid: string;
   export let location: string = null;
@@ -14,7 +15,7 @@
   const ADD = 0;
   const EDIT = 1;
   const ADD_FROM_CANDIDATE = 2;
-  const mode =
+  let mode =
     uuid != null
       ? EDIT
       : location == null || location.length === 0
@@ -70,24 +71,35 @@
   });
 
   function delete_item(item_uuid: string) {
-    campaign.items = campaign.items.filter((it) => it.uuid !== item_uuid)
-      .map((it, index) => ({...it, ordinal: index + 1}));
+    campaign.items = campaign.items
+      .filter((it) => it.uuid !== item_uuid)
+      .map((it, index) => ({ ...it, ordinal: index + 1 }));
   }
 
   function add_item() {
-    campaign.items.push({ name: "", price: 0, uuid: v4(), ordinal: campaign.items.length + 1 });
+    campaign.items.push({
+      name: "",
+      price: 0,
+      uuid: v4(),
+      ordinal: campaign.items.length + 1,
+    });
     campaign.items = campaign.items;
   }
 
   async function save() {
     campaign = await api.updateCampaign({ campaign, candidate_uuid });
+    mode = EDIT;
   }
 </script>
 
 {#if campaign == null}
-  <h1>Loading campaign {uuid}</h1>
+  <h1>{$_("edit_campaign.loading")}</h1>
 {:else}
-  <h1>{mode == EDIT ? "Edit" : "Create"} campaign {campaign.title}</h1>
+  <h1>
+    {mode == EDIT
+      ? $_("edit_campaign.title_edit", { values: { title: campaign.title } })
+      : $_("edit_campaign.title_add", { values: { title: campaign.title } })}
+  </h1>
 
   <div class="mb-2">
     <button
@@ -95,15 +107,17 @@
       class="btn btn-primary"
       on:click={add_item}
       disabled={save_in_progress}>
-      + Add item
+      + {$_("edit_campaign.add_item")}
     </button>
     <InProgressButton
       on_click_function={save}
-      label="Save"
+      label={$_("edit_campaign.save")}
       bind:in_progress={save_in_progress} />
   </div>
   <div class="input-group mb-3">
-    <span class="input-group-text" for="title">Title</span>
+    <span class="input-group-text" for="title">
+      {$_("edit_campaign.campaign_title")}
+    </span>
     <input
       class="form-control"
       type="text"
@@ -112,7 +126,9 @@
       disabled={save_in_progress} />
   </div>
   <div class="input-group mb-3">
-    <span class="input-group-text" for="campaign_url">Campaign url</span>
+    <span class="input-group-text" for="campaign_url">
+      {$_("edit_campaign.campaign_url")}
+    </span>
     <input
       class="form-control"
       type="text"
@@ -121,7 +137,9 @@
       disabled={save_in_progress} />
   </div>
   <div class="input-group mb-3">
-    <span class="input-group-text" for="campaign_url">Image url</span>
+    <span class="input-group-text" for="campaign_url">
+      {$_("edit_campaign.image_url")}
+    </span>
     <input
       class="form-control"
       type="text"
@@ -134,7 +152,9 @@
       <div class="card-body">
         <div class="input-group">
           <span class="input-group-text">{item.ordinal}.</span>
-          <span class="input-group-text" for="item_name_{item.uuid}">Name</span>
+          <span class="input-group-text" for="item_name_{item.uuid}">
+            {$_("edit_campaign.item_name")}
+          </span>
           <input
             class="form-control"
             type="text"
@@ -144,7 +164,7 @@
         </div>
         <div class="input-group">
           <span class="input-group-text" for="item_price_{item.uuid}">
-            Price
+            {$_("edit_campaign.item_price")}
           </span>
           <input
             class="form-control"
@@ -159,7 +179,7 @@
           class="btn btn-danger"
           on:click={() => delete_item(item.uuid)}
           disabled={mode == EDIT}>
-          Delete
+          {$_("edit_campaign.delete_item")}
         </button>
       </div>
     </div>

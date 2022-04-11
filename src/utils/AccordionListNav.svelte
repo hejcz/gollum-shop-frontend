@@ -1,6 +1,7 @@
 <script lang="ts">
   import { debounce } from "../utils/debounce";
   import type { AccordionItem } from "./accordion_item";
+  import { _ } from "svelte-i18n";
 
   export let items: AccordionItem[];
   export let items_provider: (
@@ -18,7 +19,7 @@
     type="text"
     bind:value={search}
     on:keyup={filter}
-    placeholder="Filter by title" />
+    placeholder={$_("campaigns.filter_by_name")} />
   <slot name="actions" />
 </div>
 

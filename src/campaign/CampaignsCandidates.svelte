@@ -7,6 +7,7 @@
   import { role, user } from "../stores";
   import AccordionList from "../utils/AccordionList.svelte";
   import type { AccordionItem } from "../utils/accordion_item";
+  import { _ } from "svelte-i18n";
 
   let candidates: (CampaignCandidate & AccordionItem)[] = [];
 
@@ -32,7 +33,7 @@
   }
 </script>
 
-<h1>Campaigns proposals</h1>
+<h1>{$_("proposed_campaigns.title")}</h1>
 
 <AccordionList items_provider={fetch} items={candidates}>
   <svelte:fragment slot="title" let:item>
@@ -53,8 +54,13 @@
             data-bs-toggle="collapse"
             data-bs-target
             on:click={() => unlike(item.id)}>
-            <Fa icon={faHeart} primaryColor="red" /> Liked {item.liking_users
-              .length} times
+            <Fa icon={faHeart} primaryColor="red" />
+            {$_(
+              item.liking_users.length === 1
+                ? "proposed_campaigns.single_like"
+                : "proposed_campaigns.likes",
+              { values: { count: item.liking_users.length } }
+            )}
           </button>
         {:else}
           <button
@@ -63,7 +69,13 @@
             data-bs-toggle="collapse"
             data-bs-target
             on:click={() => like(item.id)}>
-            <Fa icon={faHeartOpen} /> Liked {item.liking_users.length} times
+            <Fa icon={faHeartOpen} />
+            {$_(
+              item.liking_users.length === 1
+                ? "proposed_campaigns.single_like"
+                : "proposed_campaigns.likes",
+              { values: { count: item.liking_users.length } }
+            )}
           </button>
         {/if}
       </div>
@@ -74,10 +86,10 @@
       {#if $role.might_modify_campaign()}
         <li>
           <Link to="/campaigns/edit?from={item.id}"
-            >Convert to active campaign</Link>
+            >{$_("proposed_campaigns.convert_to_active")}</Link>
         </li>
       {:else}
-        Nothing to do here
+        {$_("proposed_campaigns.no_actions")}
       {/if}
     </ul>
   </div>
