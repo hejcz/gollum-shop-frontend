@@ -1,7 +1,7 @@
 <script lang="ts">
   import { v4 } from "uuid";
   import { parse as parse_query_string } from "query-string";
-  import { api, Campaign } from "../api/Api";
+  import { api, Campaign, CampaignItem } from "../api/Api";
   import InProgressButton from "../utils/InProgressButton.svelte";
   import { useNavigate } from "svelte-navigator";
   import { onMount } from "svelte";
@@ -52,6 +52,7 @@
   });
 
   let campaign: Campaign;
+  let removable_items: CampaignItem[] = [];
 
   onMount(async () => {
     switch (mode) {
@@ -71,23 +72,31 @@
   });
 
   function delete_item(item_uuid: string) {
-    campaign.items = campaign.items
+    removable_items = removable_items
       .filter((it) => it.uuid !== item_uuid)
       .map((it, index) => ({ ...it, ordinal: index + 1 }));
   }
 
   function add_item() {
-    campaign.items.push({
+    removable_items.push({
       name: "",
       price: 0,
       uuid: v4(),
       ordinal: campaign.items.length + 1,
     });
-    campaign.items = campaign.items;
+    removable_items = removable_items;
   }
 
   async function save() {
-    campaign = await api.updateCampaign({ campaign, candidate_uuid });
+    const campaign_with_extra_items: Campaign = {
+      ...campaign,
+      items: [...campaign.items, ...removable_items],
+    };
+    campaign = await api.updateCampaign({
+      campaign: campaign_with_extra_items,
+      candidate_uuid,
+    });
+    removable_items = [];
     mode = EDIT;
   }
 </script>
@@ -147,7 +156,7 @@
       bind:value={campaign.img_url}
       disabled={save_in_progress} />
   </div>
-  {#each campaign.items as item}
+  {#each [...campaign.items, ...removable_items] as item, index}
     <div class="card mb-2" style="width: 100%;">
       <div class="card-body">
         <div class="input-group">
@@ -178,7 +187,7 @@
           type="button"
           class="btn btn-danger"
           on:click={() => delete_item(item.uuid)}
-          disabled={mode == EDIT}>
+          disabled={index < campaign.items.length}>
           {$_("edit_campaign.delete_item")}
         </button>
       </div>

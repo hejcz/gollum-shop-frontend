@@ -92,3 +92,9 @@
     </ul>
   </div>
 </AccordionList>
+
+<style>
+  .badge {
+    text-transform: uppercase;
+  }
+</style>
