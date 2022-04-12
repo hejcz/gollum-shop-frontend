@@ -82,7 +82,7 @@
       name: "",
       price: 0,
       uuid: v4(),
-      ordinal: campaign.items.length + 1,
+      ordinal: campaign.items.length + removable_items.length + 1,
     });
     removable_items = removable_items;
   }
