@@ -48,7 +48,7 @@
 <style>
   img {
     width: 90px;
-    height: 52px;
+    height: 59px;
     object-fit: cover;
     overflow: hidden;
     float: left;
