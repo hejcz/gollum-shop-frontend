@@ -46,7 +46,7 @@
       <Route path="/orders-history">
         <OrdersHistory />
       </Route>
-      <Route path="/campaigns/proposals"s>
+      <Route path="/campaigns/proposals">
         <CampaignsCandidates />
       </Route>
       {#if $role.might_modify_campaign()}

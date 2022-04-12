@@ -123,10 +123,10 @@
       label={$_("edit_campaign.save")}
       bind:in_progress={save_in_progress} />
   </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text" for="title">
+  <div class="mb-3">
+    <label for="title" class="form-label">
       {$_("edit_campaign.campaign_title")}
-    </span>
+    </label>
     <input
       class="form-control"
       type="text"
@@ -134,10 +134,10 @@
       bind:value={campaign.title}
       disabled={save_in_progress} />
   </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text" for="campaign_url">
+  <div class="mb-3">
+    <label class="form-label" for="campaign_url">
       {$_("edit_campaign.campaign_url")}
-    </span>
+    </label>
     <input
       class="form-control"
       type="text"
@@ -145,10 +145,10 @@
       bind:value={campaign.url}
       disabled={save_in_progress} />
   </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text" for="campaign_url">
+  <div class="mb-3">
+    <label class="form-label" for="campaign_url">
       {$_("edit_campaign.image_url")}
-    </span>
+    </label>
     <input
       class="form-control"
       type="text"

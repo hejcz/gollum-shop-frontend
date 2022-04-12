@@ -36,14 +36,16 @@
             </li>
             <li class="nav-item">
               <span class="nav-link">
-                <Link to="/campaigns/archive"
-                  >{$_("nav.archived_campaigns")}</Link>
+                <Link to="/campaigns/archive">
+                  {$_("nav.archived_campaigns")}
+                </Link>
               </span>
             </li>
             <li class="nav-item">
               <span class="nav-link">
-                <Link to="/campaigns/proposals"
-                  >{$_("nav.proposed_campaigns")}</Link>
+                <Link to="/campaigns/proposals">
+                  {$_("nav.proposed_campaigns")}
+                </Link>
               </span>
             </li>
             <li class="nav-item">

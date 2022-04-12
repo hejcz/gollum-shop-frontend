@@ -36,12 +36,14 @@
     {#if $role.might_modify_campaign()}
       <ul>
         <li>
-          <Link to="/campaigns/edit/{item.id}"
-            >{$_("archived_campaigns.edit_campaign")}</Link>
+          <Link to="/campaigns/edit/{item.id}">
+            {$_("archived_campaigns.edit_campaign")}
+          </Link>
         </li>
         <li>
-          <Link to="/orders/{item.id}"
-            >{$_("archived_campaigns.manage_orders")}</Link>
+          <Link to="/orders/{item.id}">
+            {$_("archived_campaigns.manage_orders")}
+          </Link>
         </li>
         <li>
           <span class="fake-link" on:click={() => unlock(item.id)}>

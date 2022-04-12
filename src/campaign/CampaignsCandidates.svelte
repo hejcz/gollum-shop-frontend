@@ -85,8 +85,9 @@
     <ul>
       {#if $role.might_modify_campaign()}
         <li>
-          <Link to="/campaigns/edit?from={item.id}"
-            >{$_("proposed_campaigns.convert_to_active")}</Link>
+          <Link to="/campaigns/edit?from={item.id}">
+            {$_("proposed_campaigns.convert_to_active")}
+          </Link>
         </li>
       {:else}
         {$_("proposed_campaigns.no_actions")}
