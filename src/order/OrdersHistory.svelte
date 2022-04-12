@@ -41,7 +41,6 @@
         return { name, price, amount: it.amount };
       });
       const order_value = items.reduce((acc, i) => acc + i.price * i.amount, 0);
-      const to_pay = order_value - o.paid_amount;
       new_orders.push({
         campaign_title: c.title,
         paid_value: o.paid_amount,

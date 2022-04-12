@@ -43,14 +43,14 @@
       <Route path="/order/:uuid" let:params>
         <Order uuid={params.uuid} />
       </Route>
-      <Route path="/orders-history" let:params>
+      <Route path="/orders-history">
         <OrdersHistory />
       </Route>
-      <Route path="/campaigns/proposals" let:params>
+      <Route path="/campaigns/proposals"s>
         <CampaignsCandidates />
       </Route>
       {#if $role.might_modify_campaign()}
-        <Route path="/campaigns/edit" let:params let:location>
+        <Route path="/campaigns/edit" let:location>
           <EditCampaign uuid={null} location={location.search} />
         </Route>
         <Route path="/campaigns/edit/:uuid" let:params>
