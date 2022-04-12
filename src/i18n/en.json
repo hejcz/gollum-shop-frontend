@@ -51,7 +51,13 @@
   "orders_history.unpaid": "Unpaid",
   "orders_history.paid": "Paid",
   "orders_history.order_paid": "Order is paid",
-  "orders_history.to_pay": "You need to pay: {to_pay}. You already paid: {paid}.",
+  "orders_history.name": "Name",
+  "orders_history.quantity": "Quantity",
+  "orders_history.price": "Price",
+  "orders_history.item_total": "Item total",
+  "orders_history.total": "Total",
+  "orders_history.paid_confirmed": "Paid",
+  "orders_history.left": "To pay",
   "login.login": "Click to login",
   "login.in_progress": "Authorization in progress"
 }

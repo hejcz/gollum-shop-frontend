@@ -74,26 +74,61 @@
   </svelte:fragment>
 
   <div slot="item-actions" let:item>
-    {#if item.order_value > item.paid_value}
-      <p>
-        {$_("orders_history.to_pay", {
-          values: {
-            to_pay: item.order_value - item.paid_value,
-            paid: item.paid_value,
-          },
-        })}
-      </p>
-    {/if}
-    <ul>
-      {#each item.items as i}
-        <li>{i.amount} x {i.name} ({i.price} PLN)</li>
-      {/each}
-    </ul>
+    {@const total = item.items.reduce(
+      (acc, it) => acc + it.amount * it.price,
+      0
+    )}
+    {@const to_pay = total - item.paid_value}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">{$_("orders_history.name")}</th>
+          <th scope="col">{$_("orders_history.quantity")}</th>
+          <th scope="col">{$_("orders_history.price")}</th>
+          <th scope="col">{$_("orders_history.item_total")}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {#each item.items as i}
+          <tr>
+            <th scope="row">{i.name}</th>
+            <td>{i.amount}</td>
+            <td>{i.price}</td>
+            <td>{i.amount * i.price}</td>
+          </tr>
+        {/each}
+        <tr>
+          <th scope="row">{$_("orders_history.total")}</th>
+          <td />
+          <td />
+          <td>{total}</td>
+        </tr>
+        <tr>
+          <th scope="row">{$_("orders_history.paid_confirmed")}</th>
+          <td />
+          <td />
+          <td>{item.paid_value}</td>
+        </tr>
+        {#if to_pay > 0}
+          <tr>
+            <th scope="row">{$_("orders_history.left")}</th>
+            <td />
+            <td />
+            <td class:text-danger={to_pay > 0}>{to_pay}</td>
+          </tr>
+        {/if}
+      </tbody>
+    </table>
   </div>
 </AccordionList>
 
 <style>
   .badge {
     text-transform: uppercase;
+  }
+
+  th {
+    text-decoration: none !important;
+    font-weight: normal !important;
   }
 </style>

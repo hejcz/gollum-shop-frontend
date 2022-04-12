@@ -51,7 +51,13 @@
   "orders_history.unpaid": "Nieopłacone",
   "orders_history.paid": "Opłacone",
   "orders_history.order_paid": "Zamówienie jest opłacone",
-  "orders_history.to_pay": "Do zapłaty pozostało: {to_pay}. Do tej pory zapłaciłeś: {paid}.",
+  "orders_history.name": "Nazwa",
+  "orders_history.quantity": "Ilość sztuk",
+  "orders_history.price": "Cena",
+  "orders_history.item_total": "Łącznie",
+  "orders_history.total": "Łącznie",
+  "orders_history.paid_confirmed": "Wpłacono",
+  "orders_history.left": "Pozostało do zapłaty",
   "login.login": "Zaloguj",
   "login.loading_client": "Weryfikacja trwa"
 }
