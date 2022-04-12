@@ -47,6 +47,7 @@
   "order.no_items": "There is nothing to order yet",
   "order.quantity": "Quantity",
   "order.paid": "Paid {paid} out of {totalPrice}",
+  "orders_history.title": "Orders history",
   "orders_history.unpaid": "Unpaid",
   "orders_history.paid": "Paid",
   "orders_history.order_paid": "Order is paid",

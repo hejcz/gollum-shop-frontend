@@ -55,7 +55,7 @@
   }
 </script>
 
-<h1>Orders history</h1>
+<h1>{$_("orders_history.title")}</h1>
 
 <AccordionList items_provider={fetch}>
   <svelte:fragment slot="title" let:item>

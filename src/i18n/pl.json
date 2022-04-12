@@ -47,6 +47,7 @@
   "order.no_items": "Brak pozycji do zamówienia",
   "order.quantity": "Ilość sztuk",
   "order.paid": "Zapłacono {paid} z {totalPrice}",
+  "orders_history.title": "Historia zamówień",
   "orders_history.unpaid": "Nieopłacone",
   "orders_history.paid": "Opłacone",
   "orders_history.order_paid": "Zamówienie jest opłacone",
