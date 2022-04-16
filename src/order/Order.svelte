@@ -52,12 +52,10 @@
   <div class="mb-2">
     <InProgressButton
       on_click_function={async () => order()}
-      label="Order"
+      label={$_('order.confirm')}
       disabled_predicate={() => totalPrice <= 0} />
     {#if items.length === 0}
       <span>{$_("order.no_items")}</span>
-    {:else}
-      <span>{$_("order.paid", { values: { paid, totalPrice } })}</span>
     {/if}
   </div>
   {#each items as { amount, item }}
@@ -66,23 +64,23 @@
         <div class="card-title">
           <h5 class:fade-text={amount == null || amount === 0}>
             {item.ordinal}. {item.name}
-            <span class="ms-2 badge bg-secondary">{item.price} PLN</span>
+            <span class="ms-2 badge bg-secondary">{item.price} {$_('currency.pln')}</span>
           </h5>
         </div>
         <div class="input-group card-text">
           <span class="input-group-text">{$_("order.quantity")}</span>
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="btn btn-outline-secondary change-amount"
             on:click={() => amount++}>
-            +1
+            +
           </button>
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="btn btn-outline-secondary change-amount"
             on:click={() =>
-              (amount = amount - 1 <= 0 ? null : Math.max(0, amount - 1))}>
-            -1
+              (amount = Math.max(0, amount - 1))}>
+            -
           </button>
           <input
             type="number"
@@ -107,5 +105,9 @@
 
   .badge {
     vertical-align: top;
+  }
+
+  .change-amount {
+      min-width: 40px;
   }
 </style>
