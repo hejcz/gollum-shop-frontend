@@ -9,8 +9,10 @@ import type {
   CampaignUpdate,
   Order,
   OrderedItem,
+  User,
 } from "./Api";
 import { campaigns, candidates, orders } from "./mock_data";
+import { users } from "./mock_data/users";
 
 function mutateCampaign(uuid: string, mutator: (c: Campaign) => void): void {
   const campaign = campaigns.find((c) => c.uuid === uuid);
@@ -28,6 +30,28 @@ function test_title_like(title: string, titleLike: string | null) {
 }
 
 export class MockApi implements Api {
+  fetchUsers(): Promise<User[]> {
+    return (async () => {
+      return users.map((it) => ({ ...it }));
+    })();
+  }
+
+  activateUser(user_uuid: string): Promise<User> {
+    return (async () => {
+      const user = users.find((u) => u.uuid === user_uuid);
+      user.activated = true;
+      return { ...user };
+    })();
+  }
+
+  deactivateUser(user_uuid: string): Promise<User> {
+    return (async () => {
+      const user = users.find((u) => u.uuid === user_uuid);
+      user.activated = false;
+      return { ...user };
+    })();
+  }
+
   likeCandidate(uuid: string): Promise<CampaignCandidate> {
     return (async () => {
       const candidate = candidates.find((c) => c.uuid === uuid);

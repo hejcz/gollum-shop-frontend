@@ -52,7 +52,7 @@
   <div class="mb-2">
     <InProgressButton
       on_click_function={async () => order()}
-      label={$_('order.confirm')}
+      label={$_("order.confirm")}
       disabled_predicate={() => totalPrice <= 0} />
     {#if items.length === 0}
       <span>{$_("order.no_items")}</span>
@@ -64,7 +64,10 @@
         <div class="card-title">
           <h5 class:fade-text={amount == null || amount === 0}>
             {item.ordinal}. {item.name}
-            <span class="ms-2 badge bg-secondary">{item.price} {$_('currency.pln')}</span>
+            <span class="ms-2 badge bg-secondary">
+              {item.price}
+              {$_("currency.pln")}
+            </span>
           </h5>
         </div>
         <div class="input-group card-text">
@@ -78,8 +81,7 @@
           <button
             type="button"
             class="btn btn-outline-secondary change-amount"
-            on:click={() =>
-              (amount = Math.max(0, amount - 1))}>
+            on:click={() => (amount = Math.max(0, amount - 1))}>
             -
           </button>
           <input
@@ -108,6 +110,6 @@
   }
 
   .change-amount {
-      min-width: 40px;
+    min-width: 40px;
   }
 </style>

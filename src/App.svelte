@@ -14,6 +14,7 @@
   import OrdersHistory from "./order/OrdersHistory.svelte";
   import { role, user } from "./stores";
   import { _ } from "svelte-i18n";
+  import ManageUsers from "./authentication/ManageUsers.svelte";
 
   onMount(async () => {
     await authentication_manager.initiate_client();
@@ -58,6 +59,9 @@
         </Route>
         <Route path="/orders/:uuid" let:params>
           <ManageOrders uuid={params.uuid} />
+        </Route>
+        <Route path="/users">
+          <ManageUsers />
         </Route>
       {/if}
     {/if}

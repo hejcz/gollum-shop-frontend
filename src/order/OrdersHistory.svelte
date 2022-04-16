@@ -93,28 +93,31 @@
           <tr>
             <th scope="row">{i.name}</th>
             <td>{i.amount}</td>
-            <td>{i.price} {$_('currency.pln')}</td>
-            <td>{i.amount * i.price} {$_('currency.pln')}</td>
+            <td>{i.price} {$_("currency.pln")}</td>
+            <td>{i.amount * i.price} {$_("currency.pln")}</td>
           </tr>
         {/each}
         <tr>
           <th scope="row">{$_("orders_history.total")}</th>
           <td />
           <td />
-          <td>{total} {$_('currency.pln')}</td>
+          <td>{total} {$_("currency.pln")}</td>
         </tr>
         <tr>
           <th scope="row">{$_("orders_history.paid_confirmed")}</th>
           <td />
           <td />
-          <td>{item.paid_value} {$_('currency.pln')}</td>
+          <td>{item.paid_value} {$_("currency.pln")}</td>
         </tr>
         {#if to_pay > 0}
           <tr>
             <th scope="row">{$_("orders_history.left")}</th>
             <td />
             <td />
-            <td class:text-danger={to_pay > 0}>{to_pay} {$_('currency.pln')}</td>
+            <td class:text-danger={to_pay > 0}>
+              {to_pay}
+              {$_("currency.pln")}
+            </td>
           </tr>
         {/if}
       </tbody>

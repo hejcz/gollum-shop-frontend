@@ -51,6 +51,12 @@ export interface CampaignUpdate {
   candidate_uuid?: string;
 }
 
+export interface User {
+  uuid: string;
+  username: string;
+  activated: boolean;
+}
+
 export interface Api {
   fetchCampaignOrders(
     campaign_uuid: string
@@ -70,6 +76,9 @@ export interface Api {
   ): Promise<CampaignCandidate[]>;
   likeCandidate(uuid: string): Promise<CampaignCandidate>;
   unlikeCandidate(uuid: string): Promise<CampaignCandidate>;
+  fetchUsers(): Promise<User[]>;
+  activateUser(user_uuid: string): Promise<User>;
+  deactivateUser(user_uuid: string): Promise<User>;
 }
 
 export const api: Api = ["local", "github"].includes(environment())

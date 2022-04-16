@@ -54,6 +54,11 @@
               </span>
             </li>
             <li class="nav-item">
+              <span class="nav-link">
+                <Link to="/users">{$_("nav.manage_users")}</Link>
+              </span>
+            </li>
+            <li class="nav-item">
               <span class="nav-link" on:click={switchToAdmin}>
                 {$_("nav.switch_to_admin")}
               </span>

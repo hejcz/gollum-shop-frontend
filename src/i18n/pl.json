@@ -6,6 +6,7 @@
   "nav.orders_history": "Historia zamówień",
   "nav.switch_to_admin": "Admin",
   "nav.switch_to_user": "User",
+  "nav.manage_users": "Zarządzaj użytkownikami",
   "nav.logout": "Wyloguj",
   "campaigns.filter_by_name": "Filtruj po nazwie",
   "active_campaigns.title": "Aktywne kampanie",
@@ -60,5 +61,10 @@
   "orders_history.left": "Pozostało do zapłaty",
   "login.login": "Zaloguj",
   "login.loading_client": "Weryfikacja trwa",
+  "manage_users.username": "Użytkownik",
+  "manage_users.actions": "Zarządzaj",
+  "manage_users.activate": "Odblokuj",
+  "manage_users.deactivate": "Zablokuj",
+  "manage_users.verified": "Zweryfikowany",
   "currency.pln": "zł"
 }
