@@ -5,6 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "build-github": "environment=github rollup -c",
+    "build-prod": "environment=prod rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json",

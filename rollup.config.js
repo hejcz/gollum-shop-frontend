@@ -12,12 +12,14 @@ import json from '@rollup/plugin-json';
 const production = !process.env.ROLLUP_WATCH;
 
 let auth0_audience = 'http://localhost:8090'
-console.log()
 let auth0_logout_url
 switch (process.env.environment) {
 	case 'github':
 		auth0_logout_url = 'https://hejcz.github.io'
         break;
+	case 'prod':
+		auth0_logout_url = 'https://gollum.pl'
+		break;
 	default:
 		auth0_logout_url = 'http://localhost:8090'
         break;
