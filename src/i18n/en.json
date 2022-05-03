@@ -61,10 +61,14 @@
   "orders_history.left": "To pay",
   "login.login": "Click to login",
   "login.in_progress": "Authorization in progress",
+  "login.email": "Email address",
+  "login.password": "Password",
+  "login.submit": "Login",
   "manage_users.username": "Username",
   "manage_users.actions": "Manage",
   "manage_users.activate": "Unblock",
   "manage_users.deactivate": "Block",
   "manage_users.verified": "Verified",
-  "currency.pln": "PLN"
+  "currency.pln": "PLN",
+  "anonymous.info": "You dont have any role assigned yet"
 }

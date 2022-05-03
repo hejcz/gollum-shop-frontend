@@ -61,10 +61,14 @@
   "orders_history.left": "Pozostało do zapłaty",
   "login.login": "Zaloguj",
   "login.loading_client": "Weryfikacja trwa",
+  "login.email": "Adres email",
+  "login.password": "Hasło",
+  "login.submit": "Zaloguj",
   "manage_users.username": "Użytkownik",
   "manage_users.actions": "Zarządzaj",
   "manage_users.activate": "Odblokuj",
   "manage_users.deactivate": "Zablokuj",
   "manage_users.verified": "Zweryfikowany",
-  "currency.pln": "zł"
+  "currency.pln": "zł",
+  "anonymous.info": "Administrator nie nadał Ci jeszcze żadnej roli"
 }

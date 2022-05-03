@@ -1,5 +1,4 @@
-import { environment } from "../environment";
-import { MockApi } from "./mock_api";
+import { RestApi } from "./rest_api";
 
 export interface CampaignItem {
   ordinal: number;
@@ -81,6 +80,4 @@ export interface Api {
   deactivateUser(user_uuid: string): Promise<User>;
 }
 
-export const api: Api = ["local", "github"].includes(environment())
-  ? new MockApi()
-  : null;
+export const api: Api = new RestApi()
