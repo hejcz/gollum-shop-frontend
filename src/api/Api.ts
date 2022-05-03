@@ -80,4 +80,4 @@ export interface Api {
   deactivateUser(user_uuid: string): Promise<User>;
 }
 
-export const api: Api = new RestApi()
+export const api: Api = new RestApi();

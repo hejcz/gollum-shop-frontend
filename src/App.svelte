@@ -17,8 +17,7 @@
   import ManageUsers from "./authentication/ManageUsers.svelte";
 
   onMount(async () => {
-    await authentication_manager.initiate_client();
-    await authentication_manager.store_credentials();
+    await authentication_manager.store_credentials_if_authenticated();
   });
 </script>
 

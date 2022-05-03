@@ -1,37 +1,132 @@
 <script lang="ts">
-  import { authentication_client_initialized } from "../stores";
   import { authentication_manager } from "./authentication_manager";
   import { _ } from "svelte-i18n";
+  import { get } from "svelte/store";
 
-  let email: string = ''
-  let password: string = ''
+  let username: string = "";
+  let email: string = "";
+  let password: string = "";
+  let repeated_password: string = "";
+  let signup_mode: boolean = false;
+
+  let warning = null;
 
   async function login() {
+    warning = null;
     await authentication_manager.login(email, password);
-    await authentication_manager.store_credentials();
+  }
+
+  async function signup() {
+    warning = null;
+    if (password !== repeated_password) {
+      warning = get(_)("login.different_password");
+      return;
+    }
+    await authentication_manager.signup(username, password, email);
+  }
+
+  async function switch_mode() {
+    warning = null;
+    username = "";
+    email = "";
+    password = "";
+    repeated_password = "";
+    signup_mode = !signup_mode;
   }
 </script>
 
-{#if $authentication_client_initialized}
-  <h1>{$_("login.login")}</h1>
-  <div style="display: flex; justify-content: center;" class="mt-4">
-    <form>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">{$_('login.email')}</label>
-        <input bind:value={email} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">{$_('login.password')}</label>
-        <input bind:value={password} type="password" class="form-control" id="exampleInputPassword1">
-      </div>
-      <button type="button" on:click={login} class="btn btn-primary">{$_('login.submit')}</button>
-    </form>
+{#if signup_mode}
+  <h1>{$_("login.signup")}</h1>
+  <div class="centered mt-4">
+    <div class="stacked">
+      <form>
+        <div class="mb-3">
+          <label for="username" class="form-label">
+            {$_("login.username")}
+          </label>
+          <input
+            bind:value={username}
+            type="email"
+            class="form-control"
+            id="username" />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">{$_("login.email")}</label>
+          <input
+            bind:value={email}
+            type="email"
+            class="form-control"
+            id="email" />
+        </div>
+        <div class="mb-3">
+          <label for="password1" class="form-label">
+            {$_("login.password")}
+          </label>
+          <input
+            bind:value={password}
+            type="password"
+            class="form-control"
+            id="password1" />
+        </div>
+        <div class="mb-3">
+          <label for="password2" class="form-label">
+            {$_("login.repeat_password")}
+          </label>
+          <input
+            bind:value={repeated_password}
+            type="password"
+            class="form-control"
+            id="password2" />
+        </div>
+        <button type="button" on:click={signup} class="btn btn-primary">
+          {$_("login.signup")}
+        </button>
+        <button type="button" on:click={switch_mode} class="btn btn-link">
+          {$_("login.login")}
+        </button>
+      </form>
+      {#if warning != null}
+        <div class="alert alert-warning mt-4" role="alert">
+          {warning}
+        </div>
+      {/if}
+    </div>
   </div>
 {:else}
-  <h1>{$_("login.loading_client")}</h1>
-  <div class="d-flex justify-content-center">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
+  <h1>{$_("login.login")}</h1>
+  <div class="centered mt-4">
+    <div class="stacked">
+      <form>
+        <div class="mb-3">
+          <label for="email" class="form-label">{$_("login.email")}</label>
+          <input
+            bind:value={email}
+            type="email"
+            class="form-control"
+            id="email" />
+        </div>
+        <div class="mb-3">
+          <label for="password1" class="form-label">
+            {$_("login.password")}
+          </label>
+          <input
+            bind:value={password}
+            type="password"
+            class="form-control"
+            id="password1" />
+        </div>
+        <button type="button" on:click={login} class="btn btn-primary">
+          {$_("login.submit")}
+        </button>
+        <button type="button" on:click={switch_mode} class="btn btn-link">
+          {$_("login.signup")}
+        </button>
+      </form>
+      {#if warning != null}
+        <div class="alert alert-warning mt-4" role="alert">
+          {warning}
+        </div>
+      {/if}
     </div>
   </div>
 {/if}
@@ -39,5 +134,16 @@
 <style>
   form {
     max-width: 500px;
+  }
+
+  .centered {
+    display: flex;
+    justify-content: center;
+  }
+
+  .stacked {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 </style>
