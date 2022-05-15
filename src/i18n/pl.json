@@ -20,6 +20,7 @@
   "proposed_campaigns.likes": "Polubiono {count} razy",
   "proposed_campaigns.convert_to_active": "Przenieś do aktywnych kampanii",
   "proposed_campaigns.no_actions": "Brak akcji do wykonania",
+  "proposed_campaigns.add_draft": "Dodaj propozycję kampanii",
   "edit_campaign.loading": "Ładowanie kampanii",
   "edit_campaign.title_edit": "Edytuj kampanię {title}",
   "edit_campaign.title_add": "Dodaj kampanie {title}",
@@ -74,5 +75,10 @@
   "manage_users.deactivate": "Zablokuj",
   "manage_users.verified": "Zweryfikowany",
   "currency.pln": "zł",
-  "anonymous.info": "Administrator nie nadał Ci jeszcze żadnej roli"
+  "anonymous.info": "Administrator nie nadał Ci jeszcze żadnej roli",
+  "add_draft.title_add": "Dodaj propozycję kampanii",
+  "add_draft.save": "Zapisz propozycję",
+  "add_draft.campaign_title": "Nazwa kampanii",
+  "add_draft.campaign_url": "Url kampanii",
+  "add_draft.image_url": "Url obrazka"
 }

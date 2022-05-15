@@ -20,6 +20,7 @@
   "proposed_campaigns.likes": "Liked {count} times",
   "proposed_campaigns.convert_to_active": "Convert to active campaign",
   "proposed_campaigns.no_actions": "Nothing to do here",
+  "proposed_campaigns.add_draft": "Add draft",
   "edit_campaign.loading": "Loading campaign",
   "edit_campaign.title_edit": "Edit campaign {title}",
   "edit_campaign.title_add": "Add campaign {title}",
@@ -74,5 +75,10 @@
   "manage_users.deactivate": "Block",
   "manage_users.verified": "Verified",
   "currency.pln": "PLN",
-  "anonymous.info": "You dont have any role assigned yet"
+  "anonymous.info": "You dont have any role assigned yet",
+  "add_draft.title_add": "Add campaign candidate",
+  "add_draft.save": "Save candidate",
+  "add_draft.campaign_title": "Title",
+  "add_draft.campaign_url": "Url",
+  "add_draft.image_url": "Image url"
 }

@@ -15,6 +15,7 @@
   import { role, user } from "./stores";
   import { _ } from "svelte-i18n";
   import ManageUsers from "./authentication/ManageUsers.svelte";
+  import AddDraft from "./campaign/AddDraft.svelte";
 
   onMount(async () => {
     await authentication_manager.store_credentials_if_authenticated();
@@ -46,8 +47,11 @@
       <Route path="/orders-history">
         <OrdersHistory />
       </Route>
-      <Route path="/campaigns/proposals">
+      <Route path="/drafts">
         <CampaignsCandidates />
+      </Route>
+      <Route path="/new-draft">
+        <AddDraft />
       </Route>
       {#if $role.might_modify_campaign()}
         <Route path="/campaigns/edit" let:location>

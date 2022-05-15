@@ -11,6 +11,8 @@ import json from '@rollup/plugin-json';
 
 const production = !process.env.ROLLUP_WATCH;
 
+const environment = process.env.environment ?? 'local'
+
 function serve() {
 	let server;
 

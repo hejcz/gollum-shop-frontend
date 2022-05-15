@@ -8,7 +8,7 @@ export const role: Writable<Role> = writable(new Anonymous());
 export const access_token: Writable<string> = writable(null);
 
 export const api_url: Readable<string> = readable(
-  "https://bonestest.herokuapp.com/"
+  "https://bonestest.herokuapp.com/api/"
 );
 
 export function switchToLoggedUser() {

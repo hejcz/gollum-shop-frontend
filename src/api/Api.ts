@@ -1,3 +1,4 @@
+import { MockApi } from "./mock_api";
 import { RestApi } from "./rest_api";
 
 export interface CampaignItem {
@@ -66,6 +67,7 @@ export interface Api {
   fetchCampaign(uuid: string): Promise<Campaign>;
   orderCampaign(uuid: string, items: OrderedItem[]): Promise<Order>;
   updateCampaign(update: CampaignUpdate): Promise<Campaign>;
+  addCandidate(draft: CampaignCandidate): Promise<CampaignCandidate>;
   fetchCampaigns(params: CampaignsSearchParams): Promise<Campaign[]>;
   lockCampaign(uuid: string): Promise<Campaign>;
   unlockCampaign(uuid: string): Promise<Campaign>;

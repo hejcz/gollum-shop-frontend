@@ -85,7 +85,7 @@ class CustomEndpointManager implements AuthenticationManager {
           user.set(login);
           acess_token_store.set(access_token);
           const { role } = this.parseJwt(access_token);
-          role_store.set(role == true ? new Admin() : new LoggedUser());
+          role_store.set(role === "admin" ? new Admin() : new LoggedUser());
           return;
         } else {
           console.log(message);

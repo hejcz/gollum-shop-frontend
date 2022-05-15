@@ -30,6 +30,10 @@ function test_title_like(title: string, titleLike: string | null) {
 }
 
 export class MockApi implements Api {
+  addCandidate(draft: CampaignCandidate): Promise<CampaignCandidate> {
+    throw new Error("Method not implemented.");
+  }
+
   fetchUsers(): Promise<User[]> {
     return (async () => {
       return users.map((it) => ({ ...it }));
@@ -86,25 +90,9 @@ export class MockApi implements Api {
 
   fetchCampaignCandidates(titleLike: string): Promise<CampaignCandidate[]> {
     return (async () => {
-      const result = candidates.filter((c) =>
+      return candidates.filter((c) =>
         test_title_like(c.title, titleLike)
       );
-      result.sort((a, b) => {
-        if (a.liking_users.length > b.liking_users.length) {
-          return -1;
-        }
-        if (a.liking_users.length < b.liking_users.length) {
-          return 1;
-        }
-        if (a.title > b.title) {
-          return 1;
-        }
-        if (a.title < b.title) {
-          return -1;
-        }
-        return 0;
-      });
-      return result;
     })();
   }
 
