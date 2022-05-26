@@ -25,7 +25,7 @@
       return -1;
     }
     return 0;
-  }
+  };
 
   async function fetch(
     search: string
@@ -53,7 +53,6 @@
   function add_draft() {
     navigate(`/new-draft`);
   }
-
 </script>
 
 <h1>{$_("proposed_campaigns.title")}</h1>

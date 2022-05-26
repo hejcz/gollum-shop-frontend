@@ -90,9 +90,7 @@ export class MockApi implements Api {
 
   fetchCampaignCandidates(titleLike: string): Promise<CampaignCandidate[]> {
     return (async () => {
-      return candidates.filter((c) =>
-        test_title_like(c.title, titleLike)
-      );
+      return candidates.filter((c) => test_title_like(c.title, titleLike));
     })();
   }
 

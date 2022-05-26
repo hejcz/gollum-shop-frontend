@@ -5,7 +5,8 @@ export interface CampaignItem {
   ordinal: number;
   name: string;
   price: number;
-  uuid: string;
+  // null for new items. Server should always send not null value.
+  uuid?: string;
 }
 
 export interface Campaign {
@@ -49,6 +50,7 @@ export interface CampaignsSearchParams {
 export interface CampaignUpdate {
   campaign: Campaign;
   candidate_uuid?: string;
+  is_new: boolean;
 }
 
 export interface User {

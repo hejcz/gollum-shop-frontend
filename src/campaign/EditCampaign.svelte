@@ -88,6 +88,7 @@
   }
 
   async function save() {
+    removable_items.forEach(it => it.uuid = null);
     const campaign_with_extra_items: Campaign = {
       ...campaign,
       items: [...campaign.items, ...removable_items],
@@ -95,6 +96,7 @@
     campaign = await api.updateCampaign({
       campaign: campaign_with_extra_items,
       candidate_uuid,
+      is_new: mode === ADD || mode === ADD_FROM_CANDIDATE,
     });
     removable_items = [];
     mode = EDIT;

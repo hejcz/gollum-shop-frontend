@@ -54,10 +54,12 @@
       on_click_function={async () => order()}
       label={$_("order.confirm")}
       disabled_predicate={() => totalPrice <= 0} />
-    {#if items.length === 0}
-      <span>{$_("order.no_items")}</span>
-    {/if}
   </div>
+  {#if items.length === 0}
+    <div>
+      <span>{$_("order.no_items")}</span>
+    </div>
+  {/if}
   {#each items as { amount, item }}
     <div class="card mb-2" style="width: 100%;">
       <div class="card-body">
