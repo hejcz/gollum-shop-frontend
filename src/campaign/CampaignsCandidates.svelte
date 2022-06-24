@@ -4,7 +4,7 @@
   import Fa from "svelte-fa";
   import { Link, useNavigate } from "svelte-navigator";
   import { api, CampaignCandidate } from "../api/Api";
-  import { role, user } from "../stores";
+  import { role, user, user_uuid } from "../stores";
   import AccordionList from "../utils/AccordionList.svelte";
   import type { AccordionItem } from "../utils/accordion_item";
   import { _ } from "svelte-i18n";
@@ -74,7 +74,7 @@
       </div>
       <div class="col-12 col-md">
         <!-- https://stackoverflow.com/questions/67281841/bootstrap-link-in-accordion-header-stoppropagation-not-working -->
-        {#if item.liking_users.includes($user)}
+        {#if item.liking_users.includes($user_uuid)}
           <button
             class="btn btn-light non-collapsing"
             type="button"

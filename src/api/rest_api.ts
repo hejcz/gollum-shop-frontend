@@ -1,5 +1,5 @@
 import { get } from "svelte/store";
-import { access_token, api_url as url } from "../stores";
+import { access_token, api_url as url, user_uuid } from "../stores";
 import type {
   Api,
   AssignedToUser,
@@ -8,7 +8,7 @@ import type {
   CampaignsSearchParams,
   CampaignUpdate,
   Order,
-  OrderedItem,
+  OrderUpdate,
   User,
 } from "./Api";
 
@@ -22,7 +22,7 @@ function backend_campaign_to_frontend_campaign(campaign: any): Campaign {
     locked: !campaign.active,
     items: campaign.items?.map((i, index) => ({
       uuid: i.uuid,
-      ordinal: index,
+      ordinal: i.ordinal,
       name: i.name,
       price: i.price,
     })),
@@ -43,7 +43,7 @@ function backend_draft_to_frontend_draft(draft: any): CampaignCandidate {
 
 function backend_user_to_frontend_user(user: any): User {
   return {
-    uuid: user.id + "",
+    uuid: user.uuid,
     activated: user.active,
     username: user.username,
   };
@@ -52,10 +52,10 @@ function backend_user_to_frontend_user(user: any): User {
 function backend_order_to_frontend_order(order: any): Order {
   return {
     campaign_uuid: order.uuid,
-    paid_amount: 0,
+    paid_amount: Number.parseInt(order.paid_amount),
     items: order.items?.map((i) => ({
       item_uuid: i.uuid,
-      amount: i.amount,
+      amount: Number.parseInt(i.amount),
     })),
   };
 }
@@ -117,7 +117,7 @@ export class RestApi implements Api {
       if (response.ok) {
         const response_json = await response.json();
         if (response_json.uuid == null) {
-          return { campaign_uuid, items: [], paid_amount: 0 };
+          return null;
         }
         return backend_order_to_frontend_order(response_json);
       }
@@ -125,7 +125,20 @@ export class RestApi implements Api {
   }
 
   updatePaidAmount(order: Order & AssignedToUser): Promise<Order> {
-    throw new Error("Method not implemented.");
+    return (async () => {
+      const payload = {
+        paid_amount: order.paid_amount,
+        campaign_uuid: order.campaign_uuid,
+      };
+      const response = await fetch(
+        api_url + "campaigns/" + order.campaign_uuid + "/order",
+        options("PATCH", payload)
+      );
+      if (response.ok) {
+        const response_json = await response.json();
+        return backend_order_to_frontend_order(response_json.result[0]);
+      }
+    })();
   }
 
   fetchCampaign(uuid: string): Promise<Campaign> {
@@ -143,8 +156,28 @@ export class RestApi implements Api {
     })();
   }
 
-  orderCampaign(uuid: string, items: OrderedItem[]): Promise<Order> {
-    throw new Error("Method not implemented.");
+  orderCampaign(campaign_uuid: string, update: OrderUpdate): Promise<Order> {
+    return (async () => {
+      const payload = {
+        items: update.items.map((it) => ({
+          pledge_id: it.item_uuid,
+          amount: it.amount,
+        })),
+      };
+      const response = update.is_new
+        ? await fetch(
+            api_url + "campaigns/" + campaign_uuid + "/order",
+            options("POST", payload)
+          )
+        : await fetch(
+            api_url + "campaigns/" + campaign_uuid + "/order",
+            options("PATCH", payload)
+          );
+      if (response.ok) {
+        const response_json = await response.json();
+        return backend_order_to_frontend_order(response_json.result[0]);
+      }
+    })();
   }
 
   updateCampaign(update: CampaignUpdate): Promise<Campaign> {
@@ -154,16 +187,13 @@ export class RestApi implements Api {
         payload["uuid"] = update.candidate_uuid ?? null;
       }
       payload["draft"] = false;
+      payload["active"] = !update.campaign.locked;
       const response =
         update.is_new && update.candidate_uuid == null
           ? await fetch(api_url + "campaigns", options("POST", payload))
           : await fetch(api_url + "campaigns", options("PATCH", payload));
       if (response.ok) {
         const response_json = await response.json();
-        console.log(response_json.result[0]);
-        console.log(
-          backend_campaign_to_frontend_campaign(response_json.result[0])
-        );
         return backend_campaign_to_frontend_campaign(response_json.result[0]);
       }
     })();
@@ -199,11 +229,33 @@ export class RestApi implements Api {
   }
 
   lockCampaign(uuid: string): Promise<Campaign> {
-    throw new Error("Method not implemented.");
+    return (async () => {
+      const response = await fetch(
+        api_url + "campaigns",
+        options("PATCH", { active: false, draft: false, archived: true, uuid })
+      );
+      if (response.ok) {
+        const response_json = await response.json();
+        if (response_json.result.length > 0) {
+          return backend_campaign_to_frontend_campaign(response_json.result[0]);
+        }
+      }
+    })();
   }
 
   unlockCampaign(uuid: string): Promise<Campaign> {
-    throw new Error("Method not implemented.");
+    return (async () => {
+      const response = await fetch(
+        api_url + "campaigns",
+        options("PATCH", { active: true, draft: false, archived: false, uuid })
+      );
+      if (response.ok) {
+        const response_json = await response.json();
+        if (response_json.result.length > 0) {
+          return backend_campaign_to_frontend_campaign(response_json.result[0]);
+        }
+      }
+    })();
   }
 
   fetchCampaignCandidate(uuid: string): Promise<CampaignCandidate> {

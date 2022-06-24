@@ -29,6 +29,11 @@ export interface Order {
   paid_amount: number;
 }
 
+export interface OrderUpdate {
+  items: OrderedItem[];
+  is_new: boolean;
+}
+
 export interface AssignedToUser {
   username: string;
 }
@@ -67,7 +72,7 @@ export interface Api {
   fetchOrder(order_uuid: string): Promise<Order>;
   updatePaidAmount(order: Order & AssignedToUser): Promise<Order>;
   fetchCampaign(uuid: string): Promise<Campaign>;
-  orderCampaign(uuid: string, items: OrderedItem[]): Promise<Order>;
+  orderCampaign(uuid: string, items: OrderUpdate): Promise<Order>;
   updateCampaign(update: CampaignUpdate): Promise<Campaign>;
   addCandidate(draft: CampaignCandidate): Promise<CampaignCandidate>;
   fetchCampaigns(params: CampaignsSearchParams): Promise<Campaign[]>;

@@ -88,7 +88,7 @@
   }
 
   async function save() {
-    removable_items.forEach(it => it.uuid = null);
+    removable_items.forEach((it) => (it.uuid = null));
     const campaign_with_extra_items: Campaign = {
       ...campaign,
       items: [...campaign.items, ...removable_items],

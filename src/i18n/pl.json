@@ -69,6 +69,8 @@
   "login.username": "Nazwa użytkownika",
   "login.repeat_password": "Powtórz hasło",
   "login.different_password": "Hasła różnią się",
+  "login.signup_success": "Rejestracja zakończyła się sukcesem. Wkrótce otrzymasz na maila link z potwierdzeniem.",
+  "login.signup_error": "Rejestracja zakończyła się błędem. Upewnij się, że wszystkie pola są prawidłowo uzupełnione.",
   "manage_users.username": "Użytkownik",
   "manage_users.actions": "Zarządzaj",
   "manage_users.activate": "Odblokuj",

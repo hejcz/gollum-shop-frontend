@@ -69,6 +69,8 @@
   "login.username": "Username",
   "login.repeat_password": "Repeat password",
   "login.different_password": "Passwords are different",
+  "login.signup_success": "Registration succeeded. You should receive you activation e-mail soon.",
+  "login.signup_error": "Registration failed. Check if all fields are filled correctly.",
   "manage_users.username": "Username",
   "manage_users.actions": "Manage",
   "manage_users.activate": "Unblock",

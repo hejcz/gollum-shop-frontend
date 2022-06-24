@@ -2,6 +2,7 @@
   import { authentication_manager } from "./authentication_manager";
   import { _ } from "svelte-i18n";
   import { get } from "svelte/store";
+  import { onMount } from "svelte";
 
   let username: string = "";
   let email: string = "";
@@ -10,6 +11,7 @@
   let signup_mode: boolean = false;
 
   let warning = null;
+  let successful_signup = false;
 
   async function login() {
     warning = null;
@@ -22,7 +24,16 @@
       warning = get(_)("login.different_password");
       return;
     }
-    await authentication_manager.signup(username, password, email);
+    const success = await authentication_manager.signup(
+      username,
+      password,
+      email
+    );
+    if (success) {
+      successful_signup = true;
+    } else {
+      warning = get(_)("login.signup_error");
+    }
   }
 
   async function switch_mode() {
@@ -33,9 +44,19 @@
     repeated_password = "";
     signup_mode = !signup_mode;
   }
+
+  onMount(async () => {
+    const cookie = document.cookie;
+    const access_token = cookie.split("=")[1];
+    if (access_token) {
+      await authentication_manager.test_credentials(access_token);
+    }
+  });
 </script>
 
-{#if signup_mode}
+{#if successful_signup}
+  <h1>{$_("login.signup_success")}</h1>
+{:else if signup_mode}
   <h1>{$_("login.signup")}</h1>
   <div class="centered mt-4">
     <div class="stacked">
@@ -85,11 +106,6 @@
           {$_("login.login")}
         </button>
       </form>
-      {#if warning != null}
-        <div class="alert alert-warning mt-4" role="alert">
-          {warning}
-        </div>
-      {/if}
     </div>
   </div>
 {:else}
@@ -122,12 +138,12 @@
           {$_("login.signup")}
         </button>
       </form>
-      {#if warning != null}
-        <div class="alert alert-warning mt-4" role="alert">
-          {warning}
-        </div>
-      {/if}
     </div>
+  </div>
+{/if}
+{#if warning != null}
+  <div class="alert alert-warning mt-4" role="alert">
+    {warning}
   </div>
 {/if}
 

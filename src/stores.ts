@@ -1,14 +1,15 @@
 import { readable, Readable, writable, Writable } from "svelte/store";
-import { Admin, Anonymous, LoggedUser, Role } from "./authentication/roles";
+import { Admin, LoggedUser, Role } from "./authentication/roles";
 
-export const user: Writable<string> = writable(null);
+export const role: Writable<Role> = writable(null);
 
-export const role: Writable<Role> = writable(new Anonymous());
+export const user_uuid: Writable<string> = writable(null);
 
 export const access_token: Writable<string> = writable(null);
 
 export const api_url: Readable<string> = readable(
-  "https://bonestest.herokuapp.com/api/"
+  // "https://bonestest.herokuapp.com/api/"
+  "http://localhost:3000/api/"
 );
 
 export function switchToLoggedUser() {

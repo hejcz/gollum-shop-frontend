@@ -10,13 +10,15 @@
   let campaign: Campaign = null;
   let items = [];
   let paid = 0;
+  let new_order = null;
   $: totalPrice = items
     .map((i) => i.item.price * i.amount)
     .reduce((acc, x) => acc + x, 0);
 
   onMount(async () => {
-    const fetchedOrder: Order = await api.fetchOrder(uuid);
+    let fetchedOrder: Order = await api.fetchOrder(uuid);
     const fetchedCampaign: Campaign = await api.fetchCampaign(uuid);
+    new_order = fetchedOrder == null;
     if (fetchedCampaign == null) {
       items = [];
       campaign = null;
@@ -24,23 +26,25 @@
     } else {
       // set ordered amounts
       const orderItems = new Map<string, OrderedItem>();
-      fetchedOrder.items.forEach((i) => orderItems.set(i.item_uuid, i));
+      if (fetchedOrder != null) {
+        fetchedOrder.items.forEach((i) => orderItems.set(i.item_uuid, i));
+      }
       items = fetchedCampaign.items.map((i) => ({
         amount: orderItems.get(i.uuid)?.amount ?? 0,
         item: { ...i },
       }));
-      paid = fetchedOrder.paid_amount;
+      paid = fetchedOrder == null ? 0 : fetchedOrder.paid_amount;
       campaign = fetchedCampaign;
     }
   });
 
   async function order() {
-    await api.orderCampaign(
-      uuid,
-      items
+    await api.orderCampaign(uuid, {
+      is_new: new_order,
+      items: items
         .filter((i) => i.amount > 0)
-        .map((i) => ({ item_uuid: i.item.uuid, amount: i.amount }))
-    );
+        .map((i) => ({ item_uuid: i.item.uuid, amount: i.amount })),
+    });
   }
 </script>
 

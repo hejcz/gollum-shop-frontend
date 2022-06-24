@@ -23,12 +23,11 @@ function serve() {
 	return {
 		writeBundle() {
 			if (server) return;
-			server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev', "--single", "--port", "8090"], {
+			server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev', "--single", "--port", "8090", "--host", "0.0.0.0"], {
 				stdio: ['ignore', 'inherit', 'inherit'],
 				shell: true
 			});
-
-			process.on('SIGTERM', toExit);
+			process.on('SIGTERM', toExit); 
 			process.on('exit', toExit);
 		}
 	};
@@ -40,7 +39,7 @@ export default {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'public/build/bundle.js'
+		file: 'public/static/build/bundle.js'
 	},
 	plugins: [
 		json(),

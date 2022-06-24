@@ -12,7 +12,7 @@
   import ManageOrders from "./order/ManageOrders.svelte";
   import Order from "./order/Order.svelte";
   import OrdersHistory from "./order/OrdersHistory.svelte";
-  import { role, user } from "./stores";
+  import { role } from "./stores";
   import { _ } from "svelte-i18n";
   import ManageUsers from "./authentication/ManageUsers.svelte";
   import AddDraft from "./campaign/AddDraft.svelte";
@@ -27,7 +27,7 @@
 </svelte:head>
 <Router>
   <div class="container">
-    {#if $user == null}
+    {#if $role == null}
       <Navigation hide_actions={true} />
       <Login />
     {:else if $role.is_anonymous()}
