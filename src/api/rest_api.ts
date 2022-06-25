@@ -278,7 +278,7 @@ export class RestApi implements Api {
     fetch_params.set("draft", "true");
     fetch_params.set("active", "false");
     if (titleLike) {
-      fetch_params.set("like", titleLike);
+      fetch_params.set("name", titleLike);
     }
     return (async () => {
       const response = await fetch(

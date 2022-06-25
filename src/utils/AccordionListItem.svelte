@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { AccordionItem } from "./accordion_item";
-
   export let item: AccordionItem;
 </script>
 

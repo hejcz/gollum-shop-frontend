@@ -16,6 +16,7 @@
   import { _ } from "svelte-i18n";
   import ManageUsers from "./authentication/ManageUsers.svelte";
   import AddDraft from "./campaign/AddDraft.svelte";
+  import SignUp from "./authentication/SignUp.svelte";
 
   onMount(async () => {
     await authentication_manager.store_credentials_if_authenticated();
@@ -29,7 +30,12 @@
   <div class="container">
     {#if $role == null}
       <Navigation hide_actions={true} />
-      <Login />
+      <Route path="/signup">
+        <SignUp />
+      </Route>
+      <Route path="/*">
+        <Login />
+      </Route>
     {:else if $role.is_anonymous()}
       <Navigation logout_only={true} />
       <Anonymous />

@@ -57,7 +57,7 @@
     <InProgressButton
       on_click_function={async () => order()}
       label={$_("order.confirm")}
-      disabled_predicate={() => totalPrice <= 0} />
+      disabled_predicate={() => totalPrice <= 0 && new_order} />
   </div>
   {#if items.length === 0}
     <div>
