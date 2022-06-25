@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Link } from "svelte-navigator";
   import { authentication_manager } from "./authentication/authentication_manager";
-  import { switchToLoggedUser, switchToAdmin } from "./stores";
   import { _ } from "svelte-i18n";
 
   export let hide_actions = false;
@@ -43,7 +42,7 @@
             </li>
             <li class="nav-item">
               <span class="nav-link">
-                <Link to="/campaigns/proposals">
+                <Link to="/drafts">
                   {$_("nav.proposed_campaigns")}
                 </Link>
               </span>
@@ -56,16 +55,6 @@
             <li class="nav-item">
               <span class="nav-link">
                 <Link to="/users">{$_("nav.manage_users")}</Link>
-              </span>
-            </li>
-            <li class="nav-item">
-              <span class="nav-link" on:click={switchToAdmin}>
-                {$_("nav.switch_to_admin")}
-              </span>
-            </li>
-            <li class="nav-item">
-              <span class="nav-link" on:click={switchToLoggedUser}>
-                {$_("nav.switch_to_user")}
               </span>
             </li>
           {/if}

@@ -1,5 +1,6 @@
 /node_modules/
-/public/build/
+/public/static/build/
+/public/build
 /public/auth_config.json
 
 .DS_Store

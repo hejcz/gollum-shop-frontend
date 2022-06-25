@@ -2,21 +2,37 @@
   import { faHeart } from "@fortawesome/free-solid-svg-icons";
   import { faHeart as faHeartOpen } from "@fortawesome/free-regular-svg-icons";
   import Fa from "svelte-fa";
-  import { Link } from "svelte-navigator";
+  import { Link, useNavigate } from "svelte-navigator";
   import { api, CampaignCandidate } from "../api/Api";
-  import { role, user } from "../stores";
+  import { role, user, user_uuid } from "../stores";
   import AccordionList from "../utils/AccordionList.svelte";
   import type { AccordionItem } from "../utils/accordion_item";
   import { _ } from "svelte-i18n";
 
   let candidates: (CampaignCandidate & AccordionItem)[] = [];
 
+  const sort_by_likes = (a: CampaignCandidate, b: CampaignCandidate) => {
+    if (a.liking_users.length > b.liking_users.length) {
+      return -1;
+    }
+    if (a.liking_users.length < b.liking_users.length) {
+      return 1;
+    }
+    if (a.title > b.title) {
+      return 1;
+    }
+    if (a.title < b.title) {
+      return -1;
+    }
+    return 0;
+  };
+
   async function fetch(
     search: string
   ): Promise<(CampaignCandidate & AccordionItem)[]> {
     const fetched_candidates: CampaignCandidate[] =
       await api.fetchCampaignCandidates(search);
-    return fetched_candidates.map((c) => ({
+    return fetched_candidates.sort(sort_by_likes).map((c) => ({
       ...c,
       id: c.uuid,
     }));
@@ -31,11 +47,22 @@
     await api.unlikeCandidate(candidate_uuid);
     candidates = await fetch(null);
   }
+
+  const navigate = useNavigate();
+
+  function add_draft() {
+    navigate(`/new-draft`);
+  }
 </script>
 
 <h1>{$_("proposed_campaigns.title")}</h1>
 
 <AccordionList items_provider={fetch} items={candidates}>
+  <svelte:fragment slot="nav-actions">
+    <button type="button" class="btn btn-primary" on:click={add_draft}>
+      + {$_("proposed_campaigns.add_draft")}
+    </button>
+  </svelte:fragment>
   <svelte:fragment slot="title" let:item>
     <div class="row">
       <div class="col">
@@ -47,7 +74,7 @@
       </div>
       <div class="col-12 col-md">
         <!-- https://stackoverflow.com/questions/67281841/bootstrap-link-in-accordion-header-stoppropagation-not-working -->
-        {#if item.liking_users.includes($user)}
+        {#if item.liking_users.includes($user_uuid)}
           <button
             class="btn btn-light non-collapsing"
             type="button"

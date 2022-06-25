@@ -1,5 +1,3 @@
-import { get } from "svelte/store";
-import { user } from "../stores";
 import type {
   Api,
   AssignedToUser,
@@ -8,7 +6,7 @@ import type {
   CampaignsSearchParams,
   CampaignUpdate,
   Order,
-  OrderedItem,
+  OrderUpdate,
   User,
 } from "./Api";
 import { campaigns, candidates, orders } from "./mock_data";
@@ -30,6 +28,10 @@ function test_title_like(title: string, titleLike: string | null) {
 }
 
 export class MockApi implements Api {
+  addCandidate(draft: CampaignCandidate): Promise<CampaignCandidate> {
+    throw new Error("Method not implemented.");
+  }
+
   fetchUsers(): Promise<User[]> {
     return (async () => {
       return users.map((it) => ({ ...it }));
@@ -56,7 +58,7 @@ export class MockApi implements Api {
     return (async () => {
       const candidate = candidates.find((c) => c.uuid === uuid);
       const liking_users = new Set<string>(candidate.liking_users);
-      liking_users.add(get(user));
+      liking_users.add("test-user");
       candidate.liking_users = Array.from(liking_users.values());
       return { ...candidate };
     })();
@@ -66,7 +68,7 @@ export class MockApi implements Api {
     return (async () => {
       const candidate = candidates.find((c) => c.uuid === uuid);
       const liking_users = new Set<string>(candidate.liking_users);
-      liking_users.delete(get(user));
+      liking_users.delete("test-user");
       candidate.liking_users = Array.from(liking_users.values());
       return { ...candidate };
     })();
@@ -80,31 +82,13 @@ export class MockApi implements Api {
 
   fetchUserOrders(): Promise<Order[]> {
     return (async () => {
-      return orders[get(user)] ?? [];
+      return orders["test-user"] ?? [];
     })();
   }
 
   fetchCampaignCandidates(titleLike: string): Promise<CampaignCandidate[]> {
     return (async () => {
-      const result = candidates.filter((c) =>
-        test_title_like(c.title, titleLike)
-      );
-      result.sort((a, b) => {
-        if (a.liking_users.length > b.liking_users.length) {
-          return -1;
-        }
-        if (a.liking_users.length < b.liking_users.length) {
-          return 1;
-        }
-        if (a.title > b.title) {
-          return 1;
-        }
-        if (a.title < b.title) {
-          return -1;
-        }
-        return 0;
-      });
-      return result;
+      return candidates.filter((c) => test_title_like(c.title, titleLike));
     })();
   }
 
@@ -149,16 +133,16 @@ export class MockApi implements Api {
 
   fetchOrder(campaign_uuid: string): Promise<Order> {
     return (async () => {
-      const order: Order = orders[get(user)]?.find(
-        (o) => o.campaign_uuid === campaign_uuid
-      ) ?? { campaign_uuid: campaign_uuid, items: [], paid_amount: 0 };
+      const order: Order =
+        orders["test-user"]?.find((o) => o.campaign_uuid === campaign_uuid) ??
+        null;
       return JSON.parse(JSON.stringify(order));
     })();
   }
 
-  orderCampaign(uuid: string, items: OrderedItem[]): Promise<Order> {
+  orderCampaign(uuid: string, update: OrderUpdate): Promise<Order> {
     return (async () => {
-      const username = get(user);
+      const username = "test-user";
       if (orders[username] == null) {
         orders[username] = [];
       }
@@ -167,10 +151,9 @@ export class MockApi implements Api {
         (o) => o.campaign_uuid === uuid
       );
       if (order == null) {
-        order = { campaign_uuid: uuid, items: items, paid_amount: 0 };
-        user_orders.push(order);
+        return null;
       }
-      order.items = items;
+      order.items = update.items;
       return { ...order };
     })();
   }

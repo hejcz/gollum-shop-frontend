@@ -1,18 +1,15 @@
-import type { Auth0Client } from "@auth0/auth0-spa-js";
-import { derived, Readable, writable, Writable } from "svelte/store";
-import { Anonymous, Role, LoggedUser, Admin } from "./authentication/roles";
+import { readable, Readable, writable, Writable } from "svelte/store";
+import { Admin, LoggedUser, Role } from "./authentication/roles";
 
-export const user: Writable<string> = writable(null);
+export const role: Writable<Role> = writable(null);
 
-export const role: Writable<Role> = writable(new Anonymous());
+export const user_uuid: Writable<string> = writable(null);
 
-export const auth0_client: Writable<Auth0Client> = writable(null);
+export const access_token: Writable<string> = writable(null);
 
-export const auth0_client_initialized: Readable<boolean> = derived(
-  auth0_client,
-  (value, set) => {
-    set(value !== null);
-  }
+export const api_url: Readable<string> = readable(
+  // "https://bonestest.herokuapp.com/api/"
+  "http://localhost:3000/api/"
 );
 
 export function switchToLoggedUser() {

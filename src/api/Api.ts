@@ -1,11 +1,12 @@
-import { environment } from "../environment";
 import { MockApi } from "./mock_api";
+import { RestApi } from "./rest_api";
 
 export interface CampaignItem {
   ordinal: number;
   name: string;
   price: number;
-  uuid: string;
+  // null for new items. Server should always send not null value.
+  uuid?: string;
 }
 
 export interface Campaign {
@@ -26,6 +27,11 @@ export interface Order {
   campaign_uuid: string;
   items: OrderedItem[];
   paid_amount: number;
+}
+
+export interface OrderUpdate {
+  items: OrderedItem[];
+  is_new: boolean;
 }
 
 export interface AssignedToUser {
@@ -49,6 +55,7 @@ export interface CampaignsSearchParams {
 export interface CampaignUpdate {
   campaign: Campaign;
   candidate_uuid?: string;
+  is_new: boolean;
 }
 
 export interface User {
@@ -65,8 +72,9 @@ export interface Api {
   fetchOrder(order_uuid: string): Promise<Order>;
   updatePaidAmount(order: Order & AssignedToUser): Promise<Order>;
   fetchCampaign(uuid: string): Promise<Campaign>;
-  orderCampaign(uuid: string, items: OrderedItem[]): Promise<Order>;
+  orderCampaign(uuid: string, items: OrderUpdate): Promise<Order>;
   updateCampaign(update: CampaignUpdate): Promise<Campaign>;
+  addCandidate(draft: CampaignCandidate): Promise<CampaignCandidate>;
   fetchCampaigns(params: CampaignsSearchParams): Promise<Campaign[]>;
   lockCampaign(uuid: string): Promise<Campaign>;
   unlockCampaign(uuid: string): Promise<Campaign>;
@@ -81,6 +89,4 @@ export interface Api {
   deactivateUser(user_uuid: string): Promise<User>;
 }
 
-export const api: Api = ["local", "github"].includes(environment())
-  ? new MockApi()
-  : null;
+export const api: Api = new RestApi();

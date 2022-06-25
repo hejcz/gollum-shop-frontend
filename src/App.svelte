@@ -12,13 +12,13 @@
   import ManageOrders from "./order/ManageOrders.svelte";
   import Order from "./order/Order.svelte";
   import OrdersHistory from "./order/OrdersHistory.svelte";
-  import { role, user } from "./stores";
+  import { role } from "./stores";
   import { _ } from "svelte-i18n";
   import ManageUsers from "./authentication/ManageUsers.svelte";
+  import AddDraft from "./campaign/AddDraft.svelte";
 
   onMount(async () => {
-    await authentication_manager.initiate_client();
-    await authentication_manager.store_credentials();
+    await authentication_manager.store_credentials_if_authenticated();
   });
 </script>
 
@@ -27,7 +27,7 @@
 </svelte:head>
 <Router>
   <div class="container">
-    {#if $user == null}
+    {#if $role == null}
       <Navigation hide_actions={true} />
       <Login />
     {:else if $role.is_anonymous()}
@@ -47,8 +47,11 @@
       <Route path="/orders-history">
         <OrdersHistory />
       </Route>
-      <Route path="/campaigns/proposals">
+      <Route path="/drafts">
         <CampaignsCandidates />
+      </Route>
+      <Route path="/new-draft">
+        <AddDraft />
       </Route>
       {#if $role.might_modify_campaign()}
         <Route path="/campaigns/edit" let:location>
