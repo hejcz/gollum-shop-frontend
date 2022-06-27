@@ -3,10 +3,10 @@
   import { faHeart as faHeartOpen } from "@fortawesome/free-regular-svg-icons";
   import Fa from "svelte-fa";
   import { Link, useNavigate } from "svelte-navigator";
-  import { api, CampaignCandidate } from "../api/Api";
-  import { role, user_uuid } from "../stores";
-  import AccordionList from "../utils/AccordionList.svelte";
-  import type { AccordionItem } from "../utils/accordion_item";
+  import { api, CampaignCandidate } from "../../api/Api";
+  import { role, user_uuid } from "../../stores";
+  import AccordionList from "../../utils/AccordionList.svelte";
+  import type { AccordionItem } from "../../utils/accordion_item";
   import { _ } from "svelte-i18n";
 
   let candidates: (CampaignCandidate & AccordionItem)[] = [];

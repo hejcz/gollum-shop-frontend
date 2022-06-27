@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
-  import type { Campaign, CampaignItem } from "../api/Api";
-  import InProgressButton from "../utils/InProgressButton.svelte";
+  import type { Campaign, CampaignItem } from "../../api/Api";
+  import InProgressButton from "../../utils/InProgressButton.svelte";
 
   export let title: string;
   export let add_item: () => void;

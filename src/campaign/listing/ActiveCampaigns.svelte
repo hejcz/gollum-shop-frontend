@@ -1,9 +1,9 @@
 <script lang="ts">
   import { Link, useNavigate } from "svelte-navigator";
-  import { api, Campaign } from "../api/Api";
-  import { role } from "../stores";
-  import AccordionList from "../utils/AccordionList.svelte";
-  import type { AccordionItem } from "../utils/accordion_item";
+  import { api, Campaign } from "../../api/Api";
+  import { role } from "../../stores";
+  import AccordionList from "../../utils/AccordionList.svelte";
+  import type { AccordionItem } from "../../utils/accordion_item";
   import { _ } from "svelte-i18n";
 
   const navigate = useNavigate();

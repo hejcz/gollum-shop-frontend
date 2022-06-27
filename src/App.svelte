@@ -1,25 +1,24 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { _ } from "svelte-i18n";
   import { Route, Router } from "svelte-navigator";
   import Anonymous from "./Anonymous.svelte";
   import { authentication_manager } from "./authentication/authentication_manager";
   import Login from "./authentication/Login.svelte";
-  import ActiveCampaigns from "./campaign/ActiveCampaigns.svelte";
-  import CampaignsCandidates from "./campaign/CampaignsCandidates.svelte";
-  import EditCampaign from "./campaign/EditCampaign.svelte";
-  import InactiveCampaigns from "./campaign/InactiveCampaigns.svelte";
+  import ManageUsers from "./authentication/ManageUsers.svelte";
+  import SignUp from "./authentication/SignUp.svelte";
+  import AddNewCampaign from "./campaign/modification/AddNewCampaign.svelte";
+  import CampaignsCandidates from "./campaign/listing/CampaignsCandidates.svelte";
+  import ChangeDratToCampaign from "./campaign/modification/ChangeDratToCampaign.svelte";
+  import EditExistingCampaign from "./campaign/modification/EditExistingCampaign.svelte";
+  import InactiveCampaigns from "./campaign/listing/InactiveCampaigns.svelte";
+  import ActiveCampaigns from "./campaign/listing/ActiveCampaigns.svelte";
+  import AddDraft from "./campaign/modification/AddDraft.svelte";
   import Navigation from "./Navigation.svelte";
   import ManageOrders from "./order/ManageOrders.svelte";
   import Order from "./order/Order.svelte";
   import OrdersHistory from "./order/OrdersHistory.svelte";
   import { role } from "./stores";
-  import { _ } from "svelte-i18n";
-  import ManageUsers from "./authentication/ManageUsers.svelte";
-  import AddDraft from "./campaign/AddDraft.svelte";
-  import SignUp from "./authentication/SignUp.svelte";
-  import AddNewCampaign from "./campaign/AddNewCampaign.svelte";
-  import EditExistingCampaign from "./campaign/EditExistingCampaign.svelte";
-  import ChangeDratToCampaign from "./campaign/ChangeDratToCampaign.svelte";
 
   onMount(async () => {
     await authentication_manager.store_credentials_if_authenticated();

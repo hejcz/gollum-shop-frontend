@@ -1,8 +1,8 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { v4 } from "uuid";
-  import { api, CampaignCandidate } from "../api/Api";
-  import InProgressButton from "../utils/InProgressButton.svelte";
+  import { api, CampaignCandidate } from "../../api/Api";
+  import InProgressButton from "../../utils/InProgressButton.svelte";
 
   let save_in_progress = false;
 
