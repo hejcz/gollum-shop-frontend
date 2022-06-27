@@ -12,7 +12,7 @@
   let active_campaigns = [];
 
   function add_new_campaign() {
-    navigate(`/campaigns/edit`);
+    navigate(`/campaigns/add`);
   }
 
   async function lock(uuid: string) {

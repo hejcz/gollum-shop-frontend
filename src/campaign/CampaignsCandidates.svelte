@@ -112,7 +112,7 @@
     <ul>
       {#if $role.is_admin()}
         <li>
-          <Link to="/campaigns/edit?from={item.id}">
+          <Link to="/campaigns/add/{item.id}">
             {$_("proposed_campaigns.convert_to_active")}
           </Link>
         </li>

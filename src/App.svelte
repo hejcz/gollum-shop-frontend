@@ -17,6 +17,9 @@
   import ManageUsers from "./authentication/ManageUsers.svelte";
   import AddDraft from "./campaign/AddDraft.svelte";
   import SignUp from "./authentication/SignUp.svelte";
+  import AddNewCampaign from "./campaign/AddNewCampaign.svelte";
+  import EditExistingCampaign from "./campaign/EditExistingCampaign.svelte";
+  import ChangeDratToCampaign from "./campaign/ChangeDratToCampaign.svelte";
 
   onMount(async () => {
     await authentication_manager.store_credentials_if_authenticated();
@@ -60,11 +63,14 @@
         <AddDraft />
       </Route>
       {#if $role.is_admin()}
-        <Route path="/campaigns/edit" let:location>
-          <EditCampaign uuid={null} location={location.search} />
+        <Route path="/campaigns/add">
+          <AddNewCampaign />
+        </Route>
+        <Route path="/campaigns/add/:uuid" let:params>
+          <ChangeDratToCampaign candidate_uuid={params.uuid} />
         </Route>
         <Route path="/campaigns/edit/:uuid" let:params>
-          <EditCampaign uuid={params.uuid} />
+          <EditExistingCampaign uuid={params.uuid} />
         </Route>
         <Route path="/orders/:uuid" let:params>
           <ManageOrders uuid={params.uuid} />
