@@ -1,10 +1,10 @@
 export interface Role {
-  might_modify_campaign(): boolean;
+  is_admin(): boolean;
   is_anonymous(): boolean;
 }
 
 export class Anonymous implements Role {
-  might_modify_campaign(): boolean {
+  is_admin(): boolean {
     return false;
   }
 
@@ -14,7 +14,7 @@ export class Anonymous implements Role {
 }
 
 export class LoggedUser implements Role {
-  might_modify_campaign(): boolean {
+  is_admin(): boolean {
     return false;
   }
 
@@ -24,7 +24,7 @@ export class LoggedUser implements Role {
 }
 
 export class Admin implements Role {
-  might_modify_campaign(): boolean {
+  is_admin(): boolean {
     return true;
   }
 

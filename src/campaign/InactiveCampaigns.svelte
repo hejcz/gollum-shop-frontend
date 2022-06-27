@@ -33,7 +33,7 @@
 
 <AccordionList items_provider={fetch} items={inactive_campaigns}>
   <div slot="item-actions" let:item>
-    {#if $role.might_modify_campaign()}
+    {#if $role.is_admin()}
       <ul>
         <li>
           <Link to="/campaigns/edit/{item.id}">

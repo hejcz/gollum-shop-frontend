@@ -110,7 +110,7 @@
   </svelte:fragment>
   <div slot="item-actions" let:item>
     <ul>
-      {#if $role.might_modify_campaign()}
+      {#if $role.is_admin()}
         <li>
           <Link to="/campaigns/edit?from={item.id}">
             {$_("proposed_campaigns.convert_to_active")}

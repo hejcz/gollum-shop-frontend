@@ -38,7 +38,7 @@
 
 <AccordionList items_provider={fetch} items={active_campaigns}>
   <svelte:fragment slot="nav-actions">
-    {#if $role.might_modify_campaign()}
+    {#if $role.is_admin()}
       <button type="button" class="btn btn-primary" on:click={add_new_campaign}>
         + {$_("active_campaigns.add_campaign")}
       </button>
@@ -49,7 +49,7 @@
       <li>
         <Link to="/order/{item.id}">{$_("active_campaigns.order")}</Link>
       </li>
-      {#if $role.might_modify_campaign()}
+      {#if $role.is_admin()}
         <li>
           <Link to="/campaigns/edit/{item.id}">
             {$_("active_campaigns.edit")}

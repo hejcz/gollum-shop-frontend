@@ -59,7 +59,7 @@
       <Route path="/new-draft">
         <AddDraft />
       </Route>
-      {#if $role.might_modify_campaign()}
+      {#if $role.is_admin()}
         <Route path="/campaigns/edit" let:location>
           <EditCampaign uuid={null} location={location.search} />
         </Route>
