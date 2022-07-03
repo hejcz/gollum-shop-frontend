@@ -8,8 +8,8 @@ export const user_uuid: Writable<string> = writable(null);
 export const access_token: Writable<string> = writable(null);
 
 export const api_url: Readable<string> = readable(
-  // "https://bonestest.herokuapp.com/api/"
-  "http://localhost:3000/api/"
+  "https://bonestest.herokuapp.com/api/"
+  // "http://localhost:3000/api/"
 );
 
 export function switchToLoggedUser() {
