@@ -9,7 +9,7 @@
   import SignUp from "./authentication/SignUp.svelte";
   import AddNewCampaign from "./campaign/modification/AddNewCampaign.svelte";
   import CampaignsCandidates from "./campaign/listing/CampaignsCandidates.svelte";
-  import ChangeDratToCampaign from "./campaign/modification/ChangeDratToCampaign.svelte";
+  import ChangeDraftToCampaign from "./campaign/modification/ChangeDraftToCampaign.svelte";
   import EditExistingCampaign from "./campaign/modification/EditExistingCampaign.svelte";
   import InactiveCampaigns from "./campaign/listing/InactiveCampaigns.svelte";
   import ActiveCampaigns from "./campaign/listing/ActiveCampaigns.svelte";
@@ -66,7 +66,7 @@
           <AddNewCampaign />
         </Route>
         <Route path="/campaigns/add/:uuid" let:params>
-          <ChangeDratToCampaign candidate_uuid={params.uuid} />
+          <ChangeDraftToCampaign candidate_uuid={params.uuid} />
         </Route>
         <Route path="/campaigns/edit/:uuid" let:params>
           <EditExistingCampaign uuid={params.uuid} />
