@@ -47,23 +47,13 @@ class LocalDevManager implements AuthenticationManager {
 
 // https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
 function clearCookies() {
-  var cookies = document.cookie.split("; ");
-  for (var c = 0; c < cookies.length; c++) {
-    var d = window.location.hostname.split(".");
-    while (d.length > 0) {
-      var cookieBase =
-        encodeURIComponent(cookies[c].split(";")[0].split("=")[0]) +
-        "=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=" +
-        d.join(".") +
-        " ;path=";
-      var p = location.pathname.split("/");
-      document.cookie = cookieBase + "/";
-      while (p.length > 0) {
-        document.cookie = cookieBase + p.join("/");
-        p.pop();
-      }
-      d.shift();
-    }
+  var cookies = document.cookie.split(";");
+
+  for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      var eqPos = cookie.indexOf("=");
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
   }
 }
 
@@ -163,7 +153,7 @@ class CustomEndpointManager implements AuthenticationManager {
         const { message, access_token } = await response.json();
         if (access_token) {
           setup_authorization_stores(access_token);
-          document.cookie = `gollum_token=${access_token};secure;SameSite=strict;path=/`;
+          document.cookie = `gollum_token=${access_token};secure;SameSite=Strict;path=/`;
           return;
         } else {
           console.log(message);
