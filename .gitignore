@@ -4,3 +4,4 @@
 /public/auth_config.json
 
 .DS_Store
+build.sh

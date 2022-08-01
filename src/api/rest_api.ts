@@ -52,6 +52,7 @@ function backend_user_to_frontend_user(user: any): User {
 function backend_order_to_frontend_order(order: any): Order {
   return {
     campaign_uuid: order.uuid,
+    order_uuid: order.order_uuid,
     paid_amount: Number.parseInt(order.paid_amount),
     items: order.items?.map((i) => ({
       item_uuid: i.uuid,
@@ -128,10 +129,10 @@ export class RestApi implements Api {
     return (async () => {
       const payload = {
         paid_amount: order.paid_amount,
-        campaign_uuid: order.campaign_uuid,
+        order_uuid: order.order_uuid,
       };
       const response = await fetch(
-        api_url + "campaigns/" + order.campaign_uuid + "/order",
+        api_url + "campaigns/" + order.order_uuid + "/paid",
         options("PATCH", payload)
       );
       if (response.ok) {
@@ -166,13 +167,13 @@ export class RestApi implements Api {
       };
       const response = update.is_new
         ? await fetch(
-            api_url + "campaigns/" + campaign_uuid + "/order",
-            options("POST", payload)
-          )
+          api_url + "campaigns/" + campaign_uuid + "/order",
+          options("POST", payload)
+        )
         : await fetch(
-            api_url + "campaigns/" + campaign_uuid + "/order",
-            options("PATCH", payload)
-          );
+          api_url + "campaigns/" + campaign_uuid + "/order",
+          options("PATCH", payload)
+        );
       if (response.ok) {
         const response_json = await response.json();
         return backend_order_to_frontend_order(response_json.result[0]);

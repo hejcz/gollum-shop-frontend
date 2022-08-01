@@ -1,9 +1,11 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
-
+  import { useNavigate } from "svelte-navigator";
   import { api, Order, Campaign, OrderedItem } from "../api/Api";
   import InProgressButton from "../utils/InProgressButton.svelte";
+
+  const navigate = useNavigate();
 
   export let uuid: string;
 
@@ -45,6 +47,7 @@
         .filter((i) => i.amount > 0)
         .map((i) => ({ item_uuid: i.item.uuid, amount: i.amount })),
     });
+     navigate(`/`);
   }
 </script>
 
