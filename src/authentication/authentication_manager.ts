@@ -9,7 +9,7 @@ import {
 import { Admin, Anonymous, LoggedUser } from "./roles";
 
 export interface AuthenticationManager {
-  login(login: string, password: string): Promise<void>;
+  login(login: string, password: string): Promise<boolean>;
   test_credentials(token: string): Promise<boolean>;
   logout(): Promise<void>;
   store_credentials_if_authenticated(): Promise<void>;
@@ -30,8 +30,8 @@ class LocalDevManager implements AuthenticationManager {
     return Promise.resolve(true);
   }
 
-  login(_login: string, _password: string): Promise<void> {
-    return Promise.resolve();
+  login(_login: string, _password: string): Promise<boolean> {
+    return Promise.resolve(true);
   }
 
   logout(): Promise<void> {
@@ -50,10 +50,10 @@ function clearCookies() {
   var cookies = document.cookie.split(";");
 
   for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i];
-      var eqPos = cookie.indexOf("=");
-      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    var cookie = cookies[i];
+    var eqPos = cookie.indexOf("=");
+    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
   }
 }
 
@@ -139,7 +139,7 @@ class CustomEndpointManager implements AuthenticationManager {
     })();
   }
 
-  login(login: string, password: string): Promise<void> {
+  login(login: string, password: string): Promise<boolean> {
     return (async () => {
       const response = await fetch(this.api_url + "auth/login", {
         method: "POST",
@@ -154,13 +154,15 @@ class CustomEndpointManager implements AuthenticationManager {
         if (access_token) {
           setup_authorization_stores(access_token);
           document.cookie = `gollum_token=${access_token};secure;SameSite=Strict;path=/`;
-          return;
+          return true;
         } else {
-          console.log(message);
+          console.log("No access token:", message);
+          return false
         }
       } else {
         const { message } = await response.json();
-        console.log(message);
+        console.log("Login unsuccessfull:", message);
+        return false
       }
     })();
   }
