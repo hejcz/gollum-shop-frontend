@@ -19,6 +19,7 @@
   import Order from "./order/Order.svelte";
   import OrdersHistory from "./order/OrdersHistory.svelte";
   import { role } from "./stores";
+  import ClosedCampaigns from "./campaign/listing/ClosedCampaigns.svelte";
 
   onMount(async () => {
     await authentication_manager.store_credentials_if_authenticated();
@@ -45,6 +46,9 @@
       <Navigation />
       <Route path="/">
         <ActiveCampaigns />
+      </Route>
+      <Route path="/campaigns/closed">
+        <ClosedCampaigns />
       </Route>
       <Route path="/campaigns/archive">
         <InactiveCampaigns />

@@ -35,6 +35,13 @@
             </li>
             <li class="nav-item">
               <span class="nav-link">
+                <Link to="/campaigns/closed">
+                  {$_("nav.closed_campaigns")}
+                </Link>
+              </span>
+            </li>
+            <li class="nav-item">
+              <span class="nav-link">
                 <Link to="/campaigns/archive">
                   {$_("nav.archived_campaigns")}
                 </Link>

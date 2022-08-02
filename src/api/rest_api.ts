@@ -1,11 +1,12 @@
 import { get } from "svelte/store";
 import { access_token, api_url as url, user_uuid } from "../stores";
-import type {
+import {
   Api,
   AssignedToUser,
   Campaign,
   CampaignCandidate,
   CampaignsSearchParams,
+  CampaignStatus,
   CampaignUpdate,
   Order,
   OrderUpdate,
@@ -19,7 +20,6 @@ function backend_campaign_to_frontend_campaign(campaign: any): Campaign {
     uuid: campaign.uuid,
     title: campaign.name,
     img_url: campaign.img_url,
-    locked: !campaign.active,
     items: campaign.items?.map((i, index) => ({
       uuid: i.uuid,
       ordinal: i.ordinal,
@@ -27,6 +27,7 @@ function backend_campaign_to_frontend_campaign(campaign: any): Campaign {
       price: i.price,
     })),
     url: campaign.url,
+    status: campaign.status as CampaignStatus,
   };
 }
 
@@ -64,7 +65,7 @@ export class RestApi implements Api {
   addCandidate(draft: CampaignCandidate): Promise<CampaignCandidate> {
     return (async () => {
       const payload = { ...draft };
-      payload["draft"] = true;
+      payload["status"] = CampaignStatus.DRAFT.toString();
       const response = await fetch(
         api_url + "campaigns",
         options("POST", payload)
@@ -186,8 +187,6 @@ export class RestApi implements Api {
       if (update.is_new) {
         payload["uuid"] = update.candidate_uuid ?? null;
       }
-      payload["draft"] = false;
-      payload["active"] = !update.campaign.locked;
       const response =
         update.is_new && update.candidate_uuid == null
           ? await fetch(api_url + "campaigns", options("POST", payload))
@@ -201,12 +200,9 @@ export class RestApi implements Api {
 
   fetchCampaigns(params: CampaignsSearchParams): Promise<Campaign[]> {
     const fetch_params = new URLSearchParams();
-    fetch_params.set("draft", "false");
-    if (params.active == null) {
-    } else if (params.active) {
-      fetch_params.set("active", "true");
+    if (params.status == null) {
     } else {
-      fetch_params.set("active", "false");
+      fetch_params.set("status", params.status.toString());
     }
     if (params.titleLike) {
       fetch_params.set("name", params.titleLike);
@@ -228,26 +224,11 @@ export class RestApi implements Api {
     })();
   }
 
-  lockCampaign(uuid: string): Promise<Campaign> {
+  changeStatus(uuid: string, newStatus: CampaignStatus): Promise<Campaign> {
     return (async () => {
       const response = await fetch(
         api_url + "campaigns",
-        options("PATCH", { active: false, draft: false, archived: true, uuid })
-      );
-      if (response.ok) {
-        const response_json = await response.json();
-        if (response_json.result.length > 0) {
-          return backend_campaign_to_frontend_campaign(response_json.result[0]);
-        }
-      }
-    })();
-  }
-
-  unlockCampaign(uuid: string): Promise<Campaign> {
-    return (async () => {
-      const response = await fetch(
-        api_url + "campaigns",
-        options("PATCH", { active: true, draft: false, archived: false, uuid })
+        options("PATCH", { status: newStatus, uuid })
       );
       if (response.ok) {
         const response_json = await response.json();
@@ -275,8 +256,7 @@ export class RestApi implements Api {
 
   fetchCampaignCandidates(titleLike: string): Promise<CampaignCandidate[]> {
     const fetch_params = new URLSearchParams();
-    fetch_params.set("draft", "true");
-    fetch_params.set("active", "false");
+    fetch_params.set("status", CampaignStatus.DRAFT.toString());
     if (titleLike) {
       fetch_params.set("name", titleLike);
     }

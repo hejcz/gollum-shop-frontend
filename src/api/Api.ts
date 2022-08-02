@@ -9,13 +9,24 @@ export interface CampaignItem {
   uuid?: string;
 }
 
+export enum CampaignStatus {
+  // open for new orders
+  ACTIVE,
+  // not delivered and closed for new orders
+  CLOSED,
+  // a proposal from users
+  DRAFT,
+  // delivered
+  ARCHIVED,
+}
+
 export interface Campaign {
   uuid: string;
   title: string;
   img_url: string;
   url: string;
   items: CampaignItem[];
-  locked: boolean;
+  status: CampaignStatus;
 }
 
 export interface OrderedItem {
@@ -47,7 +58,7 @@ export interface CampaignCandidate {
 }
 
 export interface CampaignsSearchParams {
-  active?: boolean;
+  status?: CampaignStatus;
   titleLike?: string;
   uuids?: string[];
 }
@@ -76,8 +87,7 @@ export interface Api {
   updateCampaign(update: CampaignUpdate): Promise<Campaign>;
   addCandidate(draft: CampaignCandidate): Promise<CampaignCandidate>;
   fetchCampaigns(params: CampaignsSearchParams): Promise<Campaign[]>;
-  lockCampaign(uuid: string): Promise<Campaign>;
-  unlockCampaign(uuid: string): Promise<Campaign>;
+  changeStatus(uuid: string, newStatus: CampaignStatus): Promise<Campaign>;
   fetchCampaignCandidate(uuid: string): Promise<CampaignCandidate>;
   fetchCampaignCandidates(
     titleLike: string | null

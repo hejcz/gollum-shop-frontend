@@ -1,4 +1,4 @@
-import type { Campaign } from "../Api";
+import { Campaign, CampaignStatus } from "../Api";
 
 export const campaigns: Campaign[] = [
   {
@@ -27,7 +27,7 @@ export const campaigns: Campaign[] = [
         uuid: "1b93d558-4181-472d-a9d8-800cf10f82ac",
       },
     ],
-    locked: false,
+    status: CampaignStatus.ACTIVE,
   },
   {
     uuid: "ee2d0863-bd0d-4fb4-8ed3-f0ec58a0b223",
@@ -67,7 +67,7 @@ export const campaigns: Campaign[] = [
         uuid: "ebe3775d-c022-4823-88b4-c9de33630b54",
       },
     ],
-    locked: false,
+    status: CampaignStatus.ACTIVE,
   },
   {
     uuid: "97c921aa-d1c3-4e34-8c72-bc620f566970",
@@ -275,7 +275,7 @@ export const campaigns: Campaign[] = [
         uuid: "6ec1cc79-447d-47cf-b9a8-e64403f516e6",
       },
     ],
-    locked: false,
+    status: CampaignStatus.ACTIVE,
   },
   {
     uuid: "779e7493-840a-45d8-8cbb-0685e0b5c910",
@@ -303,7 +303,7 @@ export const campaigns: Campaign[] = [
         uuid: "ec042da7-ee08-41d1-81d1-27daff102308",
       },
     ],
-    locked: false,
+    status: CampaignStatus.ACTIVE,
   },
   {
     uuid: "c5f6270e-3834-4464-b66f-d72c887729d8",
@@ -373,7 +373,7 @@ export const campaigns: Campaign[] = [
         uuid: "113abfac-f57e-4229-a9c8-3af569977695",
       },
     ],
-    locked: false,
+    status: CampaignStatus.ACTIVE,
   },
   {
     uuid: "557b17b5-c600-4f38-967a-f824d140c39b",
@@ -382,7 +382,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/813/283/173d4cf17a45b86679b7022e272ee752_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648563379&auto=format&frame=1&q=92&s=8b3eec7bd0d6b787abe11715d141fc86",
     items: [],
-    locked: false,
+    status: CampaignStatus.ACTIVE,
   },
   {
     uuid: "9bef6d90-4000-4b8a-899c-6e4980395149",
@@ -391,7 +391,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/665/727/f1552d5bc48a2a097289c4379b019fde_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1647364616&auto=format&frame=1&q=92&s=9150587275b3e51cfe7381c6badc5b13",
     items: [],
-    locked: false,
+    status: CampaignStatus.ACTIVE,
   },
   {
     uuid: "f66d463a-fa5b-421b-9210-45bdd49a4e56",
@@ -400,7 +400,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/896/177/aa00ca635cec930507c84fe672396cee_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649202967&auto=format&frame=1&q=92&s=6c0293944d176b1f860ffb19ce01daeb",
     items: [],
-    locked: false,
+    status: CampaignStatus.ACTIVE,
   },
   {
     uuid: "3d6b8968-fa57-4b3f-adb9-46bb6404f5dc",
@@ -409,7 +409,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/731/115/d8421a1858dc2ee11e5d0c944df1033b_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1647894839&auto=format&frame=1&q=92&s=10247f0e2e0174da40f7f4e7f611c01a",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "e277590f-d919-48ac-93c8-b7bc51db3fd7",
@@ -418,7 +418,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/832/239/50f148a62a55cb98cbda51d53261d4b8_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648685132&auto=format&frame=1&q=92&s=868ab9c693c4d3599164c873df1fea9d",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "d0ce9338-e8c7-4431-a6bf-34f453d00562",
@@ -427,7 +427,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/448/662/a3f2c1bbbb268fe2b82b918b233ababf_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1645615129&auto=format&frame=1&q=92&s=57707b8a207832c0e141c70170f85b70",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "dc909079-9eb5-48cc-8ee6-0981fc6f5db5",
@@ -436,7 +436,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/742/100/bd3c1518ce6df1409bd784d799525966_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1647970967&auto=format&frame=1&q=92&s=22689163f3da16e3e863ed32eb0d6dd2",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "d841255f-6adb-445e-9f9d-54557f3f1f8a",
@@ -445,7 +445,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/035/697/085/930b53a25a46f2a1d3c77a966bc9825a_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1637942603&auto=format&frame=1&q=92&s=285ad94c9dcda4d138f32fa38474021f",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "25b7ebec-9245-4ea8-989d-855eb9b986ae",
@@ -454,7 +454,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/893/808/b3b4a52fc02ff670bb44710f24dd941e_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649187353&auto=format&frame=1&q=92&s=44070d9542137148cbc58724dd7444f1",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "417c5d50-8157-4b63-b9dc-501bd475fc2f",
@@ -463,7 +463,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/903/471/75aa3cfa861d9f7995cab810c7632042_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649261139&auto=format&frame=1&q=92&s=b53b41f393cbe415c17ee767e6f5cdb9",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "f2ef96f3-e71c-490f-91bb-2e4f9c0ef886",
@@ -472,7 +472,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/866/295/2be7687f4225861c2b36db0c3f3f2c0f_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648947083&auto=format&frame=1&q=92&s=75867044bb0d72b70a1577039fd788c4",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "fdb9433b-c9b7-40e7-8703-3adf8829c561",
@@ -481,7 +481,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/894/809/fdb36109a623022bbc316f9764c7f82a_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649193517&auto=format&frame=1&q=92&s=bb06a411a8087384eb5eb340ccd3c189",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "51760238-b9c1-4489-be49-76b0536855bd",
@@ -490,7 +490,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/903/543/172388d5a9c95172d0f597f1d7225939_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649261465&auto=format&frame=1&q=92&s=f27fc1eb284d05a4ede72272280238d8",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "41fd58bd-28a1-4ed5-9823-d21e3e779b2c",
@@ -499,7 +499,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/690/836/50462989c108076aa716608b52019524_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1647530068&auto=format&frame=1&q=92&s=4c1df37cd4bde856972ea6ed1781a557",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "a2178252-9a73-4331-9737-280e185903cd",
@@ -508,7 +508,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/891/552/98856f335d28ea9018d857648e7622ee_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649174387&auto=format&frame=1&q=92&s=fb3df6a1da6df0b6b986838c4ee5c2c7",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "05ffa461-7eec-484c-946b-76d0761aca79",
@@ -517,7 +517,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/755/018/5ebc9071f83c063fe3965a3076aa9fcf_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648060530&auto=format&frame=1&q=92&s=6013274a676e877d66f34ad3c3323c27",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "87aa2e78-f685-4e2e-acd3-e0fd6e996998",
@@ -526,7 +526,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/895/864/d2f8baa8633bac35b62a400c404cd2ff_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649200440&auto=format&frame=1&q=92&s=d251b9968d605e79f1b905199bb49903",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "fd5da946-c556-45a7-be87-cc040763d9bb",
@@ -535,7 +535,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/692/118/e275782be713e1932a2d219c2aaf4901_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1647536920&auto=format&frame=1&q=92&s=da9e5f867adc25d678f2a8686125e2a6",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "ecc0bd78-54da-43e0-baec-ae61eadeaa65",
@@ -544,7 +544,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/851/161/8dc09b7f93d291b150cc3108041c33ad_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648810647&auto=format&frame=1&q=92&s=6bf7a57a616398d587b280800790ff60",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "89180004-9383-46ff-86b0-6b29eed32b6f",
@@ -553,7 +553,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/889/483/d1c22e3bd76924162b9b5385a8b149c2_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649162726&auto=format&frame=1&q=92&s=de3724fad4121b68249b7fb98c2ae28a",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "cac40b96-713d-492d-98e6-b897ea0cef43",
@@ -562,7 +562,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/753/783/fccb07fa95a028e20fcd3a036b49f86f_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648054623&auto=format&frame=1&q=92&s=6ccc51271e7a655d2db19eed439e5584",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "3445e4be-e5f0-47eb-b0a0-b84d16fb5f0d",
@@ -571,7 +571,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/596/792/a99c2440dd1d7c0d355d25dd6bcd1428_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1646793278&auto=format&frame=1&q=92&s=50ace6351cdeefff98b3adccc3cb0ccb",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "c4ae7185-e9b6-432c-8f42-34aaa543d491",
@@ -580,7 +580,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/890/285/2f6a4608f8958c5d9cb94d4f70500b7f_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649167746&auto=format&frame=1&q=92&s=4bab6fb3e5fcf98c51ee5a89cd152cce",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "53f234b6-17b9-4241-822b-66ddd8f8435d",
@@ -589,7 +589,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/799/172/f2186bf4f1f4d795a79d7ba3cf25df57_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648461662&auto=format&frame=1&q=92&s=9b6d6324a710ff31c705ff5cb4f8fde4",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "9a45ba7b-888e-467c-87ee-e98b2275a37b",
@@ -598,7 +598,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/838/013/5cb3d518333b5577d5d2133d18e49b43_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648732085&auto=format&frame=1&q=92&s=3bb8ae91e171d3e75a1bb9f641fe4ab2",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "421ea070-3ba8-4887-a15b-0084766d5ca1",
@@ -607,7 +607,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/739/769/1724759d5924d2f3c4d8a79b297a6c20_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1647961213&auto=format&frame=1&q=92&s=ff11bafdd4198f601a15653fd839c0dc",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "4091c04f-ddae-493a-8cf9-2899ebe0ee9e",
@@ -616,7 +616,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/595/849/58d3e77c293520058992124e31ad312b_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1646785715&auto=format&frame=1&q=92&s=8af40fea9901dd3089969109df0db31d",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "9c77f507-76d4-4a46-8bce-b1920f07a493",
@@ -625,7 +625,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/630/818/11f7b2d4e57ba18ef351a038e8cbc742_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1647043619&auto=format&frame=1&q=92&s=401a2a394c271d0a700174b8c05ba2ea",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "fdc083ae-51be-4c0d-a729-2effebfe66a4",
@@ -634,7 +634,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/901/151/849f4dc205df0b84a43b2d710a98b656_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649248837&auto=format&frame=1&q=92&s=2537acf91a09f261060589dd315e6d95",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "6ff4c989-c4f9-4bac-85d5-3e675e08cce9",
@@ -643,7 +643,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/901/056/bc626f519121887c3a914eddfc85a802_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649248081&auto=format&frame=1&q=92&s=c7a13ffa35be8d38583e093db4c9405c",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "e8bc38e6-a98e-4809-8427-d1f931c15025",
@@ -652,7 +652,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/668/308/99e49818db7590c48f80eaf9a1a1485b_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1647372172&auto=format&frame=1&q=92&s=fdd09c01497f0ad2cb67fd128eb7f30c",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "c53d7d65-4d94-48f8-b1cb-967f96a1e285",
@@ -661,7 +661,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/818/312/733c74d731ad8124b860b3779fb2d7b7_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648589040&auto=format&frame=1&q=92&s=5ecb30075f1b5b5cd5672eef85f5e3fb",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "7e2a119b-1ac7-40c1-bb93-345ea2e26f07",
@@ -670,7 +670,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/892/927/e22060df9d1411ab39dd5cff6b8060a3_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649182083&auto=format&frame=1&q=92&s=3943a07e80bfaffeb6655716871107df",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "f94edd9a-e110-4388-a412-5c5311fe405f",
@@ -679,7 +679,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/880/032/9abe34ebcf13d1a5e55df4feffcef4d1_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649088900&auto=format&frame=1&q=92&s=724dec7fc087bc7dd11cade35ad0481e",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "6da5682e-d16b-4ff7-b92d-8860b716ec7c",
@@ -688,7 +688,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/816/535/51de39f801a4914d71884e07a90463ed_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648579318&auto=format&frame=1&q=92&s=e72a267d7ed242fedef09d7ceb0a2c8e",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "68c42583-9f75-4970-a70a-b55f256756e9",
@@ -697,7 +697,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/874/505/173416b46b444c91574878e30468c531_original.png?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649039051&auto=format&frame=1&q=92&s=77619d16f5a005b9d9aca62b09b9fd9f",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "95d6071e-12bf-4029-93ec-f6eef419c8c2",
@@ -706,7 +706,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/902/609/41a8fee8cfb116f6a402f0359b3c4f27_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1649256971&auto=format&frame=1&q=92&s=b719937b705e931964476f6c1f7c7987",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "2bd61856-74de-43af-aa4f-832184271dd4",
@@ -715,7 +715,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/740/946/3a58241f35d8b9e0bd317fc8ffa4a0df_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1647966181&auto=format&frame=1&q=92&s=cfcf2b8e3bf9765812a099eb7099543f",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "8c8f15a3-0115-4571-8737-392319dc899c",
@@ -724,7 +724,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/828/677/a43e159070ce893fd329a73ff9b18175_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1648663851&auto=format&frame=1&q=92&s=8cb650866cecc4275fb45ab1fd6c385d",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "0f3587ae-ffeb-4300-98d9-024e8d70c5a6",
@@ -733,7 +733,7 @@ export const campaigns: Campaign[] = [
     img_url:
       "https://ksr-ugc.imgix.net/assets/036/640/630/6add053b0976c83561e538c8ea4f7792_original.jpg?ixlib=rb-4.0.2&crop=faces&w=352&h=198&fit=crop&v=1647163454&auto=format&frame=1&q=92&s=bb2814e46f0628f369de421104ace8b0",
     items: [],
-    locked: true,
+    status: CampaignStatus.ARCHIVED,
   },
   {
     uuid: "4e4a3dbd-85c4-4dcb-be2a-572ebc96e24f",
@@ -741,6 +741,6 @@ export const campaigns: Campaign[] = [
     url: "https://google.com",
     img_url: "https://google.com",
     items: [],
-    locked: false,
+    status: CampaignStatus.ACTIVE,
   },
 ];

@@ -1,13 +1,13 @@
 <script lang="ts">
   import { Link, useNavigate } from "svelte-navigator";
-  import { api, Campaign } from "../../api/Api";
+  import { api, Campaign, CampaignStatus } from "../../api/Api";
   import { role } from "../../stores";
   import AccordionList from "../../utils/AccordionList.svelte";
   import type { AccordionItem } from "../../utils/accordion_item";
   import { _ } from "svelte-i18n";
 
   const navigate = useNavigate();
-  const fetch_filter = { active: true };
+  const fetch_filter = { status: CampaignStatus.ACTIVE };
 
   let active_campaigns = [];
 
@@ -16,7 +16,7 @@
   }
 
   async function lock(uuid: string) {
-    await api.lockCampaign(uuid);
+    await api.changeStatus(uuid, CampaignStatus.CLOSED);
     active_campaigns = await fetch(null);
   }
 
