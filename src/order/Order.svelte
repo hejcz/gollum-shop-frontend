@@ -47,7 +47,7 @@
         .filter((i) => i.amount > 0)
         .map((i) => ({ item_uuid: i.item.uuid, amount: i.amount })),
     });
-     navigate(`/`);
+    navigate(`/`);
   }
 </script>
 

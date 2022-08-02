@@ -167,13 +167,13 @@ export class RestApi implements Api {
       };
       const response = update.is_new
         ? await fetch(
-          api_url + "campaigns/" + campaign_uuid + "/order",
-          options("POST", payload)
-        )
+            api_url + "campaigns/" + campaign_uuid + "/order",
+            options("POST", payload)
+          )
         : await fetch(
-          api_url + "campaigns/" + campaign_uuid + "/order",
-          options("PATCH", payload)
-        );
+            api_url + "campaigns/" + campaign_uuid + "/order",
+            options("PATCH", payload)
+          );
       if (response.ok) {
         const response_json = await response.json();
         return backend_order_to_frontend_order(response_json.result[0]);
