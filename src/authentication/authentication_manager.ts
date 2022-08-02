@@ -157,12 +157,12 @@ class CustomEndpointManager implements AuthenticationManager {
           return true;
         } else {
           console.log("No access token:", message);
-          return false
+          return false;
         }
       } else {
         const { message } = await response.json();
         console.log("Login unsuccessfull:", message);
-        return false
+        return false;
       }
     })();
   }

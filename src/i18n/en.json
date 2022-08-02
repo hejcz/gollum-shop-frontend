@@ -74,7 +74,7 @@
   "login.warn.username_must_not_be_empty": "Username must not be empty",
   "login.warn.email_must_not_be_empty": "E-mail must not be empty",
   "login.warn.password_must_not_be_empty": "Password must not be empty",
-  "login.error":"Bad login or password",
+  "login.error": "Bad login or password",
   "manage_users.username": "Username",
   "manage_users.actions": "Manage",
   "manage_users.activate": "Unblock",

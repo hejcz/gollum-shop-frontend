@@ -1,6 +1,6 @@
 <script lang="ts">
   import { authentication_manager } from "./authentication_manager";
- import { _ } from "svelte-i18n";
+  import { _ } from "svelte-i18n";
   import { get } from "svelte/store";
   import { onMount } from "svelte";
   import { useNavigate } from "svelte-navigator";
@@ -14,7 +14,7 @@
   async function login() {
     warning = null;
     let result = await authentication_manager.login(email, password);
-    if(!result) warning = get(_)("login.error");
+    if (!result) warning = get(_)("login.error");
   }
 
   onMount(async () => {

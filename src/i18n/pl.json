@@ -74,7 +74,7 @@
   "login.warn.username_must_not_be_empty": "Nazwa użytkownika nie może być pusta",
   "login.warn.email_must_not_be_empty": "Email nie może być pusty",
   "login.warn.password_must_not_be_empty": "Hasło nie może być puste",
-  "login.error":"Błędny login lub hasło",
+  "login.error": "Błędny login lub hasło",
   "manage_users.username": "Użytkownik",
   "manage_users.actions": "Zarządzaj",
   "manage_users.activate": "Odblokuj",
