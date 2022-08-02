@@ -1,7 +1,8 @@
 {
   "nav.title": "Gollum Group",
   "nav.active_campaigns": "Active campaigns",
-  "nav.archived_campaigns": "Campaigns archive",
+  "nav.archived_campaigns": "Archived campaigns",
+  "nav.closed_campaigns": "Closed campaigns",
   "nav.proposed_campaigns": "Campaigns proposals",
   "nav.orders_history": "Orders history",
   "nav.switch_to_admin": "Switch to admin",
@@ -14,11 +15,11 @@
   "active_campaigns.order": "Order / Modify order",
   "active_campaigns.edit": "Edit campaign",
   "active_campaigns.manage_orders": "Manage orders",
-  "active_campaigns.lock": "Lock campaign",
+  "active_campaigns.lock": "Move to closed",
   "proposed_campaigns.title": "Campaigns proposals",
   "proposed_campaigns.single_like": "Liked 1 time",
   "proposed_campaigns.likes": "Liked {count} times",
-  "proposed_campaigns.convert_to_active": "Convert to active campaign",
+  "proposed_campaigns.convert_to_active": "Move to active",
   "proposed_campaigns.no_actions": "Nothing to do here",
   "proposed_campaigns.add_draft": "Add draft",
   "edit_campaign.loading": "Loading campaign",
@@ -85,5 +86,11 @@
   "add_draft.save": "Save candidate",
   "add_draft.campaign_title": "Title",
   "add_draft.campaign_url": "Url",
-  "add_draft.image_url": "Image url"
+  "add_draft.image_url": "Image url",
+  "closed_campaigns.title": "Closed campaigns",
+  "closed_campaigns.edit_campaign": "Edit campaign",
+  "closed_campaigns.manage_orders": "Manage orders",
+  "closed_campaigns.convert_to_active": "Move to active",
+  "closed_campaigns.convert_to_archived": "Move to archived",
+  "closed_campaigns.no_actions": "Nothing to do here"
 }

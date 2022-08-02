@@ -34,7 +34,7 @@
       campaign = null;
     } else {
       // set ordered amounts
-      fill_form(fetchedCampaign, fetchedOrder)
+      fill_form(fetchedCampaign, fetchedOrder);
       campaign = fetchedCampaign;
     }
   });
@@ -46,8 +46,8 @@
         .filter((i) => i.amount > 0)
         .map((i) => ({ item_uuid: i.item.uuid, amount: i.amount })),
     });
-    new_order = false
-    fill_form(campaign, savedOrder)
+    new_order = false;
+    fill_form(campaign, savedOrder);
   }
 </script>
 

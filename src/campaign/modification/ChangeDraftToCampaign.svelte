@@ -3,7 +3,7 @@
   import { _ } from "svelte-i18n";
   import { useNavigate } from "svelte-navigator";
   import { v4 } from "uuid";
-  import { api, Campaign, CampaignItem } from "../../api/Api";
+  import { api, Campaign, CampaignItem, CampaignStatus } from "../../api/Api";
   import EditCampaign from "./EditCampaign.svelte";
 
   export let candidate_uuid: string;
@@ -20,6 +20,7 @@
     title: "",
     img_url: "",
     url: "",
+    status: CampaignStatus.ACTIVE,
   });
 
   let campaign: Campaign;

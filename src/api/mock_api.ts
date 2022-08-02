@@ -4,6 +4,7 @@ import type {
   Campaign,
   CampaignCandidate,
   CampaignsSearchParams,
+  CampaignStatus,
   CampaignUpdate,
   Order,
   OrderUpdate,
@@ -183,7 +184,7 @@ export class MockApi implements Api {
     return (async () => {
       const filtered_campaigns = campaigns.filter(
         (c) =>
-          (params.active == null || params.active ? !c.locked : c.locked) &&
+          (params.status == null || params.status === c.status) &&
           test_title_like(c.title, params.titleLike) &&
           (params.uuids == null || params.uuids.includes(c.uuid))
       );
@@ -194,16 +195,9 @@ export class MockApi implements Api {
     })();
   }
 
-  lockCampaign(uuid: string): Promise<Campaign> {
+  changeStatus(uuid: string, newStatus: CampaignStatus): Promise<Campaign> {
     return (async () => {
-      mutateCampaign(uuid, (c) => (c.locked = true));
-      return this.fetchCampaign(uuid);
-    })();
-  }
-
-  unlockCampaign(uuid: string): Promise<Campaign> {
-    return (async () => {
-      mutateCampaign(uuid, (c) => (c.locked = false));
+      mutateCampaign(uuid, (c) => (c.status = newStatus));
       return this.fetchCampaign(uuid);
     })();
   }
