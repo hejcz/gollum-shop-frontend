@@ -36,6 +36,7 @@ export interface OrderedItem {
 
 export interface Order {
   campaign_uuid: string;
+  order_uuid: string;
   items: OrderedItem[];
   paid_amount: number;
 }
