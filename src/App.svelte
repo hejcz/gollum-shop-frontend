@@ -6,6 +6,7 @@
   import { authentication_manager } from "./authentication/authentication_manager";
   import Login from "./authentication/Login.svelte";
   import ManageUsers from "./authentication/ManageUsers.svelte";
+  import UserProfile from "./authentication/UserProfile.svelte";
   import SignUp from "./authentication/SignUp.svelte";
   import AddNewCampaign from "./campaign/modification/AddNewCampaign.svelte";
   import CampaignsCandidates from "./campaign/listing/CampaignsCandidates.svelte";
@@ -65,6 +66,10 @@
       <Route path="/new-draft">
         <AddDraft />
       </Route>
+      <Route path="/users/profile">
+          <UserProfile />
+        </Route>
+      
       {#if $role.is_admin()}
         <Route path="/campaigns/add">
           <AddNewCampaign />

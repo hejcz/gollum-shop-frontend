@@ -61,7 +61,7 @@
             </li>
             <li class="nav-item">
               <span class="nav-link">
-                <Link to="/users">{$_("nav.manage_users")}</Link>
+                <Link to="/users/profile">{$_("nav.userprofile")}</Link>
               </span>
             </li>
           {/if}

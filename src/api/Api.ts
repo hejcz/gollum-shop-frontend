@@ -76,6 +76,20 @@ export interface User {
   activated: boolean;
 }
 
+
+export interface UserProfile {
+  uuid: string;
+  username: string;
+  activated: boolean;
+  firstname: string;
+  lastname: string;
+  phone: string;
+  street: string;
+  city: string;
+  zip: string;
+  inpost_code: string;
+}
+
 export interface Api {
   fetchCampaignOrders(
     campaign_uuid: string
@@ -96,6 +110,7 @@ export interface Api {
   likeCandidate(uuid: string): Promise<CampaignCandidate>;
   unlikeCandidate(uuid: string): Promise<CampaignCandidate>;
   fetchUsers(): Promise<User[]>;
+  fetchUserProfile(): Promise<UserProfile>;
   activateUser(user_uuid: string): Promise<User>;
   deactivateUser(user_uuid: string): Promise<User>;
 }
