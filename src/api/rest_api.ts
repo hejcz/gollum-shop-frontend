@@ -11,6 +11,7 @@ import {
   Order,
   OrderUpdate,
   User,
+  UserProfile,
 } from "./Api";
 
 const api_url = get(url);
@@ -50,9 +51,25 @@ function backend_user_to_frontend_user(user: any): User {
   };
 }
 
+function backend_user_profile_to_frontend_user_profile(user: any): UserProfile {
+  return {
+    uuid: user.uuid,
+    activated: user.active,
+    username: user.username,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    phone: user.phone,
+    zip: user.zip,
+    city: user.city,
+    street: user.street,
+    inpost_code: user.inpost_code,
+  };
+}
+
 function backend_order_to_frontend_order(order: any): Order {
   return {
     campaign_uuid: order.uuid,
+    order_uuid: order.order_uuid,
     paid_amount: Number.parseInt(order.paid_amount),
     items: order.items?.map((i) => ({
       item_uuid: i.uuid,
@@ -130,6 +147,7 @@ export class RestApi implements Api {
       const payload = {
         paid_amount: order.paid_amount,
         campaign_uuid: order.campaign_uuid,
+        order_uuid: order.order_uuid,
       };
       const response = await fetch(
         api_url + "campaigns/" + order.campaign_uuid + "/order",
@@ -305,6 +323,48 @@ export class RestApi implements Api {
         const response_json = await response.json();
         return response_json.map(backend_user_to_frontend_user);
       }
+    })();
+  }
+
+  fetchUserProfile(): Promise<UserProfile> {
+    return (async () => {
+      const response = await fetch(api_url + "users/profile", options("GET"));
+      if (response.ok) {
+        const response_json = await response.json();
+        console.log(response_json);
+        return response_json;
+        // return response_json.map(backend_user_profile_to_frontend_user_profile);
+      }
+    })();
+  }
+
+  updateUserProfile(
+    username: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+    phone: string,
+    street: string,
+    zip: string,
+    city: string,
+    inpost: string
+  ): Promise<boolean> {
+    return (async () => {
+      const response = await fetch(
+        api_url + "users/profile",
+        options("PATCH", {
+          username: username,
+          firstname: firstname,
+          lastname: lastname,
+          email: email,
+          phone: phone,
+          street: street,
+          zip: zip,
+          city: city,
+          inpost: inpost,
+        })
+      );
+      return true;
     })();
   }
 
