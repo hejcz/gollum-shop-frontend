@@ -76,7 +76,6 @@ export interface User {
   activated: boolean;
 }
 
-
 export interface UserProfile {
   uuid: string;
   username: string;

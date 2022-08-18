@@ -51,7 +51,6 @@ function backend_user_to_frontend_user(user: any): User {
   };
 }
 
-
 function backend_user_profile_to_frontend_user_profile(user: any): UserProfile {
   return {
     uuid: user.uuid,
@@ -186,13 +185,13 @@ export class RestApi implements Api {
       };
       const response = update.is_new
         ? await fetch(
-          api_url + "campaigns/" + campaign_uuid + "/order",
-          options("POST", payload)
-        )
+            api_url + "campaigns/" + campaign_uuid + "/order",
+            options("POST", payload)
+          )
         : await fetch(
-          api_url + "campaigns/" + campaign_uuid + "/order",
-          options("PATCH", payload)
-        );
+            api_url + "campaigns/" + campaign_uuid + "/order",
+            options("PATCH", payload)
+          );
       if (response.ok) {
         const response_json = await response.json();
         return backend_order_to_frontend_order(response_json.result[0]);
@@ -329,21 +328,30 @@ export class RestApi implements Api {
 
   fetchUserProfile(): Promise<UserProfile> {
     return (async () => {
-      const response = await fetch(api_url + "users/profile",
-        options("GET"));
+      const response = await fetch(api_url + "users/profile", options("GET"));
       if (response.ok) {
         const response_json = await response.json();
-        console.log(response_json)
-        return response_json
+        console.log(response_json);
+        return response_json;
         // return response_json.map(backend_user_profile_to_frontend_user_profile);
       }
     })();
   }
 
-  updateUserProfile(username: string, firstname: string, lastname: string, email: string, phone: string, street: string, zip: string, city: string, inpost: string): Promise<boolean> {
-
+  updateUserProfile(
+    username: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+    phone: string,
+    street: string,
+    zip: string,
+    city: string,
+    inpost: string
+  ): Promise<boolean> {
     return (async () => {
-      const response = await fetch(api_url + "users/profile",
+      const response = await fetch(
+        api_url + "users/profile",
         options("PATCH", {
           username: username,
           firstname: firstname,
@@ -353,11 +361,11 @@ export class RestApi implements Api {
           street: street,
           zip: zip,
           city: city,
-          inpost: inpost
+          inpost: inpost,
         })
       );
-      return true
-    })()
+      return true;
+    })();
   }
 
   activateUser(user_uuid: string): Promise<User> {

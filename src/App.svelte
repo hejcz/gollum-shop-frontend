@@ -67,9 +67,9 @@
         <AddDraft />
       </Route>
       <Route path="/users/profile">
-          <UserProfile />
-        </Route>
-      
+        <UserProfile />
+      </Route>
+
       {#if $role.is_admin()}
         <Route path="/campaigns/add">
           <AddNewCampaign />
