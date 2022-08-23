@@ -1,4 +1,3 @@
-import { MockApi } from "./mock_api";
 import { RestApi } from "./rest_api";
 
 export interface CampaignItem {
@@ -36,6 +35,7 @@ export interface OrderedItem {
 
 export interface Order {
   campaign_uuid: string;
+  order_uuid: string;
   items: OrderedItem[];
   paid_amount: number;
 }
@@ -75,6 +75,20 @@ export interface User {
   activated: boolean;
 }
 
+export interface UserProfile {
+  uuid: string;
+  username: string;
+  activated: boolean;
+  firstname: string;
+  lastname: string;
+  phone: string;
+  email: string;
+  street: string;
+  city: string;
+  zip: string;
+  inpost_code: string;
+}
+
 export interface Api {
   fetchCampaignOrders(
     campaign_uuid: string
@@ -95,8 +109,10 @@ export interface Api {
   likeCandidate(uuid: string): Promise<CampaignCandidate>;
   unlikeCandidate(uuid: string): Promise<CampaignCandidate>;
   fetchUsers(): Promise<User[]>;
+  fetchUserProfile(): Promise<UserProfile>;
   activateUser(user_uuid: string): Promise<User>;
   deactivateUser(user_uuid: string): Promise<User>;
+  updateUserProfile(updated_profile: UserProfile): Promise<boolean>;
 }
 
 export const api: Api = new RestApi();

@@ -9,6 +9,7 @@ import type {
   Order,
   OrderUpdate,
   User,
+  UserProfile,
 } from "./Api";
 import { campaigns, candidates, orders } from "./mock_data";
 import { users } from "./mock_data/users";
@@ -29,6 +30,12 @@ function test_title_like(title: string, titleLike: string | null) {
 }
 
 export class MockApi implements Api {
+  fetchUserProfile(): Promise<UserProfile> {
+    throw new Error("Method not implemented.");
+  }
+  updateUserProfile(updated_profile: UserProfile): Promise<boolean> {
+    throw new Error("Method not implemented.");
+  }
   addCandidate(draft: CampaignCandidate): Promise<CampaignCandidate> {
     throw new Error("Method not implemented.");
   }
