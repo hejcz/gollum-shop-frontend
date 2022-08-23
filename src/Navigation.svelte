@@ -1,8 +1,16 @@
 <script lang="ts">
   import { Link } from "svelte-navigator";
+  import { Route, Router } from "svelte-navigator";
+  import Anonymous from "./Anonymous.svelte";
+  import { onMount } from "svelte";
+  import { role } from "./stores";
   import { authentication_manager } from "./authentication/authentication_manager";
   import { _ } from "svelte-i18n";
 
+  onMount(async () => {
+    await authentication_manager.store_credentials_if_authenticated();
+  });
+  
   export let hide_actions = false;
   export let logout_only = false;
 
@@ -59,9 +67,20 @@
                 <Link to="/orders-history">{$_("nav.orders_history")}</Link>
               </span>
             </li>
-            <li class="nav-item">
+            
+            {#if $role}  
+            {#if   $role.is_admin()}
+              <li class="nav-item">
               <span class="nav-link">
                 <Link to="/users/profile">{$_("nav.userprofile")}</Link>
+              </span>
+              </li> 
+            {/if}
+            {/if}
+
+            <li class="nav-item">
+              <span class="nav-link">
+                <Link to="/users">{$_("nav.manage_users")}</Link>
               </span>
             </li>
           {/if}
